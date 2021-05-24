@@ -28,6 +28,14 @@ class HomeScreen extends GetView<HomeController> {
           resizeToAvoidBottomInset: true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
           decoration: NavBarDecoration(
             borderRadius: BorderRadius.circular(10.0),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 0,
+                blurRadius: 0,
+                offset: Offset(0, 0), // changes position of shadow
+              ),
+            ],
             colorBehindNavBar: Colors.white,
           ),
           popAllScreensOnTapOfSelectedTab: true,
