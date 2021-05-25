@@ -104,27 +104,35 @@ class customDrawer extends StatelessWidget {
 
 
             CustomListTile(
-                onTapFunction: (){},
+                onTapFunction: (){
+                  Get.toNamed(Routes.CONTACT);
+                },
                 text: "تواصل معنا",
                 listIcon: Icon(Icons.add_alert, color: Color(0XFF1a4b6b),)
             ),
 
 
             CustomListTile(
-                onTapFunction: (){},
+                onTapFunction: (){
+                  Get.toNamed(Routes.ABOUT);
+                },
                 text: "من نحن",
                 listIcon: Icon(Icons.add_alert, color: Color(0XFF1a4b6b),)
             ),
 
 
             CustomListTile(
-                onTapFunction: (){},
+                onTapFunction: (){
+                  Get.toNamed(Routes.TERMS);
+                },
                 text: "الشروط والأحكام",
                 listIcon: Icon(Icons.add_alert, color: Color(0XFF1a4b6b),)
             ),
 
             CustomListTile(
-                onTapFunction: (){},
+                onTapFunction: (){
+                  Get.toNamed(Routes.PRIVACY);
+                },
                 text: "سياسة الخصوصية",
                 listIcon: Icon(Icons.add_alert, color: Color(0XFF1a4b6b),)
             ),

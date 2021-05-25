@@ -9,6 +9,7 @@ class CustomTextFormField extends StatelessWidget {
   final TextInputType keyboardType;
   final bool isSecure;
   final double textLabelSize;
+  final bool isTextArea;
 
   CustomTextFormField({
     required this.textLabel,
@@ -16,6 +17,7 @@ class CustomTextFormField extends StatelessWidget {
     required this.keyboardType,
     this.textLabelSize = 16.0,
     this.isSecure = false,
+    this.isTextArea = false
   });
 
   @override
@@ -31,6 +33,7 @@ class CustomTextFormField extends StatelessWidget {
         ),
         SizedBox(height: 10.0,),
         TextFormField(
+          maxLines: isTextArea ? 4 : 1,
           controller: textController,
           keyboardType: keyboardType,
           obscureText: isSecure,

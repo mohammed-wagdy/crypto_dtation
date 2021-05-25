@@ -24,7 +24,7 @@ class HomeScreen extends GetView<HomeController> {
           screens: controller.pages,
           items: controller.navBarsItems(),
           confineInSafeArea: true,
-          backgroundColor: Colors.white, // Default is Colors.white.
+          backgroundColor: whiteColor, // Default is Colors.white.
           resizeToAvoidBottomInset: true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
           decoration: NavBarDecoration(
             borderRadius: BorderRadius.circular(10.0),
