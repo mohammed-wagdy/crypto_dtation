@@ -1,11 +1,11 @@
 import 'package:crypto_station/constants.dart';
+import 'package:crypto_station/views/favourite_screen.dart';
 import 'package:crypto_station/views/homepage_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 class HomeController extends GetxController {
-  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
   final currentIndex = 0.obs;
   PersistentTabController controller = PersistentTabController();
   TextEditingController searchInput = TextEditingController();
@@ -22,7 +22,7 @@ class HomeController extends GetxController {
     Text("العروض"),
     Text("إضافة عرض"),
     Text("حسابي"),
-    Text("المفضلة"),
+    FavouriteScreen(),
   ];
 
   List<PersistentBottomNavBarItem> navBarsItems() {

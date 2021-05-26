@@ -21,7 +21,7 @@ class NotificationScreen extends GetView<HomeController> {
           preferredSize: const Size.fromHeight(60),
           child: CustomDarkAppBar(
             appBarTitle: "التنبيهات",
-            drawerKey: controller.scaffoldKey,
+            drawerContext: context,
           )),
       body: ListView.builder(
         itemCount: 5,

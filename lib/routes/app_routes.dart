@@ -9,4 +9,5 @@ abstract class Routes {
   static const CONFIRM    = '/confirm';
   static const NOTIFICATIONS    = '/notifications';
   static const REUST_PAGE    = '/result_page';
+  static const FAVOURITE    = '/favourite';
 }

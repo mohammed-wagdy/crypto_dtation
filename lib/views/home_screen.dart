@@ -11,13 +11,7 @@ class HomeScreen extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: whiteColor,
-        key: controller.scaffoldKey,
         drawer: customDrawer(),
-        appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(60),
-            child: CustomAppBar(
-              drawerKey: controller.scaffoldKey,
-            )),
         body: PersistentTabView(
           context,
           controller: controller.controller,

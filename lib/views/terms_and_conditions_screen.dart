@@ -19,7 +19,7 @@ class TermsAndConditions extends GetView<HomeController> {
           preferredSize: const Size.fromHeight(60),
           child: CustomDarkAppBar(
             appBarTitle: "الشروط والأحكام",
-            drawerKey: controller.scaffoldKey,
+            drawerContext: context,
           )),
       body: Container(
         width: double.infinity,

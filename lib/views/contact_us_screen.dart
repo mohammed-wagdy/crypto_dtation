@@ -21,7 +21,7 @@ class ContactUs extends GetView<HomeController> {
           preferredSize: const Size.fromHeight(60),
           child: CustomDarkAppBar(
             appBarTitle: "تواصل معنا",
-            drawerKey: controller.scaffoldKey,
+            drawerContext: context,
           )),
       body: Container(
         width: double.infinity,

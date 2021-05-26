@@ -5,11 +5,11 @@ import 'package:get/get.dart';
 
 class CustomDarkAppBar extends StatelessWidget {
 
-  final GlobalKey<ScaffoldState> drawerKey;
+  final BuildContext drawerContext;
   final String appBarTitle;
   final bool noBackPage;
 
-  CustomDarkAppBar({required this.drawerKey,required this.appBarTitle,this.noBackPage = false});
+  CustomDarkAppBar({required this.drawerContext,required this.appBarTitle,this.noBackPage = false});
 
   @override
   Widget build(BuildContext context) {

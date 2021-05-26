@@ -14,7 +14,7 @@ class SearchResultScreen extends GetView<HomeController> {
             child: CustomDarkAppBar(
               noBackPage: true,
               appBarTitle: "نتائج البحث",
-              drawerKey: controller.scaffoldKey,
+              drawerContext: context,
             )),
         body: GridUserBlock(),
     );

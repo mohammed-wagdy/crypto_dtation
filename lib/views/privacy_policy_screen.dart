@@ -19,7 +19,7 @@ class PrivacyAndPolicy extends GetView<HomeController> {
           preferredSize: const Size.fromHeight(60),
           child: CustomDarkAppBar(
             appBarTitle: "سياسة الخصوصية",
-            drawerKey: controller.scaffoldKey,
+            drawerContext: context,
           )),
       body: Container(
         width: double.infinity,
