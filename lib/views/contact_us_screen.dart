@@ -30,6 +30,9 @@ class ContactUs extends GetView<HomeController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+
+              Center(child: Image.asset("assets/images/constactUs.png",height: 200,)),
+
               CustomText(
                 text: "أرسل لنا أستفسارك أو أقتراحك أو شكواك",
                 textSize: 17,

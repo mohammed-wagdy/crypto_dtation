@@ -8,25 +8,38 @@ class CustomText extends StatelessWidget {
   final double textSize;
   final FontWeight textFontWeight;
   final TextAlign textTextAlign;
+  final bool userName;
 
   CustomText({
     this.text = "",
     this.textColor = blackColor,
     this.textFontWeight = FontWeight.normal,
     this.textSize = mainSize,
-    this.textTextAlign = TextAlign.start
+    this.textTextAlign = TextAlign.start,
+    this.userName = false,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Text(
+    return !userName ? Text(
       text,
       textAlign: textTextAlign,
       style: TextStyle(
-         height: 1.6,
+         height: 1.4,
         color: textColor,
         fontWeight: textFontWeight,
         fontSize: textSize
+      ),
+    ) : Text(
+      text,
+      textAlign: textTextAlign,
+      maxLines: 2,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+          height: 1.4,
+          color: textColor,
+          fontWeight: textFontWeight,
+          fontSize: textSize
       ),
     );
   }

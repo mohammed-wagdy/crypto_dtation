@@ -29,7 +29,7 @@ class TermsAndConditions extends GetView<HomeController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
 
-              Center(child: Image.network("https://cdn.dribbble.com/users/6623125/screenshots/14841425/crypto_4x.png",height: 200,)),
+              Center(child: Image.asset("assets/images/conditions.png",height: 200,)),
 
               SizedBox(height: 30,),
 

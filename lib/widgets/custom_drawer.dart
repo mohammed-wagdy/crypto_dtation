@@ -90,7 +90,9 @@ class customDrawer extends StatelessWidget {
             ),
 
             CustomListTile(
-                onTapFunction: (){},
+                onTapFunction: (){
+                  Get.toNamed(Routes.NOTIFICATIONS);
+                },
                 text: "التنبيهات",
                 isTrailing: true,
                 listIcon: Icon(Icons.add_alert, color: Color(0XFF1a4b6b),)

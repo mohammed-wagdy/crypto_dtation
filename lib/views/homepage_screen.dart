@@ -26,6 +26,28 @@ class HomePageScreen extends GetView<HomeController> {
     return Scaffold(
       backgroundColor: whiteColor,
       body: Column(children: [
+
+        // Input Search
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: TextFormField(
+            controller: controller.searchInput,
+            keyboardType: TextInputType.text,
+            cursorColor: mainColor,
+            decoration: InputDecoration(
+              filled: true,
+              prefixIcon: Icon(Icons.search,size: 25,color: Colors.grey,),
+              hintText: "البحث ...",
+              hintStyle: TextStyle(color: Colors.grey),
+              // fillColor: inputFillColor,
+              contentPadding: EdgeInsets.all(15.0),
+              border: OutlineInputBorder(borderSide: BorderSide(color: inputBorderColor,),borderRadius: BorderRadius.all(Radius.circular(10.0))),
+              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: inputBorderColor),borderRadius: BorderRadius.all(Radius.circular(10.0))),
+              focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: mainColor.withOpacity(0.5)),borderRadius: BorderRadius.all(Radius.circular(10.0))),
+            ),
+          ),
+        ),
+
         // Slider
         CarouselSlider(
             items: [
@@ -61,8 +83,8 @@ class HomePageScreen extends GetView<HomeController> {
 
         // Grid Of Users
         Expanded(
-          //child: ListUserBlock()
-          child: GridUserBlock(),
+          child: GridUserBlock()
+         // child: GridUserBlock(),
         ),
 
         SizedBox(

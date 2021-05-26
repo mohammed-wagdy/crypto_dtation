@@ -59,7 +59,12 @@ class ListUserBlock extends StatelessWidget {
                                 SizedBox(width: 10,),
                                 Image.network("https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_Egypt.svg/640px-Flag_of_Egypt.svg.png",width: 20,),
                                 SizedBox(width: 20,),
-                                Icon(Icons.favorite,color: favouriteColor,),
+                                GestureDetector(
+                                  onTap: () {
+                                    print('fdfddf');
+                                  },
+                                  child: Icon(Icons.favorite,color: favouriteColor,),
+                                )
                               ],
                             ),
                             Row(
@@ -113,8 +118,7 @@ class ListUserBlock extends StatelessWidget {
                     )
                   ],
                 ),
-                SizedBox(height: 10,),
-
+                //SizedBox(height: 10,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

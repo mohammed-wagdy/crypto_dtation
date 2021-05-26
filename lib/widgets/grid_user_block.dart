@@ -7,13 +7,12 @@ class GridUserBlock extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      itemCount:3,
+      itemCount: 10,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: MediaQuery.of(context).orientation ==
-            Orientation.landscape ? 3: 1,
+        crossAxisCount: MediaQuery.of(context).orientation == Orientation.landscape ? 3: 1,
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
-        childAspectRatio: (2 / 1),
+        childAspectRatio: 1.8,
       ),
       itemBuilder: (context,index) {
         return Container(
@@ -36,12 +35,10 @@ class GridUserBlock extends StatelessWidget {
             children: [
               Row(
                 children: [
-
                   // User Image
                   Container(
                     width: 60,
                     height: 60,
-                    padding: EdgeInsets.all(100),
                     decoration: BoxDecoration(
                         border: Border.all(color: grayColor),
                         shape: BoxShape.circle,
@@ -65,15 +62,23 @@ class GridUserBlock extends StatelessWidget {
                           children: [
                             Expanded(
                               child: CustomText(
-                                text: "محمد وجدي محمد كمال",
+                                userName: true,
+                                text: " محمد وجدي محمد ",
                                 textColor: nameColor,
                                 textSize: 18.0,
                                 textFontWeight: FontWeight.bold,
                               ),
                             ),
-                            Icon(Icons.favorite,color: favouriteColor,),
+                            GestureDetector(
+                              onTap: () {
+                                print('fdfddf');
+                              },
+                              child: Icon(Icons.favorite,color: favouriteColor,),
+                            )
                           ],
                         ),
+
+                        SizedBox(height: 5,),
 
                         // Rating and flag
                         Row(

@@ -6,4 +6,7 @@ abstract class Routes {
   static const ABOUT      = '/about';
   static const TERMS      = '/terms';
   static const PRIVACY    = '/privacy';
+  static const CONFIRM    = '/confirm';
+  static const NOTIFICATIONS    = '/notifications';
+  static const REUST_PAGE    = '/result_page';
 }

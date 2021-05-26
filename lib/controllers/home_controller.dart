@@ -8,6 +8,7 @@ class HomeController extends GetxController {
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
   final currentIndex = 0.obs;
   PersistentTabController controller = PersistentTabController();
+  TextEditingController searchInput = TextEditingController();
 
   @override
   void onInit() {
