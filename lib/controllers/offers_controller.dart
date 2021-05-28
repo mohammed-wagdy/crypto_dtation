@@ -1,13 +1,13 @@
 
 import 'package:get/get.dart';
 
-class FavouriteController extends GetxController {
+class OffersController extends GetxController {
 
   RxBool isGrid = false.obs;
+  RxBool selectMyOffers = true.obs;
 
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
   }
 

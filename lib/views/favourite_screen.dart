@@ -2,7 +2,9 @@ import 'package:crypto_station/constants.dart';
 import 'package:crypto_station/controllers/favourite_controller.dart';
 import 'package:crypto_station/widgets/custom_text.dart';
 import 'package:crypto_station/widgets/grid_user_block.dart';
+import 'package:crypto_station/widgets/grid_user_with_status.dart';
 import 'package:crypto_station/widgets/list_user_block.dart';
+import 'package:crypto_station/widgets/list_user_with_status.dart';
 import 'package:crypto_station/widgets/special_appBar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -167,12 +169,11 @@ class FavouriteScreen extends GetView<FavouriteController> {
             ),
           ),
 
-          Expanded(child: controller.isGrid.value == true ? GridUserBlock() : ListUserBlock()),
+          Expanded(child: controller.isGrid.value == true ? GridUserBlockWithStatus() : ListUserBlockWithStatus()),
 
           SizedBox(height: 15,),
         ],
       ),
-
     ));
   }
 }

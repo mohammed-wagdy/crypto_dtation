@@ -12,7 +12,9 @@ const Color yellowColor       = Color(0XFFffdc0a);
 const Color nameColor         = Color(0XFF10bbd5);
 const Color grayColor         = Color(0XFFc8c8c8);
 const Color rateColor         = Color(0XFFffdc0a);
-const Color favouriteColor         = Color(0XFFce1126);
+const Color favouriteColor    = Color(0XFFce1126);
+const Color redColor          = Color(0XFFc0392b);
+const Color greenColor        = Color(0XFF27ae60);
 
 
 // Sizes

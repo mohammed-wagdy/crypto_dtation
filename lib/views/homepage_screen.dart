@@ -6,7 +6,9 @@ import 'package:crypto_station/helper.dart';
 import 'package:crypto_station/widgets/custom_appbar.dart';
 import 'package:crypto_station/widgets/custom_text.dart';
 import 'package:crypto_station/widgets/grid_user_block.dart';
+import 'package:crypto_station/widgets/grid_user_with_status.dart';
 import 'package:crypto_station/widgets/list_user_block.dart';
+import 'package:crypto_station/widgets/list_user_with_status.dart';
 import 'package:crypto_station/widgets/slider_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -90,8 +92,8 @@ class HomePageScreen extends GetView<HomeController> {
 
         // Grid Of Users
         Expanded(
-          child: GridUserBlock()
-         // child: GridUserBlock(),
+         // child: ListUserBlockWithStatus()
+         child: GridUserBlock(),
         ),
 
         SizedBox(

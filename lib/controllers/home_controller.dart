@@ -1,6 +1,8 @@
 import 'package:crypto_station/constants.dart';
 import 'package:crypto_station/views/favourite_screen.dart';
 import 'package:crypto_station/views/homepage_screen.dart';
+import 'package:crypto_station/views/offers_screen.dart';
+import 'package:crypto_station/views/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
@@ -19,9 +21,9 @@ class HomeController extends GetxController {
 
   final List<Widget> pages = [
     HomePageScreen(),
-    Text("العروض"),
+    OffersScreen(),
     Text("إضافة عرض"),
-    Text("حسابي"),
+    ProfileScreen(),
     FavouriteScreen(),
   ];
 
