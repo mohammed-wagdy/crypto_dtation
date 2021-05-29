@@ -84,7 +84,9 @@ class customDrawer extends StatelessWidget {
             ),
 
             CustomListTile(
-                onTapFunction: (){},
+                onTapFunction: (){
+                  Get.toNamed(Routes.ADVANCED_SEARCH);
+                },
                 text: "بحث متقدم",
                 listIcon: Icon(Icons.search, color: Color(0XFF1a4b6b),)
             ),

@@ -9,7 +9,7 @@ import 'package:crypto_station/widgets/special_appBar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class FavouriteScreen extends GetView<FavouriteController> {
+class SearchResultScreen extends GetView<FavouriteController> {
 
   FavouriteController controller = Get.put(FavouriteController());
 
@@ -20,7 +20,7 @@ class FavouriteScreen extends GetView<FavouriteController> {
           preferredSize: const Size.fromHeight(60),
           child: SpecialAppBar(
             drawerContext: context,
-            appBarTitle: "المفضلات",
+            appBarTitle: "نتائج البحث",
           )),
       body: Column(
         children: [

@@ -11,4 +11,7 @@ abstract class Routes {
   static const RESULT_PAGE       = '/result_page';
   static const FAVOURITE        = '/favourite';
   static const OFFERS           = '/offers';
+  static const ADVANCED_SEARCH           = '/advanced_search';
+  static const SEARCH_RESULT           = '/search_result';
+  static const OFFER_DETAILS           = '/order_details';
 }

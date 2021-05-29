@@ -1,8 +1,11 @@
 import 'package:crypto_station/routes/app_pages.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 void main() {
+  GestureBinding.instance?.resamplingEnabled = true;
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 

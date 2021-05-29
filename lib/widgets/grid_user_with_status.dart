@@ -12,7 +12,8 @@ class GridUserBlockWithStatus extends StatelessWidget {
         crossAxisCount: MediaQuery.of(context).orientation == Orientation.landscape ? 3: 1,
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
-        childAspectRatio: 1.8,
+        childAspectRatio: MediaQuery.of(context).size.width /
+            (MediaQuery.of(context).size.height / 4.2),
       ),
       itemBuilder: (context,index) {
         return Stack(

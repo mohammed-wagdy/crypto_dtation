@@ -31,23 +31,9 @@ class CustomButton extends StatelessWidget {
                 borderRadius: BorderRadius.all(Radius.circular(10.0))
             )
         ),
-      child: Text(buttonText, style: TextStyle(fontSize: buttonTextSize,fontWeight: buttonTextFontWeight),),
+      child: Text(buttonText, style: TextStyle(fontSize: buttonTextSize,fontWeight: FontWeight.w500),),
       onPressed: buttonOnPress,
     );
-    // return TextButton(
-    //   style: TextButton.styleFrom(
-    //       padding: EdgeInsets.all(15.0),
-    //       primary: buttonTextColor,
-    //       backgroundColor: buttonBackground,
-    //       shape: RoundedRectangleBorder(
-    //           borderRadius: BorderRadius.all(Radius.circular(buttonBorderRadius))
-    //       )
-    //   ),
-    //   onPressed: buttonPressed(),
-    //   child: Text(
-    //     buttonText,
-    //     style: TextStyle(fontSize: buttonTextSize),
-    //   ),
-    // );
+
   }
 }

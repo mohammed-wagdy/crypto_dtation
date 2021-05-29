@@ -1,4 +1,5 @@
 import 'package:crypto_station/constants.dart';
+import 'package:crypto_station/views/add_offer_screen.dart';
 import 'package:crypto_station/views/favourite_screen.dart';
 import 'package:crypto_station/views/homepage_screen.dart';
 import 'package:crypto_station/views/offers_screen.dart';
@@ -22,7 +23,7 @@ class HomeController extends GetxController {
   final List<Widget> pages = [
     HomePageScreen(),
     OffersScreen(),
-    Text("إضافة عرض"),
+    AddOfferScreen(),
     ProfileScreen(),
     FavouriteScreen(),
   ];

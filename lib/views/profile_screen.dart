@@ -14,6 +14,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class ProfileScreen extends GetView<ProfileController> {
   ProfileController controller = Get.put(ProfileController());
+  List myArr = ['1','2','3','4','5','6'];
 
   @override
   Widget build(BuildContext context) {
@@ -308,130 +309,7 @@ class ProfileScreen extends GetView<ProfileController> {
                                     ),
                                   );
                                 });
-                            // Get.defaultDialog(
-                            //   radius: 10.0,
-                            //   titleStyle: TextStyle(
-                            //     fontSize: 16.0,
-                            //     fontWeight: FontWeight.bold,
-                            //     color: mainColor
-                            //   ),
-                            //   title: "تعديل البيانات ",
-                            //  content:  // User Data
-                            //  Container(
-                            //    padding: EdgeInsets.symmetric(horizontal: 10),
-                            //    child: Column(
-                            //      mainAxisSize: MainAxisSize.min,
-                            //      crossAxisAlignment: CrossAxisAlignment.stretch,
-                            //      children: [
-                            //        Row(
-                            //          children: [
-                            //
-                            //            // User Image
-                            //            Container(
-                            //              width: 50,
-                            //              height: 50,
-                            //              decoration: BoxDecoration(
-                            //                  border: Border.all(color: grayColor),
-                            //                  shape: BoxShape.circle,
-                            //                  image: DecorationImage(
-                            //                    image: NetworkImage("https://static01.nyt.com/images/2020/11/20/multimedia/00Gates-1/00Gates-1-mobileMasterAt3x.jpg"),
-                            //                  )
-                            //              ),
-                            //            ),
-                            //
-                            //            SizedBox(width: 10,),
-                            //
-                            //            Expanded(
-                            //              child: Column(
-                            //                crossAxisAlignment: CrossAxisAlignment.start,
-                            //                children: [
-                            //
-                            //                  // Name and Favourite
-                            //                  Row(
-                            //                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            //                    // crossAxisAlignment: CrossAxisAlignment.stretch,
-                            //                    children: [
-                            //                      Expanded(
-                            //                        child: CustomText(
-                            //                          userName: true,
-                            //                          text: " محمد وجدي محمد ",
-                            //                          textColor: nameColor,
-                            //                          textSize: 15.0,
-                            //                          textFontWeight: FontWeight.bold,
-                            //                        ),
-                            //                      ),
-                            //                    ],
-                            //                  ),
-                            //
-                            //
-                            //                  Divider(
-                            //                    color: Colors.grey.withOpacity(0.3),
-                            //                  ),
-                            //
-                            //                  // Rating and flag
-                            //                  Row(
-                            //                    children: [
-                            //                      GestureDetector(
-                            //                        onTap: (){},
-                            //                        child: Container(
-                            //                          padding: EdgeInsets.symmetric(vertical: 1,horizontal: 4),
-                            //                          decoration: BoxDecoration(
-                            //                            borderRadius: BorderRadius.all(Radius.circular(5)),
-                            //                            color: grayColor,
-                            //                          ),
-                            //                          child: CustomText(
-                            //                            text: "تغيير الصورة",
-                            //                            textSize: 12,
-                            //                            textColor: mainColor,
-                            //                            textFontWeight: FontWeight.w500,
-                            //                          ),
-                            //                        ),
-                            //                      ),
-                            //                      SizedBox(width: 40,),
-                            //                      Image.network("https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_Egypt.svg/640px-Flag_of_Egypt.svg.png",width: 20,),
-                            //                    ],
-                            //                  ),
-                            //
-                            //                ],
-                            //              ),
-                            //            ),
-                            //
-                            //          ],
-                            //        ),
-                            //        SizedBox(height: 15,),
-                            //        CustomTextFormField(
-                            //            textLabel: "البريد الألكتروني",
-                            //            textLabelSize: 14.0,
-                            //            textController: controller.searchInput,
-                            //            keyboardType: TextInputType.emailAddress
-                            //        ),
-                            //        SizedBox(height: 10,),
-                            //        CustomTextFormField(
-                            //          textLabel: "كلمة المرور",
-                            //          textLabelSize: 14.0,
-                            //          textController: controller.searchInput,
-                            //          keyboardType: TextInputType.text,
-                            //          isSecure: true,
-                            //        ),
-                            //        SizedBox(height: 10,),
-                            //        CustomTextFormField(
-                            //            textLabel: "رقم الجوال",
-                            //            textLabelSize: 14.0,
-                            //            textController: controller.searchInput,
-                            //            keyboardType: TextInputType.number
-                            //        ),
-                            //        SizedBox(height: 10,),
-                            //        CustomTextFormField(
-                            //            textLabel: "عنوان المحفظة",
-                            //            textLabelSize: 14.0,
-                            //            textController: controller.searchInput,
-                            //            keyboardType: TextInputType.text
-                            //        ),
-                            //
-                            //      ],
-                            //    ),
-                            //  ),
-                            // );
+
                           },
                           icon: Icon(
                             FontAwesomeIcons.user,
@@ -844,7 +722,7 @@ class ProfileScreen extends GetView<ProfileController> {
                         buttonBackground: whiteColor,
                           buttonText: "إضافة",
                           buttonTextColor: nameColor,
-                          buttonTextSize: 16.0,
+                          buttonTextSize: 15.0,
                           buttonOnPress: () {}
                           ),
                     ],
@@ -857,111 +735,123 @@ class ProfileScreen extends GetView<ProfileController> {
               height: 10,
             ),
 
-            Expanded(
-              child: ListView.separated(
-                separatorBuilder: (BuildContext ctn, int index) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: SizedBox(
-                      height: 10.0,
-                    ),
-                  );
-                },
-                shrinkWrap: true,
-                primary: false,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: 4,
-                itemBuilder: (BuildContext ctx, int index) {
-                  return Container(
-                    margin: EdgeInsets.symmetric(horizontal: 16),
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                        border:
-                            Border.all(color: Colors.grey.withOpacity(0.3))),
-                    child: Column(
-                      children: [
-                        // User Data
-                        Row(
-                          children: [
-                            // User Image
-                            Container(
-                              width: 60,
-                              height: 60,
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: grayColor),
-                                  shape: BoxShape.circle,
-                                  image: DecorationImage(
-                                    image: NetworkImage(
-                                        "https://static01.nyt.com/images/2020/11/20/multimedia/00Gates-1/00Gates-1-mobileMasterAt3x.jpg"),
-                                  )),
+            ListView.separated(
+              separatorBuilder: (BuildContext ctn, int index) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: SizedBox(
+                    height: 10.0,
+                  ),
+                );
+              },
+              shrinkWrap: true,
+              physics: ScrollPhysics(),
+              //    primary: false,
+              //   physics: NeverScrollableScrollPhysics(),
+              itemCount: myArr.take(2).length,
+              itemBuilder: (BuildContext ctx, int index) {
+                return Container(
+                  margin: EdgeInsets.symmetric(horizontal: 16),
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                      border:
+                      Border.all(color: Colors.grey.withOpacity(0.3))),
+                  child: Column(
+                    children: [
+                      // User Data
+                      Row(
+                        children: [
+                          // User Image
+                          Container(
+                            width: 60,
+                            height: 60,
+                            decoration: BoxDecoration(
+                                border: Border.all(color: grayColor),
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                      "https://static01.nyt.com/images/2020/11/20/multimedia/00Gates-1/00Gates-1-mobileMasterAt3x.jpg"),
+                                )),
+                          ),
+
+                          SizedBox(
+                            width: 10,
+                          ),
+
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                // Name and Favourite
+                                Row(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
+                                  // crossAxisAlignment: CrossAxisAlignment.stretch,
+                                  children: [
+                                    Expanded(
+                                      child: CustomText(
+                                        userName: true,
+                                        text: " محمد وجدي محمد ",
+                                        textColor: nameColor,
+                                        textSize: 16.0,
+                                        textFontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+
+                                SizedBox(
+                                  height: 5,
+                                ),
+
+                                // Rating and flag
+                                Row(
+                                  children: [
+                                    Row(
+                                      children: Helper.getStarsList(2.5),
+                                    ),
+                                    SizedBox(
+                                      width: 40,
+                                    ),
+                                    Image.network(
+                                      "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_Egypt.svg/640px-Flag_of_Egypt.svg.png",
+                                      width: 20,
+                                    ),
+                                  ],
+                                )
+                              ],
                             ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      CustomText(
+                        text:
+                        "تم إضافة العرض الخاص بك وهو الأن قيد المراجعة من قبل الإدارة وسيتم إرسال بريد ألكتروني عند الموافقة علي العرض او يمكنك متابعة التطبيق",
+                        textColor: Colors.grey,
+                        textSize: 13.0,
+                        textFontWeight: FontWeight.w500,
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
 
-                            SizedBox(
-                              width: 10,
-                            ),
-
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  // Name and Favourite
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    // crossAxisAlignment: CrossAxisAlignment.stretch,
-                                    children: [
-                                      Expanded(
-                                        child: CustomText(
-                                          userName: true,
-                                          text: " محمد وجدي محمد ",
-                                          textColor: nameColor,
-                                          textSize: 16.0,
-                                          textFontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-
-                                  // Rating and flag
-                                  Row(
-                                    children: [
-                                      Row(
-                                        children: Helper.getStarsList(2.5),
-                                      ),
-                                      SizedBox(
-                                        width: 40,
-                                      ),
-                                      Image.network(
-                                        "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_Egypt.svg/640px-Flag_of_Egypt.svg.png",
-                                        width: 20,
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        CustomText(
-                          text:
-                              "تم إضافة العرض الخاص بك وهو الأن قيد المراجعة من قبل الإدارة وسيتم إرسال بريد ألكتروني عند الموافقة علي العرض او يمكنك متابعة التطبيق",
-                          textColor: Colors.grey,
-                          textSize: 13.0,
-                          textFontWeight: FontWeight.w500,
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                CustomButton(
+                    buttonBackground: whiteColor,
+                    buttonText: "جميع التعليقات",
+                    buttonTextColor: nameColor,
+                    buttonTextSize: 15.0,
+                    buttonOnPress: () {}
+                ),
+              ],
             ),
 
             SizedBox(
