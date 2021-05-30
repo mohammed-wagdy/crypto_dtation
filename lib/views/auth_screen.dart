@@ -43,8 +43,6 @@ class AuthScreen extends GetView<AuthController> {
               Expanded(
                 child: TabBarView(
                   children: [
-
-
                     // Login
                     SingleChildScrollView(
                       child: Padding(

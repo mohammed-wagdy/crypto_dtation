@@ -2,7 +2,6 @@ import 'package:crypto_station/constants.dart';
 import 'package:crypto_station/controllers/home_controller.dart';
 import 'package:crypto_station/routes/app_routes.dart';
 import 'package:crypto_station/widgets/custom_button.dart';
-import 'package:crypto_station/widgets/custom_dark_appbar.dart';
 import 'package:crypto_station/widgets/custom_text.dart';
 import 'package:crypto_station/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';

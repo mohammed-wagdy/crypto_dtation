@@ -1,9 +1,7 @@
 import 'dart:ui';
-
 import 'package:crypto_station/constants.dart';
 import 'package:crypto_station/helper.dart';
 import 'package:crypto_station/providers/auth_providers.dart';
-import 'package:crypto_station/routes/app_routes.dart';
 import 'package:crypto_station/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,7 +18,6 @@ class AuthController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    print("IAM AUTH CONTROLLER");
   }
 
   changeRememberMe(value) {
