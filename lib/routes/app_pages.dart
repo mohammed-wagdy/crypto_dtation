@@ -21,7 +21,8 @@ import 'package:get/get.dart';
 
 class AppPages {
 
-  static const INITIAL = Routes.HOME;
+  static const INITIAL_LOGIN = Routes.LOGIN;
+  static const INITIAL_HOME = Routes.HOME;
 
   static final routes = <GetPage<dynamic>>[
      GetPage(name: Routes.LOGIN          , page: () => AuthScreen()                  , binding: AuthBinding()),
@@ -30,7 +31,7 @@ class AppPages {
      GetPage(name: Routes.ABOUT          , page: () => AboutUs()                     , binding: HomeBinding()),
      GetPage(name: Routes.TERMS          , page: () => TermsAndConditions()          , binding: HomeBinding()),
      GetPage(name: Routes.PRIVACY        , page: () => PrivacyAndPolicy()            , binding: HomeBinding()),
-     GetPage(name: Routes.CONFIRM        , page: () => ConfirmCodeScreen()           , binding: HomeBinding()),
+     GetPage(name: Routes.CONFIRM        , page: () => ConfirmCodeScreen()           , binding: AuthBinding()),
      GetPage(name: Routes.NOTIFICATIONS  , page: () => NotificationScreen()    , binding: HomeBinding()),
      GetPage(name: Routes.RESULT_PAGE    , page: () => SearchResultScreen()       , binding: HomeBinding()),
      GetPage(name: Routes.FAVOURITE      , page: () => FavouriteScreen()           , binding: FavouriteBinding()),

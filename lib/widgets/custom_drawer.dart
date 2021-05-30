@@ -5,6 +5,7 @@ import 'package:crypto_station/widgets/custom_listTile.dart';
 import 'package:crypto_station/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class customDrawer extends StatelessWidget {
   @override
@@ -148,7 +149,11 @@ class customDrawer extends StatelessWidget {
             ),
 
             CustomListTile(
-                onTapFunction: (){},
+                onTapFunction: (){
+                  GetStorage box = GetStorage();
+                  box.remove("currentUser");
+                  Get.offAllNamed(Routes.LOGIN);
+                },
                 text: "تسجيل الخروج",
                 listIcon: Icon(Icons.add_alert, color: Color(0XFF1a4b6b),)
             ),

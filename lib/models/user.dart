@@ -1,5 +1,5 @@
 class User {
-  int? id;
+  String? id;
   int? rolesName;
   String? fullName;
   String? email;
@@ -15,7 +15,7 @@ class User {
 
   User.fromJSON(Map<String, dynamic> jsonMap) {
     try {
-      id = jsonMap['id'];
+      id = jsonMap['id'].toString();
       rolesName = jsonMap['roles_name'];
       fullName = jsonMap['full_name'];
       email = jsonMap['email'];

@@ -1,4 +1,5 @@
 import 'package:crypto_station/constants.dart';
+import 'package:crypto_station/controllers/auth_controller.dart';
 import 'package:crypto_station/controllers/home_controller.dart';
 import 'package:crypto_station/routes/app_routes.dart';
 import 'package:crypto_station/widgets/custom_button.dart';
@@ -7,7 +8,7 @@ import 'package:crypto_station/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ConfirmCodeScreen extends GetView<HomeController> {
+class ConfirmCodeScreen extends GetView<AuthController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +34,7 @@ class ConfirmCodeScreen extends GetView<HomeController> {
 
             CustomTextFormField(
                 textLabel: "كود التفعيل",
-                textController: TextEditingController(),
+                textController: controller.confirmCodeController,
                 keyboardType: TextInputType.number),
 
             SizedBox(height: 30,),
@@ -46,7 +47,7 @@ class ConfirmCodeScreen extends GetView<HomeController> {
                 buttonTextSize: 17.0,
                 buttonTextFontWeight: FontWeight.w700,
                 buttonOnPress: () {
-
+                  controller.verifyAccount();
                 },
               ),
             ),

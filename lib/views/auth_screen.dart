@@ -8,9 +8,10 @@ import 'package:get/get.dart';
 
 class AuthScreen extends GetView<AuthController> {
 
+  AuthController controller = Get.put(AuthController());
+
   @override
   Widget build(BuildContext context) {
-
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -125,7 +126,9 @@ class AuthScreen extends GetView<AuthController> {
                                                 textController: controller.emailController,
                                               ),
                                               SizedBox(height: 15.0,),
-                                              Container(
+                                              Obx(() =>
+                                                  controller.isLoading.value ?  Center(child: Image.asset("assets/images/ajaxLoader.gif",width: 30,),) :
+                                                  Container(
                                                 width: double.infinity,
                                                 child: CustomButton(
                                                   buttonText: "إستعادة كلمة المرور",
@@ -135,7 +138,8 @@ class AuthScreen extends GetView<AuthController> {
                                                     controller.resetPassword();
                                                   },
                                                 ),
-                                              ),
+                                              ),)
+
                                             ],
                                           ),
                                         ),
@@ -154,7 +158,10 @@ class AuthScreen extends GetView<AuthController> {
                             SizedBox(height: 20.0,),
                             Container(
                               width: double.infinity,
-                              child: CustomButton(
+                              child:
+                              Obx(() =>
+                              controller.isLoading.value ?  Center(child: Image.asset("assets/images/ajaxLoader.gif",width: 30,),) :
+                              CustomButton(
                                 buttonText: "الدخول",
                                 buttonTextSize: 17.0,
                                 buttonTextFontWeight: FontWeight.w700,
@@ -162,6 +169,8 @@ class AuthScreen extends GetView<AuthController> {
                                   controller.login();
                                 },
                               ),
+                              )
+
                             ),
                           ],
                         ),
@@ -181,13 +190,25 @@ class AuthScreen extends GetView<AuthController> {
                               keyboardType: TextInputType.text,
                               textController: controller.fullNameController,
                             ),
-                            SizedBox(height: 20.0,),
+                            SizedBox(height: 15.0,),
                             CustomTextFormField(
                               textLabel: "البريد الألكتروني",
                               keyboardType: TextInputType.emailAddress,
                               textController: controller.emailController,
                             ),
-                            SizedBox(height: 20.0,),
+                            SizedBox(height: 15.0,),
+                            CustomTextFormField(
+                              textLabel: "عنوان المحفطة",
+                              keyboardType: TextInputType.text,
+                              textController: controller.walletAddressController,
+                            ),
+                            SizedBox(height: 15.0,),
+                            CustomTextFormField(
+                              textLabel: "رقم الموبايل",
+                              keyboardType: TextInputType.number,
+                              textController: controller.mobileNumberController,
+                            ),
+                            SizedBox(height: 15.0,),
                             CustomTextFormField(
                               textLabel: "كلمة المرور",
                               keyboardType: TextInputType.text,
@@ -195,7 +216,8 @@ class AuthScreen extends GetView<AuthController> {
                               textController: controller.passwordController,
                             ),
 
-                            SizedBox(height: 40.0,),
+                            SizedBox(height: 20.0,),
+                            Obx(() => controller.isLoading.value ? Center(child: Image.asset("assets/images/ajaxLoader.gif",width: 30,),) :
                             Container(
                               width: double.infinity,
                               child: CustomButton(
@@ -206,7 +228,7 @@ class AuthScreen extends GetView<AuthController> {
                                   controller.register();
                                 },
                               ),
-                            ),
+                            ),)
                           ],
                         ),
                       ),
