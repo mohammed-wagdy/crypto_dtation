@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       ),
       textDirection: TextDirection.rtl,
       debugShowCheckedModeBanner: false,
-      initialRoute: box.read("currentUser") == null ? AppPages.INITIAL_LOGIN : AppPages.INITIAL_HOME,
+      initialRoute: box.read("access_token") == null ? AppPages.INITIAL_LOGIN : AppPages.INITIAL_HOME,
       getPages: AppPages.routes,
       title: 'Crypto Station',
     );

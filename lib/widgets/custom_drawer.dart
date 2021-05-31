@@ -151,7 +151,7 @@ class customDrawer extends StatelessWidget {
             CustomListTile(
                 onTapFunction: (){
                   GetStorage box = GetStorage();
-                  box.remove("currentUser");
+                  box.remove("access_token");
                   Get.offAllNamed(Routes.LOGIN);
                 },
                 text: "تسجيل الخروج",

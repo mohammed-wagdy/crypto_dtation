@@ -3,10 +3,11 @@ import 'dart:convert';
 
 import 'package:crypto_station/models/user.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
 class AuthProvider {
-
+  GetStorage box = GetStorage();
   final String baseUrl = "http://crypto.supersoftdemo.com/public/api/";
 
   // Login
@@ -17,6 +18,7 @@ class AuthProvider {
       "password": password
     });
     var response_body = json.decode(response.body);
+    print("FDOFDO 444444 ${response_body}");
     return response_body;
   }
 
@@ -55,6 +57,33 @@ class AuthProvider {
     var response = await http.post(url , body: {
       "email": email,
     });
+    var response_body = json.decode(response.body);
+    return response_body;
+  }
+
+
+  // Update User Information
+  Future updateUserData({password, phone,wallet_address,user_id}) async {
+    var url = Uri.parse("${baseUrl}update/profile");
+    var response = await http.post(url , body: {
+      "password": password,
+      "user_id": user_id,
+      "phone": phone,
+      "wallet_address": wallet_address
+    },headers: {
+      // 'Content-Type': 'application/json',
+      // 'Accept': 'application/json',
+      'Authorization': 'Bearer ${box.read("access_token")}',
+    });
+    var response_body = json.decode(response.body);
+    return response_body;
+  }
+
+
+  // Get All Countries
+  Future getAllCountries() async {
+    var url = Uri.parse("${baseUrl}get/country");
+    var response = await http.get(url);
     var response_body = json.decode(response.body);
     return response_body;
   }

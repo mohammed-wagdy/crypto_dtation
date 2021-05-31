@@ -14,7 +14,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class ProfileScreen extends GetView<ProfileController> {
   ProfileController controller = Get.put(ProfileController());
-  List myArr = ['1','2','3','4','5','6'];
+  List myArr = ['1', '2', '3', '4', '5', '6'];
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +106,9 @@ class ProfileScreen extends GetView<ProfileController> {
                                                       //  minimumSize: Size(50, 30),
                                                       alignment:
                                                           Alignment.topLeft),
-                                                  onPressed: () {},
+                                                  onPressed: () {
+                                                    controller.updateUserData();
+                                                  },
                                                   icon: Icon(
                                                     Icons.done,
                                                     size: 14,
@@ -158,8 +160,9 @@ class ProfileScreen extends GetView<ProfileController> {
                                                         Expanded(
                                                           child: CustomText(
                                                             userName: true,
-                                                            text:
-                                                                " محمد وجدي محمد ",
+                                                            text: controller
+                                                                .user.fullName
+                                                                .toString(),
                                                             textColor:
                                                                 nameColor,
                                                             textSize: 15.0,
@@ -268,10 +271,11 @@ class ProfileScreen extends GetView<ProfileController> {
                                             height: 15,
                                           ),
                                           CustomTextFormField(
+                                            isReadOnly: true,
                                               textLabel: "البريد الألكتروني",
                                               textLabelSize: 14.0,
                                               textController:
-                                                  controller.searchInput,
+                                                  controller.emailController,
                                               keyboardType:
                                                   TextInputType.emailAddress),
                                           SizedBox(
@@ -281,7 +285,7 @@ class ProfileScreen extends GetView<ProfileController> {
                                             textLabel: "كلمة المرور",
                                             textLabelSize: 14.0,
                                             textController:
-                                                controller.searchInput,
+                                                controller.passwordController,
                                             keyboardType: TextInputType.text,
                                             isSecure: true,
                                           ),
@@ -292,7 +296,7 @@ class ProfileScreen extends GetView<ProfileController> {
                                               textLabel: "رقم الجوال",
                                               textLabelSize: 14.0,
                                               textController:
-                                                  controller.searchInput,
+                                                  controller.mobileController,
                                               keyboardType:
                                                   TextInputType.number),
                                           SizedBox(
@@ -302,14 +306,14 @@ class ProfileScreen extends GetView<ProfileController> {
                                               textLabel: "عنوان المحفظة",
                                               textLabelSize: 14.0,
                                               textController:
-                                                  controller.searchInput,
+                                                  controller.walletAddressController,
                                               keyboardType: TextInputType.text),
+
                                         ],
                                       ),
                                     ),
                                   );
                                 });
-
                           },
                           icon: Icon(
                             FontAwesomeIcons.user,
@@ -355,7 +359,7 @@ class ProfileScreen extends GetView<ProfileController> {
                                 Expanded(
                                   child: CustomText(
                                     userName: true,
-                                    text: " محمد وجدي محمد ",
+                                    text: controller.user.fullName.toString(),
                                     textColor: nameColor,
                                     textSize: 18.0,
                                     textFontWeight: FontWeight.bold,
@@ -394,21 +398,21 @@ class ProfileScreen extends GetView<ProfileController> {
                   // Email
                   ProfileDetailsWidget(
                       label: "البريد الألكتروني",
-                      data: "mohamed.wagdy957@gmail.com",
+                      data: controller.user.email.toString(),
                       iconImage: "assets/images/emailIcon.png"),
                   SizedBox(height: 15),
 
                   // Phone
                   ProfileDetailsWidget(
                       label: "رقم الجوال",
-                      data: "01009848788",
+                      data: controller.user.phone.toString(),
                       iconImage: "assets/images/Phone Icon.png"),
                   SizedBox(height: 15),
 
                   // Wallet Address
                   ProfileDetailsWidget(
                       label: "عنوان المحفظة",
-                      data: "trc20 شبكة",
+                      data: controller.user.walletAddress.toString(),
                       iconImage: "assets/images/walletIcon.png"),
                   SizedBox(height: 15),
 
@@ -422,11 +426,12 @@ class ProfileScreen extends GetView<ProfileController> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       GestureDetector(
-                        onTap: (){},
+                        onTap: () {},
                         child: Container(
                           padding: EdgeInsets.all(10.0),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(100.0)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(100.0)),
                             color: nameColor,
                           ),
                           child: CustomText(
@@ -440,11 +445,12 @@ class ProfileScreen extends GetView<ProfileController> {
                     ],
                   ),
 
-                  SizedBox(height: 5,),
+                  SizedBox(
+                    height: 5,
+                  ),
                 ],
               ),
             ),
-
 
             // Statistics
             Container(
@@ -615,7 +621,6 @@ class ProfileScreen extends GetView<ProfileController> {
                   border: Border.all(color: Colors.grey.withOpacity(0.3))),
               child: Column(
                 children: [
-
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -627,9 +632,10 @@ class ProfileScreen extends GetView<ProfileController> {
                         itemCount: 5,
                         itemSize: 20.0,
                         itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                        itemBuilder: (context, _) =>
-                            Icon(FontAwesomeIcons.solidStar,color: rateColor,
-                            ),
+                        itemBuilder: (context, _) => Icon(
+                          FontAwesomeIcons.solidStar,
+                          color: rateColor,
+                        ),
                         onRatingUpdate: (rating) {
                           print(rating);
                         },
@@ -637,7 +643,9 @@ class ProfileScreen extends GetView<ProfileController> {
                     ],
                   ),
 
-                  SizedBox(height: 10,),
+                  SizedBox(
+                    height: 10,
+                  ),
 
                   // User Data
                   Row(
@@ -705,26 +713,25 @@ class ProfileScreen extends GetView<ProfileController> {
                     ],
                   ),
 
-                  SizedBox(height: 10,),
-
+                  SizedBox(
+                    height: 10,
+                  ),
 
                   CustomTextFormField(
                       textLabel: "أكتب تعليقك",
                       textController: controller.searchInput,
                       isTextArea: true,
-                      keyboardType: TextInputType.text
-                  ),
+                      keyboardType: TextInputType.text),
 
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       CustomButton(
-                        buttonBackground: whiteColor,
+                          buttonBackground: whiteColor,
                           buttonText: "إضافة",
                           buttonTextColor: nameColor,
                           buttonTextSize: 15.0,
-                          buttonOnPress: () {}
-                          ),
+                          buttonOnPress: () {}),
                     ],
                   )
                 ],
@@ -755,8 +762,7 @@ class ProfileScreen extends GetView<ProfileController> {
                   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                      border:
-                      Border.all(color: Colors.grey.withOpacity(0.3))),
+                      border: Border.all(color: Colors.grey.withOpacity(0.3))),
                   child: Column(
                     children: [
                       // User Data
@@ -786,7 +792,7 @@ class ProfileScreen extends GetView<ProfileController> {
                                 // Name and Favourite
                                 Row(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                   // crossAxisAlignment: CrossAxisAlignment.stretch,
                                   children: [
                                     Expanded(
@@ -830,7 +836,7 @@ class ProfileScreen extends GetView<ProfileController> {
                       ),
                       CustomText(
                         text:
-                        "تم إضافة العرض الخاص بك وهو الأن قيد المراجعة من قبل الإدارة وسيتم إرسال بريد ألكتروني عند الموافقة علي العرض او يمكنك متابعة التطبيق",
+                            "تم إضافة العرض الخاص بك وهو الأن قيد المراجعة من قبل الإدارة وسيتم إرسال بريد ألكتروني عند الموافقة علي العرض او يمكنك متابعة التطبيق",
                         textColor: Colors.grey,
                         textSize: 13.0,
                         textFontWeight: FontWeight.w500,
@@ -849,8 +855,7 @@ class ProfileScreen extends GetView<ProfileController> {
                     buttonText: "جميع التعليقات",
                     buttonTextColor: nameColor,
                     buttonTextSize: 15.0,
-                    buttonOnPress: () {}
-                ),
+                    buttonOnPress: () {}),
               ],
             ),
 

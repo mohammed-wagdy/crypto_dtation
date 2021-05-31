@@ -28,6 +28,7 @@ class AuthController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
+    getAllCountries();
   }
 
   changeRememberMe(value) {
@@ -57,14 +58,13 @@ class AuthController extends GetxController {
 
           // Save User To His Model
           user = User.fromJSON(value['user']);
-          print("FKDFDKFDK ${value['user']}");
           if(user.status == "not_active") {
             Get.toNamed(Routes.CONFIRM);
             Helper.errorSnackBar("خطأ", "من فضلك قم بإدخال كود التفعيل أولا");
           }else {
             box.write("currentUser", value['user']);
+            box.write("access_token", value['access_token']);
             Get.offAllNamed(Routes.HOME);
-            print("FKDFDKFDK ${box.read("currentUser")}");
           }
         }else {
           Helper.errorSnackBar("خطأ", value['message']);
@@ -190,6 +190,14 @@ class AuthController extends GetxController {
         }
       });
     }
+  }
+
+
+  // Get All Countries
+  Future getAllCountries() async {
+    await AuthProvider().getAllCountries().then((value) {
+      print("RRRRRR ${value}");
+    });
   }
 
 

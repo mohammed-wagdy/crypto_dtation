@@ -10,6 +10,7 @@ class CustomTextFormField extends StatelessWidget {
   final bool isSecure;
   final double textLabelSize;
   final bool isTextArea;
+  final bool isReadOnly;
 
   CustomTextFormField({
     required this.textLabel,
@@ -17,7 +18,8 @@ class CustomTextFormField extends StatelessWidget {
     required this.keyboardType,
     this.textLabelSize = 16.0,
     this.isSecure = false,
-    this.isTextArea = false
+    this.isTextArea = false,
+    this.isReadOnly = false
   });
 
   @override
@@ -33,6 +35,7 @@ class CustomTextFormField extends StatelessWidget {
         ),
         SizedBox(height: 10.0,),
         TextFormField(
+          readOnly: isReadOnly ?  true : false,
           maxLines: isTextArea ? 4 : 1,
           controller: textController,
           keyboardType: keyboardType,
