@@ -517,7 +517,7 @@ class ProfileScreen extends GetView<ProfileController> {
                             text: controller.offerCount.value.toString(),
                             textFontWeight: FontWeight.bold,
                             textColor: whiteColor,
-                            textSize: 40,
+                            textSize: 35,
                           ),
 
                           Container(
@@ -572,7 +572,7 @@ class ProfileScreen extends GetView<ProfileController> {
                             text: controller.orderCount.value.toString(),
                             textFontWeight: FontWeight.bold,
                             textColor: whiteColor,
-                            textSize: 40,
+                            textSize: 35,
                           ),
                           Container(
                             alignment: Alignment.bottomLeft,
@@ -625,7 +625,7 @@ class ProfileScreen extends GetView<ProfileController> {
                             text: controller.orderRequestCount.value.toString(),
                             textFontWeight: FontWeight.bold,
                             textColor: whiteColor,
-                            textSize: 40,
+                            textSize: 35,
                           ),
                           Container(
                             alignment: Alignment.bottomLeft,
