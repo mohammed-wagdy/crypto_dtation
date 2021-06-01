@@ -8,8 +8,13 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 class customDrawer extends StatelessWidget {
+
+  GetStorage box = GetStorage();
+
   @override
   Widget build(BuildContext context) {
+    var user = box.read("currentUser");
+    print("OFOFPPOO ${user['image']}");
     return Drawer(
       child: Padding(
         padding: EdgeInsets.only(top: 20.0),
@@ -21,7 +26,11 @@ class customDrawer extends StatelessWidget {
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
-                    image: NetworkImage("https://icon-library.com/images/avatar-icon/avatar-icon-8.jpg"),
+                    fit: BoxFit.contain,
+                    image:
+                    user['image'] == null || user['image'] == "user.png" ?
+                    NetworkImage("https://www.pngjoy.com/pngm/136/2750635_gray-circle-login-user-icon-png-transparent-png.png") :
+                    NetworkImage("${user['image']}")
                   )
               ),
             ),
@@ -29,7 +38,7 @@ class customDrawer extends StatelessWidget {
             SizedBox(height: 10,),
 
             CustomText(
-              text: "محمد وجدي محمد كمال",
+              text: user['full_name'],
               textTextAlign: TextAlign.center,
               textFontWeight: FontWeight.bold,
               textColor: mainColor,

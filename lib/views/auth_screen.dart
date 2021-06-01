@@ -198,7 +198,7 @@ class AuthScreen extends GetView<AuthController> {
                             ),
                             SizedBox(height: 15.0,),
                             CustomTextFormField(
-                              textLabel: "عنوان المحفطة",
+                              textLabel: "عنوان المحفظة",
                               keyboardType: TextInputType.text,
                               textController: controller.walletAddressController,
                             ),
@@ -208,6 +208,7 @@ class AuthScreen extends GetView<AuthController> {
                               keyboardType: TextInputType.number,
                               textController: controller.mobileNumberController,
                             ),
+
                             SizedBox(height: 15.0,),
                             CustomTextFormField(
                               textLabel: "كلمة المرور",
@@ -215,7 +216,93 @@ class AuthScreen extends GetView<AuthController> {
                               isSecure: true,
                               textController: controller.passwordController,
                             ),
-
+                            SizedBox(height: 15.0,),
+                            CustomText(
+                              text: "أختر الدولة",
+                              textColor: textLabelColor,
+                              textFontWeight: FontWeight.w500,
+                              textSize: 16.0,
+                            ),
+                            SizedBox(height: 10.0,),
+                            // PopupMenuButton(
+                            //   child: Container(
+                            //     width: double.infinity,
+                            //     padding: EdgeInsets.symmetric(horizontal: 7,vertical: 15),
+                            //     decoration: BoxDecoration(
+                            //         border: Border.all(color: inputBorderColor),
+                            //         borderRadius: BorderRadius.all(Radius.circular(5.0))
+                            //     ),
+                            //     child: CustomText(
+                            //       text: "أختر الدولة",
+                            //       textColor: textLabelColor,
+                            //       textSize: 13,
+                            //     )
+                            //   ),
+                            //   itemBuilder: (BuildContext context) {
+                            //     return controller.allCountries.value.map((item) {
+                            //       return
+                            //           PopupMenuItem(
+                            //               child: Row(
+                            //                 children: [
+                            //                   Icon(Icons.circle,size: 14,color: mainColor,),
+                            //                   SizedBox(width: 7,),
+                            //                   CustomText(
+                            //                     text: "العروض النشطة",
+                            //                     textColor: mainColor,
+                            //                     textSize: 13,
+                            //                     textFontWeight: FontWeight.bold,
+                            //                   )
+                            //                 ],
+                            //               ),
+                            //               value: "",
+                            //           );
+                            //
+                            //     }).toList();
+                            //   },
+                            //   // [
+                            //   //
+                            //   //
+                            //   //   PopupMenuItem(
+                            //   //       child: Row(
+                            //   //         children: [
+                            //   //           Icon(Icons.circle,size: 14,color: mainColor,),
+                            //   //           SizedBox(width: 7,),
+                            //   //           CustomText(
+                            //   //             text: "العروض النشطة",
+                            //   //             textColor: mainColor,
+                            //   //             textSize: 13,
+                            //   //             textFontWeight: FontWeight.bold,
+                            //   //           )
+                            //   //         ],
+                            //   //       ),
+                            //   //       value: ""
+                            //   //   ),
+                            //   // ],
+                            //     onSelected: (val) {
+                            //     print("DKDFKDFKDFKD ${val}");
+                            //     },
+                            // ),
+                            Container(
+                              child: DropdownButton(
+                                isExpanded: true,
+                                dropdownColor: Colors.white,
+                                hint:  Text("أختر الدولة"),
+                                items: controller.allCountries.value.map((country){
+                                  return  DropdownMenuItem (
+                                    value: "1",
+                                    child: Row(
+                                      children: <Widget>[
+                                        Icon(Icons.arrow_forward_ios),
+                                        SizedBox(width: 10,),
+                                        Text("Mohamed Wagdy", style:  TextStyle(color: Colors.black),),
+                                      ],),
+                                  );
+                                }).toList(),
+                                onChanged: (newVal) {
+                                  print("SDSDSDS ${newVal}");
+                                },
+                              ),
+                            ),
                             SizedBox(height: 20.0,),
                             Obx(() => controller.isLoading.value ? Center(child: Image.asset("assets/images/ajaxLoader.gif",width: 30,),) :
                             Container(

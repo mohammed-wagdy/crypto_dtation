@@ -17,6 +17,7 @@ class AuthController extends GetxController {
   RxBool isLoading = false.obs;
   User user = new User();
   GetStorage box = GetStorage();
+  RxList allCountries = [Text("mohamed"),Text("mohamed"),Text("mohamed")].obs;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController fullNameController = TextEditingController();
@@ -197,6 +198,7 @@ class AuthController extends GetxController {
   Future getAllCountries() async {
     await AuthProvider().getAllCountries().then((value) {
       print("RRRRRR ${value}");
+      //allCountries.value = value['country'];
     });
   }
 

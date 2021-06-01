@@ -1,6 +1,7 @@
 import 'package:crypto_station/constants.dart';
 import 'package:crypto_station/controllers/profile_controller.dart';
 import 'package:crypto_station/helper.dart';
+import 'package:crypto_station/routes/app_routes.dart';
 import 'package:crypto_station/widgets/custom_appbar.dart';
 import 'package:crypto_station/widgets/custom_button.dart';
 import 'package:crypto_station/widgets/custom_text.dart';
@@ -11,6 +12,7 @@ import 'package:flutter/painting.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class ProfileScreen extends GetView<ProfileController> {
   ProfileController controller = Get.put(ProfileController());
@@ -18,7 +20,7 @@ class ProfileScreen extends GetView<ProfileController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Obx(()=>Scaffold(
       //key: controller.scaffoldKey,
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
@@ -27,7 +29,7 @@ class ProfileScreen extends GetView<ProfileController> {
           )),
       backgroundColor: whiteColor,
       body: ListView(
-          //  crossAxisAlignment: CrossAxisAlignment.start,
+        //  crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Input Search
             Padding(
@@ -96,7 +98,7 @@ class ProfileScreen extends GetView<ProfileController> {
                                       child: Column(
                                         mainAxisSize: MainAxisSize.min,
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.stretch,
+                                        CrossAxisAlignment.stretch,
                                         children: [
                                           Row(
                                             children: [
@@ -105,7 +107,7 @@ class ProfileScreen extends GetView<ProfileController> {
                                                       padding: EdgeInsets.zero,
                                                       //  minimumSize: Size(50, 30),
                                                       alignment:
-                                                          Alignment.topLeft),
+                                                      Alignment.topLeft),
                                                   onPressed: () {
                                                     controller.updateUserData();
                                                   },
@@ -119,11 +121,11 @@ class ProfileScreen extends GetView<ProfileController> {
                                                     textSize: 14,
                                                     textColor: mainColor,
                                                     textFontWeight:
-                                                        FontWeight.w500,
+                                                    FontWeight.w500,
                                                   ))
                                             ],
                                             mainAxisAlignment:
-                                                MainAxisAlignment.end,
+                                            MainAxisAlignment.end,
                                           ),
                                           Row(
                                             children: [
@@ -136,8 +138,11 @@ class ProfileScreen extends GetView<ProfileController> {
                                                         color: grayColor),
                                                     shape: BoxShape.circle,
                                                     image: DecorationImage(
-                                                      image: NetworkImage(
-                                                          "https://static01.nyt.com/images/2020/11/20/multimedia/00Gates-1/00Gates-1-mobileMasterAt3x.jpg"),
+                                                      fit: BoxFit.cover,
+                                                      image:
+                                                      controller.user.value.image == null || controller.user.value.image == "user.png" ?
+                                                      NetworkImage("https://www.pngjoy.com/pngm/136/2750635_gray-circle-login-user-icon-png-transparent-png.png") :
+                                                      NetworkImage("${controller.user.value.image.toString()}"),
                                                     )),
                                               ),
 
@@ -148,26 +153,26 @@ class ProfileScreen extends GetView<ProfileController> {
                                               Expanded(
                                                 child: Column(
                                                   crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
+                                                  CrossAxisAlignment.start,
                                                   children: [
                                                     // Name and Favourite
                                                     Row(
                                                       mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
                                                       // crossAxisAlignment: CrossAxisAlignment.stretch,
                                                       children: [
                                                         Expanded(
                                                           child: CustomText(
                                                             userName: true,
                                                             text: controller
-                                                                .user.fullName
+                                                                .user.value.fullName
                                                                 .toString(),
                                                             textColor:
-                                                                nameColor,
+                                                            nameColor,
                                                             textSize: 15.0,
                                                             textFontWeight:
-                                                                FontWeight.bold,
+                                                            FontWeight.bold,
                                                           ),
                                                         ),
                                                       ],
@@ -185,15 +190,15 @@ class ProfileScreen extends GetView<ProfileController> {
                                                           onTap: () {
                                                             showModalBottomSheet(
                                                                 context:
-                                                                    context,
+                                                                context,
                                                                 builder:
                                                                     (BuildContext
-                                                                        bc) {
+                                                                bc) {
                                                                   return SafeArea(
                                                                     child:
-                                                                        Container(
+                                                                    Container(
                                                                       child:
-                                                                          new Wrap(
+                                                                      new Wrap(
                                                                         children: <
                                                                             Widget>[
                                                                           new ListTile(
@@ -208,12 +213,12 @@ class ProfileScreen extends GetView<ProfileController> {
                                                                               }),
                                                                           new ListTile(
                                                                             leading:
-                                                                                new Icon(
+                                                                            new Icon(
                                                                               Icons.photo_camera,
                                                                               color: mainColor,
                                                                             ),
                                                                             title:
-                                                                                new Text('ألتقاط صورة'),
+                                                                            new Text('ألتقاط صورة'),
                                                                             onTap:
                                                                                 () {
                                                                               controller.imgFromCamera();
@@ -229,27 +234,27 @@ class ProfileScreen extends GetView<ProfileController> {
                                                           child: Container(
                                                             padding: EdgeInsets
                                                                 .symmetric(
-                                                                    vertical: 1,
-                                                                    horizontal:
-                                                                        4),
+                                                                vertical: 1,
+                                                                horizontal:
+                                                                4),
                                                             decoration:
-                                                                BoxDecoration(
+                                                            BoxDecoration(
                                                               borderRadius:
-                                                                  BorderRadius
-                                                                      .all(Radius
-                                                                          .circular(
-                                                                              5)),
+                                                              BorderRadius
+                                                                  .all(Radius
+                                                                  .circular(
+                                                                  5)),
                                                               color: grayColor,
                                                             ),
                                                             child: CustomText(
                                                               text:
-                                                                  "تغيير الصورة",
+                                                              "تغيير الصورة",
                                                               textSize: 12,
                                                               textColor:
-                                                                  mainColor,
+                                                              mainColor,
                                                               textFontWeight:
-                                                                  FontWeight
-                                                                      .w500,
+                                                              FontWeight
+                                                                  .w500,
                                                             ),
                                                           ),
                                                         ),
@@ -271,13 +276,23 @@ class ProfileScreen extends GetView<ProfileController> {
                                             height: 15,
                                           ),
                                           CustomTextFormField(
-                                            isReadOnly: true,
+                                              isReadOnly: true,
                                               textLabel: "البريد الألكتروني",
                                               textLabelSize: 14.0,
                                               textController:
-                                                  controller.emailController,
+                                              controller.emailController,
                                               keyboardType:
-                                                  TextInputType.emailAddress),
+                                              TextInputType.emailAddress),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          CustomTextFormField(
+                                              textLabel: "الأسم بالكامل",
+                                              textLabelSize: 14.0,
+                                              textController:
+                                              controller.fullNameController,
+                                              keyboardType:
+                                              TextInputType.emailAddress),
                                           SizedBox(
                                             height: 10,
                                           ),
@@ -285,7 +300,7 @@ class ProfileScreen extends GetView<ProfileController> {
                                             textLabel: "كلمة المرور",
                                             textLabelSize: 14.0,
                                             textController:
-                                                controller.passwordController,
+                                            controller.passwordController,
                                             keyboardType: TextInputType.text,
                                             isSecure: true,
                                           ),
@@ -296,9 +311,9 @@ class ProfileScreen extends GetView<ProfileController> {
                                               textLabel: "رقم الجوال",
                                               textLabelSize: 14.0,
                                               textController:
-                                                  controller.mobileController,
+                                              controller.mobileController,
                                               keyboardType:
-                                                  TextInputType.number),
+                                              TextInputType.number),
                                           SizedBox(
                                             height: 10,
                                           ),
@@ -306,7 +321,7 @@ class ProfileScreen extends GetView<ProfileController> {
                                               textLabel: "عنوان المحفظة",
                                               textLabelSize: 14.0,
                                               textController:
-                                                  controller.walletAddressController,
+                                              controller.walletAddressController,
                                               keyboardType: TextInputType.text),
 
                                         ],
@@ -330,6 +345,17 @@ class ProfileScreen extends GetView<ProfileController> {
                   // User Data
                   Row(
                     children: [
+
+                      // CircleAvatar(
+                      //   child: CachedNetworkImage(
+                      //     fit: BoxFit.cover,
+                      //     imageUrl: controller.user.image.toString() == "user.png" ? "https://upload.wikimedia.org/wikipedia/commons/f/fa/Billie_Eilish_2019_by_Glenn_Francis_%28cropped%29_2.jpg" : controller.user.image.toString(),
+                      //     placeholder: (context, url) => CircularProgressIndicator(),
+                      //     errorWidget: (context, url, error) => Icon(Icons.error),
+                      //   ),
+                      //   // backgroundColor: whiteColor,
+                      //   radius: 35,
+                      // ),
                       // User Image
                       Container(
                         width: 80,
@@ -338,9 +364,13 @@ class ProfileScreen extends GetView<ProfileController> {
                             border: Border.all(color: grayColor),
                             shape: BoxShape.circle,
                             image: DecorationImage(
-                              image: NetworkImage(
-                                  "https://static01.nyt.com/images/2020/11/20/multimedia/00Gates-1/00Gates-1-mobileMasterAt3x.jpg"),
-                            )),
+                              fit: BoxFit.cover,
+                              image:
+                              controller.user.value.image == null || controller.user.value.image == "user.png" ?
+                              NetworkImage("https://www.pngjoy.com/pngm/136/2750635_gray-circle-login-user-icon-png-transparent-png.png") :
+                              NetworkImage("${controller.user.value.image.toString()}"),
+                            )
+                        ),
                       ),
 
                       SizedBox(
@@ -359,7 +389,7 @@ class ProfileScreen extends GetView<ProfileController> {
                                 Expanded(
                                   child: CustomText(
                                     userName: true,
-                                    text: controller.user.fullName.toString(),
+                                    text: controller.user.value.fullName.toString(),
                                     textColor: nameColor,
                                     textSize: 18.0,
                                     textFontWeight: FontWeight.bold,
@@ -398,21 +428,21 @@ class ProfileScreen extends GetView<ProfileController> {
                   // Email
                   ProfileDetailsWidget(
                       label: "البريد الألكتروني",
-                      data: controller.user.email.toString(),
+                      data: controller.user.value.email.toString(),
                       iconImage: "assets/images/emailIcon.png"),
                   SizedBox(height: 15),
 
                   // Phone
                   ProfileDetailsWidget(
                       label: "رقم الجوال",
-                      data: controller.user.phone.toString(),
+                      data: controller.user.value.phone.toString(),
                       iconImage: "assets/images/Phone Icon.png"),
                   SizedBox(height: 15),
 
                   // Wallet Address
                   ProfileDetailsWidget(
                       label: "عنوان المحفظة",
-                      data: controller.user.walletAddress.toString(),
+                      data: controller.user.value.walletAddress.toString(),
                       iconImage: "assets/images/walletIcon.png"),
                   SizedBox(height: 15),
 
@@ -422,28 +452,28 @@ class ProfileScreen extends GetView<ProfileController> {
                       data: "trc20 ",
                       iconImage: "assets/images/typeIcon.png"),
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      GestureDetector(
-                        onTap: () {},
-                        child: Container(
-                          padding: EdgeInsets.all(10.0),
-                          decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(100.0)),
-                            color: nameColor,
-                          ),
-                          child: CustomText(
-                            text: "العروض",
-                            textSize: 15,
-                            textColor: whiteColor,
-                            textFontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.end,
+                  //   children: [
+                  //     GestureDetector(
+                  //       onTap: () {},
+                  //       child: Container(
+                  //         padding: EdgeInsets.all(10.0),
+                  //         decoration: BoxDecoration(
+                  //           borderRadius:
+                  //           BorderRadius.all(Radius.circular(100.0)),
+                  //           color: nameColor,
+                  //         ),
+                  //         child: CustomText(
+                  //           text: "العروض",
+                  //           textSize: 15,
+                  //           textColor: whiteColor,
+                  //           textFontWeight: FontWeight.bold,
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
 
                   SizedBox(
                     height: 5,
@@ -460,12 +490,12 @@ class ProfileScreen extends GetView<ProfileController> {
                   Expanded(
                     child: Container(
                       padding:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                      EdgeInsets.only(bottom: 0,left: 10,right: 10,top: 10),
                       margin: EdgeInsets.all(5),
                       decoration: BoxDecoration(
                           color: Color(0XFF157e9c),
                           borderRadius:
-                              BorderRadius.all(Radius.circular(10.0))),
+                          BorderRadius.all(Radius.circular(10.0))),
                       child: Column(
                         children: [
                           Image.asset(
@@ -484,21 +514,30 @@ class ProfileScreen extends GetView<ProfileController> {
                             height: 5,
                           ),
                           CustomText(
-                            text: "53",
+                            text: controller.offerCount.value.toString(),
                             textFontWeight: FontWeight.bold,
                             textColor: whiteColor,
                             textSize: 40,
                           ),
-                          GestureDetector(
-                            onTap: () {},
-                            child: Container(
-                                alignment: Alignment.bottomLeft,
-                                child: Icon(
-                                  Icons.arrow_forward_ios,
-                                  color: whiteColor,
-                                  size: 12,
-                                )),
-                          ),
+
+                          Container(
+                            alignment: Alignment.bottomLeft,
+                            child: IconButton(
+                              padding: EdgeInsets.all(0),
+                                onPressed: (){
+                                  Get.toNamed(Routes.ALL_USER_OFFERS);
+                                },
+                                icon: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Icon(
+                                    Icons.arrow_forward_ios,
+                                    color: whiteColor,
+                                    size: 18,
+                                  ),
+                                )
+                            ),
+                          )
+
                         ],
                       ),
                     ),
@@ -506,12 +545,12 @@ class ProfileScreen extends GetView<ProfileController> {
                   Expanded(
                     child: Container(
                       padding:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                      EdgeInsets.only(bottom: 0,left: 10,right: 10,top: 10),
                       margin: EdgeInsets.all(5),
                       decoration: BoxDecoration(
                           color: Color(0XFF157e9c),
                           borderRadius:
-                              BorderRadius.all(Radius.circular(10.0))),
+                          BorderRadius.all(Radius.circular(10.0))),
                       child: Column(
                         children: [
                           Image.asset(
@@ -530,21 +569,28 @@ class ProfileScreen extends GetView<ProfileController> {
                             height: 5,
                           ),
                           CustomText(
-                            text: "53",
+                            text: controller.orderCount.value.toString(),
                             textFontWeight: FontWeight.bold,
                             textColor: whiteColor,
                             textSize: 40,
                           ),
-                          GestureDetector(
-                            onTap: () {},
-                            child: Container(
-                                alignment: Alignment.bottomLeft,
-                                child: Icon(
-                                  Icons.arrow_forward_ios,
-                                  color: whiteColor,
-                                  size: 12,
-                                )),
-                          ),
+                          Container(
+                            alignment: Alignment.bottomLeft,
+                            child: IconButton(
+                                padding: EdgeInsets.all(0),
+                                onPressed: (){
+                                  Get.toNamed(Routes.ALL_USER_ORDERS);
+                                },
+                                icon: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Icon(
+                                    Icons.arrow_forward_ios,
+                                    color: whiteColor,
+                                    size: 18,
+                                  ),
+                                )
+                            ),
+                          )
                         ],
                       ),
                     ),
@@ -552,12 +598,12 @@ class ProfileScreen extends GetView<ProfileController> {
                   Expanded(
                     child: Container(
                       padding:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                      EdgeInsets.only(bottom: 0,left: 10,right: 10,top: 10),
                       margin: EdgeInsets.all(5),
                       decoration: BoxDecoration(
                           color: Color(0XFF157e9c),
                           borderRadius:
-                              BorderRadius.all(Radius.circular(10.0))),
+                          BorderRadius.all(Radius.circular(10.0))),
                       child: Column(
                         children: [
                           Image.asset(
@@ -576,21 +622,28 @@ class ProfileScreen extends GetView<ProfileController> {
                             height: 5,
                           ),
                           CustomText(
-                            text: "53",
+                            text: controller.orderRequestCount.value.toString(),
                             textFontWeight: FontWeight.bold,
                             textColor: whiteColor,
                             textSize: 40,
                           ),
-                          GestureDetector(
-                            onTap: () {},
-                            child: Container(
-                                alignment: Alignment.bottomLeft,
-                                child: Icon(
-                                  Icons.arrow_forward_ios,
-                                  color: whiteColor,
-                                  size: 12,
-                                )),
-                          ),
+                          Container(
+                            alignment: Alignment.bottomLeft,
+                            child: IconButton(
+                                padding: EdgeInsets.all(0),
+                                onPressed: (){
+                                  Get.toNamed(Routes.ALL_USER_REQUESTS);
+                                },
+                                icon: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Icon(
+                                    Icons.arrow_forward_ios,
+                                    color: whiteColor,
+                                    size: 18,
+                                  ),
+                                )
+                            ),
+                          )
                         ],
                       ),
                     ),
@@ -613,256 +666,261 @@ class ProfileScreen extends GetView<ProfileController> {
               height: 10,
             ),
 
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 16),
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  border: Border.all(color: Colors.grey.withOpacity(0.3))),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      RatingBar.builder(
-                        initialRating: 3,
-                        minRating: 1,
-                        direction: Axis.horizontal,
-                        allowHalfRating: false,
-                        itemCount: 5,
-                        itemSize: 20.0,
-                        itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                        itemBuilder: (context, _) => Icon(
-                          FontAwesomeIcons.solidStar,
-                          color: rateColor,
-                        ),
-                        onRatingUpdate: (rating) {
-                          print(rating);
-                        },
-                      ),
-                    ],
-                  ),
-
-                  SizedBox(
-                    height: 10,
-                  ),
-
-                  // User Data
-                  Row(
-                    children: [
-                      // User Image
-                      Container(
-                        width: 60,
-                        height: 60,
-                        decoration: BoxDecoration(
-                            border: Border.all(color: grayColor),
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                              image: NetworkImage(
-                                  "https://static01.nyt.com/images/2020/11/20/multimedia/00Gates-1/00Gates-1-mobileMasterAt3x.jpg"),
-                            )),
-                      ),
-
-                      SizedBox(
-                        width: 10,
-                      ),
-
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // Name and Favourite
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              // crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                Expanded(
-                                  child: CustomText(
-                                    userName: true,
-                                    text: " محمد وجدي محمد ",
-                                    textColor: nameColor,
-                                    textSize: 16.0,
-                                    textFontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-
-                            SizedBox(
-                              height: 5,
-                            ),
-
-                            // Rating and flag
-                            Row(
-                              children: [
-                                Row(
-                                  children: Helper.getStarsList(2.5),
-                                ),
-                                SizedBox(
-                                  width: 40,
-                                ),
-                                Image.network(
-                                  "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_Egypt.svg/640px-Flag_of_Egypt.svg.png",
-                                  width: 20,
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-
-                  SizedBox(
-                    height: 10,
-                  ),
-
-                  CustomTextFormField(
-                      textLabel: "أكتب تعليقك",
-                      textController: controller.searchInput,
-                      isTextArea: true,
-                      keyboardType: TextInputType.text),
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      CustomButton(
-                          buttonBackground: whiteColor,
-                          buttonText: "إضافة",
-                          buttonTextColor: nameColor,
-                          buttonTextSize: 15.0,
-                          buttonOnPress: () {}),
-                    ],
-                  )
-                ],
-              ),
-            ),
+            // // Write Comment Rate
+            // Container(
+            //   margin: EdgeInsets.symmetric(horizontal: 16),
+            //   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            //   decoration: BoxDecoration(
+            //       borderRadius: BorderRadius.all(Radius.circular(10.0)),
+            //       border: Border.all(color: Colors.grey.withOpacity(0.3))),
+            //   child: Column(
+            //     children: [
+            //       Row(
+            //         mainAxisAlignment: MainAxisAlignment.end,
+            //         children: [
+            //           RatingBar.builder(
+            //             initialRating: 3,
+            //             minRating: 1,
+            //             direction: Axis.horizontal,
+            //             allowHalfRating: false,
+            //             itemCount: 5,
+            //             itemSize: 20.0,
+            //             itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+            //             itemBuilder: (context, _) => Icon(
+            //               FontAwesomeIcons.solidStar,
+            //               color: rateColor,
+            //             ),
+            //             onRatingUpdate: (rating) {
+            //               print(rating);
+            //             },
+            //           ),
+            //         ],
+            //       ),
+            //
+            //       SizedBox(
+            //         height: 10,
+            //       ),
+            //
+            //       // User Data
+            //       Row(
+            //         children: [
+            //           // User Image
+            //           Container(
+            //             width: 60,
+            //             height: 60,
+            //             decoration: BoxDecoration(
+            //                 border: Border.all(color: grayColor),
+            //                 shape: BoxShape.circle,
+            //                 image: DecorationImage(
+            //                   image: NetworkImage(
+            //                       "https://static01.nyt.com/images/2020/11/20/multimedia/00Gates-1/00Gates-1-mobileMasterAt3x.jpg"),
+            //                 )),
+            //           ),
+            //
+            //           SizedBox(
+            //             width: 10,
+            //           ),
+            //
+            //           Expanded(
+            //             child: Column(
+            //               crossAxisAlignment: CrossAxisAlignment.start,
+            //               children: [
+            //                 // Name and Favourite
+            //                 Row(
+            //                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //                   // crossAxisAlignment: CrossAxisAlignment.stretch,
+            //                   children: [
+            //                     Expanded(
+            //                       child: CustomText(
+            //                         userName: true,
+            //                         text: " محمد وجدي محمد ",
+            //                         textColor: nameColor,
+            //                         textSize: 16.0,
+            //                         textFontWeight: FontWeight.bold,
+            //                       ),
+            //                     ),
+            //                   ],
+            //                 ),
+            //
+            //                 SizedBox(
+            //                   height: 5,
+            //                 ),
+            //
+            //                 // Rating and flag
+            //                 Row(
+            //                   children: [
+            //                     Row(
+            //                       children: Helper.getStarsList(2.5),
+            //                     ),
+            //                     SizedBox(
+            //                       width: 40,
+            //                     ),
+            //                     Image.network(
+            //                       "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_Egypt.svg/640px-Flag_of_Egypt.svg.png",
+            //                       width: 20,
+            //                     ),
+            //                   ],
+            //                 )
+            //               ],
+            //             ),
+            //           ),
+            //         ],
+            //       ),
+            //
+            //       SizedBox(
+            //         height: 10,
+            //       ),
+            //
+            //       CustomTextFormField(
+            //           textLabel: "أكتب تعليقك",
+            //           textController: controller.searchInput,
+            //           isTextArea: true,
+            //           keyboardType: TextInputType.text),
+            //
+            //       Row(
+            //         mainAxisAlignment: MainAxisAlignment.end,
+            //         children: [
+            //           CustomButton(
+            //               buttonBackground: whiteColor,
+            //               buttonText: "إضافة",
+            //               buttonTextColor: nameColor,
+            //               buttonTextSize: 15.0,
+            //               buttonOnPress: () {}),
+            //         ],
+            //       )
+            //     ],
+            //   ),
+            // ),
 
             SizedBox(
               height: 10,
             ),
 
-            ListView.separated(
-              separatorBuilder: (BuildContext ctn, int index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: SizedBox(
-                    height: 10.0,
-                  ),
-                );
-              },
-              shrinkWrap: true,
-              physics: ScrollPhysics(),
-              //    primary: false,
-              //   physics: NeverScrollableScrollPhysics(),
-              itemCount: myArr.take(2).length,
-              itemBuilder: (BuildContext ctx, int index) {
-                return Container(
-                  margin: EdgeInsets.symmetric(horizontal: 16),
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                      border: Border.all(color: Colors.grey.withOpacity(0.3))),
-                  child: Column(
-                    children: [
-                      // User Data
-                      Row(
+            controller.rates.value.isEmpty ? Center(child: Text("لا يوجد تقييمات"),) :
+            Column(
+              children: [
+                ListView.separated(
+                  separatorBuilder: (BuildContext ctn, int index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: SizedBox(
+                        height: 10.0,
+                      ),
+                    );
+                  },
+                  shrinkWrap: true,
+                  physics: ScrollPhysics(),
+                  //    primary: false,
+                  //   physics: NeverScrollableScrollPhysics(),
+                  itemCount: controller.rates.take(2).length,
+                  itemBuilder: (BuildContext ctx, int index) {
+                    return Container(
+                      margin: EdgeInsets.symmetric(horizontal: 16),
+                      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          border: Border.all(color: Colors.grey.withOpacity(0.3))),
+                      child: Column(
                         children: [
-                          // User Image
-                          Container(
-                            width: 60,
-                            height: 60,
-                            decoration: BoxDecoration(
-                                border: Border.all(color: grayColor),
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                  image: NetworkImage(
-                                      "https://static01.nyt.com/images/2020/11/20/multimedia/00Gates-1/00Gates-1-mobileMasterAt3x.jpg"),
-                                )),
-                          ),
+                          // User Data
+                          Row(
+                            children: [
+                              // User Image
+                              Container(
+                                width: 60,
+                                height: 60,
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: grayColor),
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                      image: NetworkImage(
+                                          "https://static01.nyt.com/images/2020/11/20/multimedia/00Gates-1/00Gates-1-mobileMasterAt3x.jpg"),
+                                    )),
+                              ),
 
-                          SizedBox(
-                            width: 10,
-                          ),
+                              SizedBox(
+                                width: 10,
+                              ),
 
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                // Name and Favourite
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  // crossAxisAlignment: CrossAxisAlignment.stretch,
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Expanded(
-                                      child: CustomText(
-                                        userName: true,
-                                        text: " محمد وجدي محمد ",
-                                        textColor: nameColor,
-                                        textSize: 16.0,
-                                        textFontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-
-                                SizedBox(
-                                  height: 5,
-                                ),
-
-                                // Rating and flag
-                                Row(
-                                  children: [
+                                    // Name and Favourite
                                     Row(
-                                      children: Helper.getStarsList(2.5),
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                      // crossAxisAlignment: CrossAxisAlignment.stretch,
+                                      children: [
+                                        Expanded(
+                                          child: CustomText(
+                                            userName: true,
+                                            text: " محمد وجدي محمد ",
+                                            textColor: nameColor,
+                                            textSize: 16.0,
+                                            textFontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
                                     ),
+
                                     SizedBox(
-                                      width: 40,
+                                      height: 5,
                                     ),
-                                    Image.network(
-                                      "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_Egypt.svg/640px-Flag_of_Egypt.svg.png",
-                                      width: 20,
-                                    ),
+
+                                    // Rating and flag
+                                    Row(
+                                      children: [
+                                        Row(
+                                          children: Helper.getStarsList(2.5),
+                                        ),
+                                        SizedBox(
+                                          width: 40,
+                                        ),
+                                        Image.network(
+                                          "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_Egypt.svg/640px-Flag_of_Egypt.svg.png",
+                                          width: 20,
+                                        ),
+                                      ],
+                                    )
                                   ],
-                                )
-                              ],
-                            ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          CustomText(
+                            text:
+                            "تم إضافة العرض الخاص بك وهو الأن قيد المراجعة من قبل الإدارة وسيتم إرسال بريد ألكتروني عند الموافقة علي العرض او يمكنك متابعة التطبيق",
+                            textColor: Colors.grey,
+                            textSize: 13.0,
+                            textFontWeight: FontWeight.w500,
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      CustomText(
-                        text:
-                            "تم إضافة العرض الخاص بك وهو الأن قيد المراجعة من قبل الإدارة وسيتم إرسال بريد ألكتروني عند الموافقة علي العرض او يمكنك متابعة التطبيق",
-                        textColor: Colors.grey,
-                        textSize: 13.0,
-                        textFontWeight: FontWeight.w500,
-                      ),
-                    ],
-                  ),
-                );
-              },
-            ),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                CustomButton(
-                    buttonBackground: whiteColor,
-                    buttonText: "جميع التعليقات",
-                    buttonTextColor: nameColor,
-                    buttonTextSize: 15.0,
-                    buttonOnPress: () {}),
+                    );
+                  },
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    CustomButton(
+                        buttonBackground: whiteColor,
+                        buttonText: "جميع التعليقات",
+                        buttonTextColor: nameColor,
+                        buttonTextSize: 15.0,
+                        buttonOnPress: () {}),
+                  ],
+                ),
               ],
             ),
 
             SizedBox(
-              height: 20,
+              height: 40,
             ),
           ]),
-    );
+    ));
   }
 }

@@ -37,7 +37,7 @@ class AdvancedSearchScreen extends GetView<OffersController> {
 
             CustomTextFormField(
                 textLabel: "أسم المستخدم",
-                textController: controller.payType,
+                textController: controller.paymentTypeController,
                 keyboardType: TextInputType.text
             ),
 
@@ -45,7 +45,7 @@ class AdvancedSearchScreen extends GetView<OffersController> {
 
             CustomTextFormField(
                 textLabel: "رقم العرض",
-                textController: controller.payType,
+                textController: controller.paymentTypeController,
                 keyboardType: TextInputType.text
             ),
 

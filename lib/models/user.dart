@@ -14,6 +14,7 @@ class User {
   User();
 
   User.fromJSON(Map<String, dynamic> jsonMap) {
+    print("FODFODFDO ${jsonMap}");
     try {
       id = jsonMap['id'].toString();
       rolesName = jsonMap['roles_name'];

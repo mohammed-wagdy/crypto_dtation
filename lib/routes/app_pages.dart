@@ -3,9 +3,13 @@ import 'package:crypto_station/bindings/auth_binding.dart';
 import 'package:crypto_station/bindings/favourite_binding.dart';
 import 'package:crypto_station/bindings/home_binding.dart';
 import 'package:crypto_station/bindings/offers_binding.dart';
+import 'package:crypto_station/bindings/profile_binding.dart';
 import 'package:crypto_station/routes/app_routes.dart';
 import 'package:crypto_station/views/about_us_screen.dart';
 import 'package:crypto_station/views/advanced_search_screen.dart';
+import 'package:crypto_station/views/all_user_offers.dart';
+import 'package:crypto_station/views/all_user_orders.dart';
+import 'package:crypto_station/views/all_user_requests.dart';
 import 'package:crypto_station/views/auth_screen.dart';
 import 'package:crypto_station/views/confirm_code_screen.dart';
 import 'package:crypto_station/views/contact_us_screen.dart';
@@ -39,5 +43,8 @@ class AppPages {
      GetPage(name: Routes.ADVANCED_SEARCH         , page: () => AdvancedSearchScreen()    , binding: OffersBinding()),
      GetPage(name: Routes.SEARCH_RESULT         , page: () => SearchResultScreen()    , binding: FavouriteBinding()),
      GetPage(name: Routes.OFFER_DETAILS         , page: () => OfferDetailsScreen()    , binding: OffersBinding()),
+     GetPage(name: Routes.ALL_USER_OFFERS         , page: () => AllUserOffers()    , binding: ProfileBinding()),
+     GetPage(name: Routes.ALL_USER_ORDERS         , page: () => AllUserOrders()    , binding: ProfileBinding()),
+     GetPage(name: Routes.ALL_USER_REQUESTS         , page: () => AllUserRequests()    , binding: ProfileBinding()),
   ];
 }

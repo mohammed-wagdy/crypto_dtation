@@ -84,7 +84,7 @@ class OfferDetailsScreen extends GetView<OffersController> {
 
             CustomTextFormField(
                 textLabel: "طريقة الدفع",
-                textController: controller.payType,
+                textController: controller.paymentTypeController,
                 keyboardType: TextInputType.text
             ),
 
@@ -136,7 +136,7 @@ class OfferDetailsScreen extends GetView<OffersController> {
                 Expanded(
                   child: CustomTextFormField(
                       textLabel: "الكمية",
-                      textController: controller.payType,
+                      textController: controller.paymentTypeController,
                       keyboardType: TextInputType.number
                   ),
                 ),
@@ -144,7 +144,7 @@ class OfferDetailsScreen extends GetView<OffersController> {
                 Expanded(
                   child: CustomTextFormField(
                       textLabel: "أقل كمية",
-                      textController: controller.payType,
+                      textController: controller.paymentTypeController,
                       keyboardType: TextInputType.number
                   ),
                 ),
@@ -152,7 +152,7 @@ class OfferDetailsScreen extends GetView<OffersController> {
                 Expanded(
                   child: CustomTextFormField(
                       textLabel: "سعر الصرف",
-                      textController: controller.payType,
+                      textController: controller.paymentTypeController,
                       keyboardType: TextInputType.number
                   ),
                 ),

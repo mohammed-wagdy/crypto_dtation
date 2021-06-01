@@ -2,9 +2,10 @@
 import 'dart:convert';
 
 import 'package:crypto_station/models/user.dart';
-import 'package:get/get.dart';
+// import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 
 class AuthProvider {
   GetStorage box = GetStorage();
@@ -63,20 +64,27 @@ class AuthProvider {
 
 
   // Update User Information
-  Future updateUserData({password, phone,wallet_address,user_id}) async {
-    var url = Uri.parse("${baseUrl}update/profile");
-    var response = await http.post(url , body: {
+  Future updateUserData({password, phone,wallet_address,user_id, country_id,full_name,image_url}) async {
+    String fileName = image_url.path.split('/').last;
+    FormData formData = FormData.fromMap({
+      "image": await MultipartFile.fromFile(image_url.path, filename:fileName),
       "password": password,
       "user_id": user_id,
       "phone": phone,
-      "wallet_address": wallet_address
-    },headers: {
-      // 'Content-Type': 'application/json',
-      // 'Accept': 'application/json',
-      'Authorization': 'Bearer ${box.read("access_token")}',
+      "wallet_address": wallet_address,
+      "country_id": country_id,
+      "full_name": full_name
     });
-    var response_body = json.decode(response.body);
-    return response_body;
+    var dio = Dio();
+    final response = await dio.post("http://crypto.supersoftdemo.com/public/api/update/profile",data: formData,
+      options: Options(
+          headers: {
+            // 'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ${box.read("access_token")}',
+          }
+      ));
+    return response.data;
   }
 
 
@@ -84,6 +92,62 @@ class AuthProvider {
   Future getAllCountries() async {
     var url = Uri.parse("${baseUrl}get/country");
     var response = await http.get(url);
+    var response_body = json.decode(response.body);
+    return response_body;
+  }
+
+
+  // Get Offers Count
+  Future getOffersCount({user_id}) async {
+    var url = Uri.parse("${baseUrl}get/profile/user/offers");
+    var response = await http.post(url,body: {
+      "user_id": user_id
+    },headers: {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ${box.read("access_token")}',
+    });
+    var response_body = json.decode(response.body);
+    return response_body;
+  }
+
+
+  // Get Orders Count
+  Future getOrdersCount({user_id}) async {
+    var url = Uri.parse("${baseUrl}get/profile/user/orders");
+    var response = await http.post(url,body: {
+      "user_id": user_id
+    },headers: {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ${box.read("access_token")}',
+    });
+    var response_body = json.decode(response.body);
+    return response_body;
+  }
+
+
+  // Get Orders Requests Count
+  Future getOrdersRequestsCount({user_id}) async {
+    var url = Uri.parse("${baseUrl}get/profile/user/request/orders");
+    var response = await http.post(url,body: {
+      "user_id": user_id
+    },headers: {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ${box.read("access_token")}',
+    });
+    var response_body = json.decode(response.body);
+    return response_body;
+  }
+
+
+  // Get Rates
+  Future getRates({user_id}) async {
+    var url = Uri.parse("${baseUrl}get/rate");
+    var response = await http.post(url,body: {
+      "user_id": user_id
+    },headers: {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ${box.read("access_token")}',
+    });
     var response_body = json.decode(response.body);
     return response_body;
   }
