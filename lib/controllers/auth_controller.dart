@@ -59,12 +59,13 @@ class AuthController extends GetxController {
 
           // Save User To His Model
           user = User.fromJSON(value['user']);
+          print("FOFOFOFOFOF 1 ${value['user']}");
           if(user.status == "not_active") {
             Get.toNamed(Routes.CONFIRM);
             Helper.errorSnackBar("خطأ", "من فضلك قم بإدخال كود التفعيل أولا");
           }else {
             box.write("currentUser", value['user']);
-            box.write("access_token", value['access_token']);
+             box.write("access_token", value['access_token']);
             Get.offAllNamed(Routes.HOME);
           }
         }else {

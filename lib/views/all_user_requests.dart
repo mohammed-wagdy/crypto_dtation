@@ -14,6 +14,8 @@ class AllUserRequests extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
 
+    controller.getOrdersRequestsCount();
+
     return Obx(() => Scaffold(
         appBar: PreferredSize(
             preferredSize: const Size.fromHeight(60),
@@ -104,7 +106,7 @@ class AllUserRequests extends GetView<ProfileController> {
                                     Row(
                                       children: [
                                         Row(
-                                          children: Helper.getStarsList(2.5),),
+                                          children: Helper.getStarsList(double.parse(controller.allRequests.value[index]['user']['rate'])),),
                                         SizedBox(width: 20,),
                                         Image.network("https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_Egypt.svg/640px-Flag_of_Egypt.svg.png",width: 20,),
                                       ],
@@ -123,10 +125,23 @@ class AllUserRequests extends GetView<ProfileController> {
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Icon(Icons.circle,size: 10.0, color: controller.allRequests.value[index]['status'].toString() == 'pending' ? redColor : greenColor,),
+                                    Icon(
+                                      Icons.circle,
+                                      size: 10.0,
+                                      color:
+                                      controller.allRequests.value[index]['status'].toString() == "pending" ? Colors.orange :
+                                      controller.allRequests.value[index]['status'].toString() == "rejected"  ? redColor :
+                                      controller.allRequests.value[index]['status'].toString() == "finished" ? redColor :
+                                      controller.allRequests.value[index]['status'].toString() == "accepted" ? greenColor : Colors.orange
+                                    ),
                                     SizedBox(width: 3,),
                                     CustomText(
-                                      text: controller.allRequests.value[index]['status'].toString() == 'pending' ? "معلق" : "نشط",
+                                      text:
+                                      controller.allRequests.value[index]['status'].toString() == "pending" ? "معلق" :
+                                      controller.allRequests.value[index]['status'].toString()== "rejected"  ? "مرفوض" :
+                                      controller.allRequests.value[index]['status'].toString() == "finished" ? "منتهي" :
+                                      controller.allRequests.value[index]['status'].toString() == "accepted" ? "نشط" : "",
+
                                       textSize: 13.0,
                                       textColor: whiteColor,
                                     )
@@ -301,7 +316,7 @@ class AllUserRequests extends GetView<ProfileController> {
                                     isInitialValue: true,
                                   isReadOnly: true,
                                     textLabel: "الكمية",
-                                    initVal: controller.allOffers.value[index]['quantity'].toString(),
+                                    initVal: controller.allRequests.value[index]['quantity'].toString(),
                                    // textController: controller.quantityController,
                                     keyboardType: TextInputType.number
                                 ),
@@ -311,7 +326,7 @@ class AllUserRequests extends GetView<ProfileController> {
                                 child: CustomTextFormField(
                                     isInitialValue: true,
                                     isReadOnly: true,
-                                    initVal: controller.allOffers.value[index]['low_quantity'].toString(),
+                                    initVal: controller.allRequests.value[index]['low_quantity'].toString(),
                                     textLabel: "أقل كمية",
                                   //  textController: controller.lessQuantityController,
                                     keyboardType: TextInputType.number
@@ -322,7 +337,7 @@ class AllUserRequests extends GetView<ProfileController> {
                                 child: CustomTextFormField(
                                     isInitialValue: true,
                                     isReadOnly: true,
-                                    initVal: controller.allOffers.value[index]['pay_price'].toString(),
+                                    initVal: controller.allRequests.value[index]['pay_price'].toString(),
                                     textLabel: "سعر الصرف",
                                    // textController: controller.payPriceController,
                                     keyboardType: TextInputType.number

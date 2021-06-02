@@ -16,11 +16,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 
 class ProfileScreen extends GetView<ProfileController> {
   ProfileController controller = Get.put(ProfileController());
-  List myArr = ['1', '2', '3', '4', '5', '6'];
-
   @override
   Widget build(BuildContext context) {
-    return Obx(()=>Scaffold(
+    return Obx(() => Scaffold(
       //key: controller.scaffoldKey,
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
@@ -465,7 +463,7 @@ class ProfileScreen extends GetView<ProfileController> {
                   //           color: nameColor,
                   //         ),
                   //         child: CustomText(
-                  //           text: "العروض",
+                  //           text: "الض",
                   //           textSize: 15,
                   //           textColor: whiteColor,
                   //           textFontWeight: FontWeight.bold,

@@ -13,6 +13,7 @@ class OffersScreen extends GetView<OffersController> {
 
   @override
   Widget build(BuildContext context) {
+    print("<<<<<<<<<<<<< ${controller.filteredOffers.value}");
     return Obx(() => Scaffold(
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
@@ -63,7 +64,7 @@ class OffersScreen extends GetView<OffersController> {
                             )
                           ],
                         ),
-                        value: ""
+                        value: "accepted"
                     ),
                     PopupMenuItem(
                         child: Row(
@@ -78,7 +79,7 @@ class OffersScreen extends GetView<OffersController> {
                             )
                           ],
                         ),
-                        value: ""
+                        value: "pending"
                     ),
                     PopupMenuItem(
                         child: Row(
@@ -93,7 +94,7 @@ class OffersScreen extends GetView<OffersController> {
                             )
                           ],
                         ),
-                        value: ""
+                        value: "finished"
                     ),
                     PopupMenuItem(
                         child: Row(
@@ -108,7 +109,7 @@ class OffersScreen extends GetView<OffersController> {
                             )
                           ],
                         ),
-                        value: ""
+                        value: "rejected"
                     ),
                     PopupMenuItem(
                         child: Row(
@@ -123,7 +124,7 @@ class OffersScreen extends GetView<OffersController> {
                             )
                           ],
                         ),
-                        value: ""
+                        value: "last"
                     ),
                     PopupMenuItem(
                         child: Row(
@@ -138,13 +139,11 @@ class OffersScreen extends GetView<OffersController> {
                             )
                           ],
                         ),
-                        value: ""
+                        value: "first"
                     ),
                   ],
                   onSelected: (val) {
-                    print("DKDFKDFKDFKD ${val}");
-                    // Note You must create respective pages for navigation
-                    //   Navigator.pushNamed(context, route);
+                    controller.getOffersWithFilter(search_val: val);
                   },
                 ) : PopupMenuButton(
                   child: Container(
@@ -179,7 +178,7 @@ class OffersScreen extends GetView<OffersController> {
                             )
                           ],
                         ),
-                        value: ""
+                        value: "accepted"
                     ),
                     PopupMenuItem(
                         child: Row(
@@ -194,7 +193,7 @@ class OffersScreen extends GetView<OffersController> {
                             )
                           ],
                         ),
-                        value: ""
+                        value: "finished"
                     ),
                     PopupMenuItem(
                         child: Row(
@@ -209,7 +208,7 @@ class OffersScreen extends GetView<OffersController> {
                             )
                           ],
                         ),
-                        value: ""
+                        value: "last"
                     ),
                     PopupMenuItem(
                         child: Row(
@@ -224,13 +223,11 @@ class OffersScreen extends GetView<OffersController> {
                             )
                           ],
                         ),
-                        value: ""
+                        value: "first"
                     ),
                   ],
                   onSelected: (val) {
-                    print("DKDFKDFKDFKD ${val}");
-                    // Note You must create respective pages for navigation
-                    //   Navigator.pushNamed(context, route);
+                    controller.getOffersWithFilter(search_val: val);
                   },
                 ),
 
@@ -298,7 +295,10 @@ class OffersScreen extends GetView<OffersController> {
             ),
           ),
 
-          Expanded(child: controller.isGrid.value == true ? GridUserBlockWithStatus() : ListUserBlockWithStatus()),
+          Expanded(child:
+
+          controller.isLoading.value ?  Center(child: Image.asset("assets/images/ajaxLoader.gif",width: 30,),) :
+          controller.isGrid.value == true ? GridUserBlockWithStatus(listOffersFiltered: controller.filteredOffers.value,) : ListUserBlockWithStatus(listOffersFiltered: controller.filteredOffers.value,)),
 
           SizedBox(height: 15,),
         ],

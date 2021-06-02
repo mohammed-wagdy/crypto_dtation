@@ -1,6 +1,7 @@
 import 'package:crypto_station/constants.dart';
 import 'package:crypto_station/controllers/profile_controller.dart';
 import 'package:crypto_station/helper.dart';
+import 'package:crypto_station/widgets/custom_button.dart';
 import 'package:intl/intl.dart';
 import 'package:crypto_station/widgets/custom_dark_appbar.dart';
 import 'package:crypto_station/widgets/custom_text.dart';
@@ -13,6 +14,8 @@ class AllUserOffers extends GetView<ProfileController> {
 
   @override
   Widget build(BuildContext context) {
+
+    controller.getOffersCount();
 
     return Obx(() => Scaffold(
         appBar: PreferredSize(
@@ -104,7 +107,7 @@ class AllUserOffers extends GetView<ProfileController> {
                                     Row(
                                       children: [
                                         Row(
-                                          children: Helper.getStarsList(2.5),),
+                                          children: Helper.getStarsList(double.parse(controller.allOffers.value[index]['user']['rate'])),),
                                         SizedBox(width: 20,),
                                         Image.network("https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_Egypt.svg/640px-Flag_of_Egypt.svg.png",width: 20,),
                                       ],
@@ -123,10 +126,21 @@ class AllUserOffers extends GetView<ProfileController> {
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Icon(Icons.circle,size: 10.0, color: controller.allOffers.value[index]['status'].toString() == 'pending' ? redColor : greenColor,),
+                                    Icon(
+                                      Icons.circle,
+                                      size: 10.0, color:
+                                    controller.allOffers.value[index]['status'].toString() == "pending" ? Colors.orange :
+                                    controller.allOffers.value[index]['status'].toString() == "rejected"  ? redColor :
+                                    controller.allOffers.value[index]['status'].toString() == "finished" ? redColor :
+                                    controller.allOffers.value[index]['status'].toString() == "accepted" ? greenColor : Colors.orange
+                                    ),
                                     SizedBox(width: 3,),
                                     CustomText(
-                                      text: controller.allOffers.value[index]['status'].toString() == 'pending' ? "معلق" : "نشط",
+                                      text:
+                                      controller.allOffers.value[index]['status'].toString() == "pending" ? "معلق" :
+                                      controller.allOffers.value[index]['status'].toString() == "rejected"  ? "مرفوض" :
+                                      controller.allOffers.value[index]['status'].toString() == "finished" ? "منتهي" :
+                                      controller.allOffers.value[index]['status'].toString() == "accepted" ? "نشط" : "",
                                       textSize: 13.0,
                                       textColor: whiteColor,
                                     )
@@ -355,6 +369,85 @@ class AllUserOffers extends GetView<ProfileController> {
                               )
                             ],
                           ),
+
+                          SizedBox(height: 20,),
+
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              TextButton.icon(
+                                  onPressed: (){},
+                                  label: CustomText(
+                                  text: "تعديل العرض",
+                                    textSize: 15,
+                                    textColor: mainColor,
+                              ),
+                              icon: Icon(Icons.edit,color: mainColor,size: 14,),),
+
+
+
+                              TextButton.icon(
+                                onPressed: () {
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return AlertDialog(
+                                          contentPadding: EdgeInsets.all(10.0),
+                                          content: SingleChildScrollView(
+                                            child: Column(
+                                              //    mainAxisSize: MainAxisSize.min,
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.stretch,
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    IconButton(onPressed: (){Get.back();}, icon:  Icon(Icons.close,color: mainColor,size: 25,))
+                                                  ],
+                                                  mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                                ),
+
+                                                Column(
+                                                  children: [
+                                                    Image.asset("assets/images/AlertIcon.PNG",width: 60,),
+                                                    SizedBox(height: 20,),
+                                                    CustomText(
+                                                      text: "هل تريد حذف العرض ؟",
+                                                      textColor: mainColor,
+                                                      textSize: 20.0,
+                                                      textFontWeight: FontWeight.w500,
+                                                    ),
+                                                    SizedBox(height: 30,),
+
+                                        Obx(() => controller.isLoading.value ?  Center(child: Image.asset("assets/images/ajaxLoader.gif",width: 30,),) :
+                                                    Container(
+                                                      width:double.infinity,
+                                                      child: CustomButton(
+                                                          buttonText: "نعم",
+                                                          buttonOnPress: (){
+                                                            controller.deleteOffer(offer_id: controller.allOffers.value[index]['id'].toString());
+                                                          }),
+                                                    )),
+                                                    SizedBox(height: 15,),
+                                                  ],
+                                                )
+
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      });
+                                },
+                                label: CustomText(
+                                  text: "حذف العرض",
+                                  textSize: 15,
+                                  textColor: mainColor,
+                                ),
+                                icon: Icon(Icons.delete,color: mainColor,size: 14,),)
+
+                            ],
+                          )
+
                           //
                           // SizedBox(height: 10,),
                           //

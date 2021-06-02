@@ -14,6 +14,8 @@ class AllUserOrders extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
 
+    controller.getOrdersCount();
+
     return Obx(() => Scaffold(
         appBar: PreferredSize(
             preferredSize: const Size.fromHeight(60),
@@ -104,7 +106,7 @@ class AllUserOrders extends GetView<ProfileController> {
                                     Row(
                                       children: [
                                         Row(
-                                          children: Helper.getStarsList(2.5),),
+                                          children: Helper.getStarsList(double.parse(controller.allOrders.value[index]['user']['rate'])),),
                                         SizedBox(width: 20,),
                                         Image.network("https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_Egypt.svg/640px-Flag_of_Egypt.svg.png",width: 20,),
                                       ],
@@ -123,10 +125,22 @@ class AllUserOrders extends GetView<ProfileController> {
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Icon(Icons.circle,size: 10.0, color: controller.allOrders.value[index]['status'].toString() == 'pending' ? redColor : greenColor,),
+                                    Icon(
+                                      Icons.circle,
+                                      size: 10.0,
+                                      color:
+                                      controller.allOrders.value[index]['offer']['status'].toString() == "pending" ? Colors.orange :
+                                      controller.allOrders.value[index]['offer']['status'].toString() == "rejected"  ? redColor :
+                                      controller.allOrders.value[index]['offer']['status'].toString() == "finished" ? redColor :
+                                      controller.allOrders.value[index]['offer']['status'].toString() == "accepted" ? greenColor : Colors.orange
+                                    ),
                                     SizedBox(width: 3,),
                                     CustomText(
-                                      text: controller.allOrders.value[index]['status'].toString() == 'pending' ? "معلق" : "نشط",
+                                      text:
+                                      controller.allOrders.value[index]['offer']['status'].toString() == "pending" ? "معلق" :
+                                      controller.allOrders.value[index]['offer']['status'].toString() == "rejected"  ? "مرفوض" :
+                                      controller.allOrders.value[index]['offer']['status'].toString() == "finished" ? "منتهي" :
+                                      controller.allOrders.value[index]['offer']['status'].toString() == "accepted" ? "نشط" : "",
                                       textSize: 13.0,
                                       textColor: whiteColor,
                                     )
@@ -152,7 +166,7 @@ class AllUserOrders extends GetView<ProfileController> {
                               Expanded(
                                 flex: 2,
                                 child: CustomText(
-                                  text: controller.allOrders.value[index]['id'].toString(),
+                                  text: controller.allOrders.value[index]['offer']['id'].toString(),
                                   textColor: nameColor,
                                   textFontWeight: FontWeight.w500,
                                   textSize: 14.0,
@@ -177,7 +191,7 @@ class AllUserOrders extends GetView<ProfileController> {
                               Expanded(
                                 flex: 2,
                                 child: CustomText(
-                                  text: controller.allOrders.value[index]['type'].toString() == "sale" ? "مطلوب للبيع " : "مطلوب للشراء",
+                                  text: controller.allOrders.value[index]['offer']['type'].toString() == "sale" ? "مطلوب للبيع " : "مطلوب للشراء",
                                   textColor: nameColor,
                                   textFontWeight: FontWeight.w500,
                                   textSize: 14.0,
@@ -202,7 +216,7 @@ class AllUserOrders extends GetView<ProfileController> {
                               Expanded(
                                 flex: 2,
                                 child: CustomText(
-                                  text: controller.allOrders.value[index]['currency_type'].toString() ,
+                                  text: controller.allOrders.value[index]['offer']['currency_type'].toString() ,
                                   textColor: nameColor,
                                   textFontWeight: FontWeight.w500,
                                   textSize: 14.0,
@@ -227,7 +241,7 @@ class AllUserOrders extends GetView<ProfileController> {
                               Expanded(
                                 flex: 2,
                                 child: CustomText(
-                                  text: controller.allOrders.value[index]['payment_type'].toString() ,
+                                  text: controller.allOrders.value[index]['offer']['payment_type'].toString() ,
                                   textColor: nameColor,
                                   textFontWeight: FontWeight.w500,
                                   textSize: 14.0,
@@ -283,7 +297,7 @@ class AllUserOrders extends GetView<ProfileController> {
                               Expanded(
                                 flex: 2,
                                 child: CustomText(
-                                  text: "علي المشتري (${controller.allOrders.value[index]['percent'].toString()})",
+                                  text: "علي المشتري (${controller.allOrders.value[index]['offer']['percent'].toString()})",
                                   textColor: nameColor,
                                   textFontWeight: FontWeight.w500,
                                   textSize: 14.0,
@@ -301,7 +315,7 @@ class AllUserOrders extends GetView<ProfileController> {
                                     isInitialValue: true,
                                     isReadOnly: true,
                                     textLabel: "الكمية",
-                                    initVal: controller.allOffers.value[index]['quantity'].toString(),
+                                    initVal: controller.allOrders.value[index]['offer']['quantity'].toString(),
                                    // textController: controller.quantityController,
                                     keyboardType: TextInputType.number
                                 ),
@@ -312,7 +326,7 @@ class AllUserOrders extends GetView<ProfileController> {
                                     isInitialValue: true,
                                     isReadOnly: true,
                                     textLabel: "أقل كمية",
-                                    initVal: controller.allOffers.value[index]['low_quantity'].toString(),
+                                    initVal: controller.allOrders.value[index]['offer']['low_quantity'].toString(),
                                    // textController: controller.lessQuantityController,
                                     keyboardType: TextInputType.number
                                 ),
@@ -323,7 +337,7 @@ class AllUserOrders extends GetView<ProfileController> {
                                     isInitialValue: true,
                                     isReadOnly: true,
                                     textLabel: "سعر الصرف",
-                                    initVal: controller.allOffers.value[index]['pay_price'].toString(),
+                                    initVal: controller.allOrders.value[index]['offer']['pay_price'].toString(),
                                    // textController: controller.payPriceController,
                                     keyboardType: TextInputType.number
                                 ),

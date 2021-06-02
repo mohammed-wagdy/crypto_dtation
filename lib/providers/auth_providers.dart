@@ -65,9 +65,12 @@ class AuthProvider {
 
   // Update User Information
   Future updateUserData({password, phone,wallet_address,user_id, country_id,full_name,image_url}) async {
-    String fileName = image_url.path.split('/').last;
+    print("dfffffffF");
+    print("dfffffffF ${box.read("currentUser")['image'].split('/').last}");
+    print("dfffffffF ${image_url?.path}");
+    String fileName = image_url?.path.split('/').last;
     FormData formData = FormData.fromMap({
-      "image": await MultipartFile.fromFile(image_url.path, filename:fileName),
+      "image": await MultipartFile?.fromFile(image_url?.path, filename:fileName),
       "password": password,
       "user_id": user_id,
       "phone": phone,
@@ -144,6 +147,20 @@ class AuthProvider {
     var url = Uri.parse("${baseUrl}get/rate");
     var response = await http.post(url,body: {
       "user_id": user_id
+    },headers: {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ${box.read("access_token")}',
+    });
+    var response_body = json.decode(response.body);
+    return response_body;
+  }
+
+
+  // Delete Offer
+  Future deleteOffer({offer_id}) async  {
+    var url = Uri.parse("${baseUrl}offer/delete");
+    var response = await http.post(url,body: {
+      "offer_id": offer_id
     },headers: {
       'Accept': 'application/json',
       'Authorization': 'Bearer ${box.read("access_token")}',

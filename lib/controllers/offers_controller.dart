@@ -1,4 +1,5 @@
 
+import 'package:crypto_station/controllers/home_controller.dart';
 import 'package:crypto_station/controllers/profile_controller.dart';
 import 'package:crypto_station/helper.dart';
 import 'package:crypto_station/models/offer.dart';
@@ -23,6 +24,7 @@ class OffersController extends GetxController {
   TextEditingController lowQuantitycontroller = TextEditingController();
   RxBool sell_type = false.obs;
   RxBool buy_type = false.obs;
+  RxList filteredOffers = [].obs;
 
 
   @override
@@ -55,6 +57,7 @@ class OffersController extends GetxController {
         offer = Offer.fromJSON(value['offer']);
        // Helper.successSnackBar("جيد", value['message']);
         Get.find<ProfileController>().getOffersCount();
+        Get.find<HomeController>().getHomePageAllOffers();
         paymentTypeController.text = "";
         payPriceController.text = "";
         quantityController.text = "";
@@ -67,6 +70,19 @@ class OffersController extends GetxController {
       isLoading.value = false;
       print("FDFDIIDFIDISODSDJDWK ${value}");
     });
+  }
+
+
+  // Get Offers With Search
+  Future getOffersWithFilter({search_val}) async {
+    isLoading.value = true;
+    await OffersProvider().getOffersWithFilter(search_val:search_val).then((value) {
+      if(value['status'] == 1) {
+        print("VOVOVOVVOVOV ${value}");
+        filteredOffers.value = value['offer'];
+      }
+    });
+    isLoading.value = false;
   }
 
 }

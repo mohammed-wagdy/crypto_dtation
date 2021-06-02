@@ -24,9 +24,12 @@ class RandomColorModel {
 }
 
 class HomePageScreen extends GetView<HomeController> {
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Obx(() =>
+        controller.isLoading.value ? Center(child: Image.asset("assets/images/ajaxLoader.gif",width: 30,),) :
+        Scaffold(
       //key: controller.scaffoldKey,
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
@@ -92,14 +95,14 @@ class HomePageScreen extends GetView<HomeController> {
 
         // Grid Of Users
         Expanded(
-         // child: ListUserBlockWithStatus()
-         child: GridUserBlock(),
+          // child: ListUserBlockWithStatus()
+          child: GridUserBlock(listOffers: controller.allHomePageOffer.value,),
         ),
 
         SizedBox(
           height: 15,
         ),
       ]),
-    );
+    ));
   }
 }

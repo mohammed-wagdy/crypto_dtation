@@ -1,6 +1,7 @@
 
 import 'dart:io';
 
+import 'package:crypto_station/controllers/home_controller.dart';
 import 'package:crypto_station/helper.dart';
 import 'package:crypto_station/models/offer.dart';
 import 'package:crypto_station/models/user.dart';
@@ -122,6 +123,7 @@ class ProfileController extends GetxController {
     await AuthProvider().getOrdersCount(user_id: user.value.id).then((value) {
       orderCount.value = value['count'];
       allOrders.value = value['offers'];
+      print("FOOOO 3 ${box.read("access_token")}");
     });
     isLoading.value = false;
   }
@@ -142,6 +144,21 @@ class ProfileController extends GetxController {
     isLoading.value = true;
     await AuthProvider().getRates(user_id: user.value.id).then((value) {
       rates.value = value['rates'];
+    });
+    isLoading.value = false;
+  }
+
+
+  // Delete Offer
+  Future deleteOffer({offer_id}) async {
+    isLoading.value = true;
+    await AuthProvider().deleteOffer(offer_id: offer_id).then((value) {
+      if(value['status'] == 1) {
+        Get.back();
+        Helper.successSnackBar("جيد", value['message']);
+        getOffersCount();
+      }
+
     });
     isLoading.value = false;
   }

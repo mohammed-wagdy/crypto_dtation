@@ -1,4 +1,7 @@
 import 'package:crypto_station/constants.dart';
+import 'package:crypto_station/helper.dart';
+import 'package:crypto_station/models/user.dart';
+import 'package:crypto_station/providers/home_providers.dart';
 import 'package:crypto_station/views/add_offer_screen.dart';
 import 'package:crypto_station/views/favourite_screen.dart';
 import 'package:crypto_station/views/homepage_screen.dart';
@@ -12,11 +15,15 @@ class HomeController extends GetxController {
   final currentIndex = 0.obs;
   PersistentTabController controller = PersistentTabController();
   TextEditingController searchInput = TextEditingController();
+  RxList allHomePageOffer = [].obs;
+  RxBool orderDone = false.obs;
+  RxBool isLoading = false.obs;
 
   @override
-  void onInit() {
+  void onInit() async {
     // TODO: implement onInit
     super.onInit();
+   await getHomePageAllOffers();
     controller = PersistentTabController(initialIndex: currentIndex.value);
   }
 
@@ -68,8 +75,32 @@ class HomeController extends GetxController {
 
   void changePage({pageIndex}) {
     currentIndex.value = pageIndex;
+  }
 
-    print("FODOFDOF ${pageIndex}");
-    print("FODOFDOF ${currentIndex.value}");
+
+  // Get HomePage Offers
+  Future getHomePageAllOffers() async {
+    isLoading.value = true;
+    await HomeProvider().getHomePageAllOffers().then((value) {
+      allHomePageOffer.value = value["offer"];
+    });isLoading.value = false;
+
+  }
+
+
+  // Order Offer
+  Future orderOffer({user_id , offer_id}) async {
+    isLoading.value = true;
+    await HomeProvider().orderOffer(
+    user_id: user_id,
+      offer_id: offer_id
+    ).then((value) {
+      print("FOOOOOOOMMMMM ${value}");
+      if(value['status'] == 1) {
+        Get.back();
+        Helper.successSnackBar("جيد", value['message']);
+      }
+    });
+    isLoading.value = false;
   }
 }

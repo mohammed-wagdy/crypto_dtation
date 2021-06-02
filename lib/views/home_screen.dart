@@ -1,5 +1,6 @@
 import 'package:crypto_station/constants.dart';
 import 'package:crypto_station/controllers/home_controller.dart';
+import 'package:crypto_station/controllers/profile_controller.dart';
 import 'package:crypto_station/widgets/custom_appbar.dart';
 import 'package:crypto_station/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
@@ -41,6 +42,12 @@ class HomeScreen extends GetView<HomeController> {
           onItemSelected: (index) {
             controller.currentIndex.value = index;
             controller.controller.index = index;
+            if(controller.currentIndex.value == 0) {
+              Get.put(ProfileController()).getUserData();
+              controller.getHomePageAllOffers();
+            } else if(controller.currentIndex.value == 0) {
+              Get.put(ProfileController()).getUserData();
+            }
           },
           screenTransitionAnimation: ScreenTransitionAnimation( // Screen transition animation on change of selected tab.
             animateTabTransition: true,
