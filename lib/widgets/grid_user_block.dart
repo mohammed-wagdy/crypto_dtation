@@ -23,6 +23,8 @@ class GridUserBlock extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    print("FOFFOFOOFLIST ${listOffers}");
+
     TextEditingController payType = TextEditingController();
     HomeController homController = Get.put(HomeController());
 
@@ -89,12 +91,17 @@ class GridUserBlock extends StatelessWidget {
                           // crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             Expanded(
-                              child: CustomText(
-                                userName: true,
-                                text: listOffers![index]["user"]["full_name"],
-                                textColor: nameColor,
-                                textSize: 18.0,
-                                textFontWeight: FontWeight.bold,
+                              child: GestureDetector(
+                                onTap: (){
+                                  Get.toNamed(Routes.OTHER_USER_PROFILE , arguments: listOffers![index]["user"]["id"].toString());
+                                },
+                                child: CustomText(
+                                  userName: true,
+                                  text: listOffers![index]["user"]["full_name"],
+                                  textColor: nameColor,
+                                  textSize: 18.0,
+                                  textFontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                             GestureDetector(
@@ -526,7 +533,9 @@ class GridUserBlock extends StatelessWidget {
                                 Container(
                                   width: double.infinity,
                                   child:
-                                  listOffers![index]["user"]["id"] != _box.read("currentUser")['id'] ?
+                                  listOffers![index]["user"]["id"] != _box.read("currentUser")['id'] &&
+                                      listOffers![index]['status'] == "accepted" ?
+
                                   CustomButton(
                                     buttonText: "طلب العرض",
                                     buttonOnPress: () {

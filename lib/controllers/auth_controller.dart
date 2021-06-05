@@ -18,12 +18,24 @@ class AuthController extends GetxController {
   User user = new User();
   GetStorage box = GetStorage();
   RxList allCountries = [Text("mohamed"),Text("mohamed"),Text("mohamed")].obs;
+
+  RxDouble rateCount = 0.0.obs;
+  TextEditingController messageController = TextEditingController();
+
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController fullNameController = TextEditingController();
   TextEditingController walletAddressController = TextEditingController();
   TextEditingController mobileNumberController = TextEditingController();
   TextEditingController confirmCodeController = TextEditingController();
+  RxMap otherUserProfile = {}.obs;
+  RxList rates = [].obs;
+  RxList allOffers = [].obs;
+  RxList allOrders = [].obs;
+  RxList allRequests = [].obs;
+  RxInt offerCount = 0.obs;
+  RxInt orderCount = 0.obs;
+  RxInt orderRequestCount = 0.obs;
 
   @override
   void onInit() {
@@ -202,6 +214,79 @@ class AuthController extends GetxController {
       //allCountries.value = value['country'];
     });
   }
+
+  // Get User Profile
+  Future getUserProfile({user_id}) async {
+    isLoading.value = true;
+    await AuthProvider().getUserProfile(user_id: user_id).then((value) {
+      print("RRRRRR ${value['user'][0]}");
+      if(value['status'] == 1) {
+        otherUserProfile.value = value['user'][0];
+      }
+    });
+   await getOrdersCount(user_id: user_id);
+    await getOffersCount(user_id: user_id);
+    await getOrdersRequestsCount(user_id: user_id);
+    isLoading.value = false;
+  }
+
+
+
+
+  // Get Offers Count
+  Future getOffersCount({user_id}) async {
+    isLoading.value = true;
+    await AuthProvider().getOffersCount(user_id: user_id).then((value) {
+      offerCount.value = value['count'];
+      allOffers.value = value['offers'];
+    });
+    isLoading.value = false;
+  }
+
+
+
+  // Get Orders Count
+  Future getOrdersCount({user_id}) async {
+    isLoading.value = true;
+    await AuthProvider().getOrdersCount(user_id: user_id).then((value) {
+      orderCount.value = value['count'];
+      allOrders.value = value['offers'];
+    });
+    isLoading.value = false;
+  }
+
+
+  // Get Requests Count
+  Future getOrdersRequestsCount({user_id}) async {
+    isLoading.value = true;
+    await AuthProvider().getOrdersRequestsCount(user_id: user_id).then((value) {
+      orderRequestCount.value = value['count'];
+      allRequests.value = value['offers'];
+    });
+    isLoading.value = false;
+  }
+
+
+  // Set Rate
+  Future setRate({user_id , user_offer_id}) async {
+    if(messageController.text.isEmpty) {
+      Helper.errorSnackBar("خطأ", "من فضلك أدخل التعليق");
+    }
+    isLoading.value = true;
+    await AuthProvider().setRate(
+      message: messageController.text,
+      rate: rateCount.value.toString(),
+      user_offer_id: user_offer_id,
+      user_id: user_id,
+    ).then((value) {
+      if(value['status'] == 1) {
+        Helper.successSnackBar("جيد", value['message']);
+        messageController.text = "";
+      }
+    });
+    isLoading.value = false;
+  }
+
 
 
 }

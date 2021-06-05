@@ -7,6 +7,9 @@ import 'package:crypto_station/bindings/profile_binding.dart';
 import 'package:crypto_station/routes/app_routes.dart';
 import 'package:crypto_station/views/about_us_screen.dart';
 import 'package:crypto_station/views/advanced_search_screen.dart';
+import 'package:crypto_station/views/all_other_offers.dart';
+import 'package:crypto_station/views/all_other_order.dart';
+import 'package:crypto_station/views/all_other_requests.dart';
 import 'package:crypto_station/views/all_user_offers.dart';
 import 'package:crypto_station/views/all_user_orders.dart';
 import 'package:crypto_station/views/all_user_requests.dart';
@@ -18,6 +21,7 @@ import 'package:crypto_station/views/home_screen.dart';
 import 'package:crypto_station/views/notifications_screen.dart';
 import 'package:crypto_station/views/offer_details_screen.dart';
 import 'package:crypto_station/views/offers_screen.dart';
+import 'package:crypto_station/views/other_user.dart';
 import 'package:crypto_station/views/privacy_policy_screen.dart';
 import 'package:crypto_station/views/search_resault.dart';
 import 'package:crypto_station/views/terms_and_conditions_screen.dart';
@@ -44,7 +48,11 @@ class AppPages {
      GetPage(name: Routes.SEARCH_RESULT         , page: () => SearchResultScreen()    , binding: FavouriteBinding()),
      GetPage(name: Routes.OFFER_DETAILS         , page: () => OfferDetailsScreen()    , binding: OffersBinding()),
      GetPage(name: Routes.ALL_USER_OFFERS         , page: () => AllUserOffers()    , binding: ProfileBinding()),
+     GetPage(name: Routes.ALL_OTHERS_OFFERS         , page: () => AllOthersOffers()    , binding: AuthBinding()),
      GetPage(name: Routes.ALL_USER_ORDERS         , page: () => AllUserOrders()    , binding: ProfileBinding()),
+     GetPage(name: Routes.ALL_OTHERS_ORDERS         , page: () => AllOtherOrders()    , binding: AuthBinding()),
      GetPage(name: Routes.ALL_USER_REQUESTS         , page: () => AllUserRequests()    , binding: ProfileBinding()),
+     GetPage(name: Routes.ALL_OTHERS_REQUESTS         , page: () => AllOtherRequests()    , binding: AuthBinding()),
+     GetPage(name: Routes.OTHER_USER_PROFILE         , page: () => OtherUserProfileScreen()    , binding: AuthBinding()),
   ];
 }

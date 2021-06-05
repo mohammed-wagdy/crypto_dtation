@@ -1,7 +1,9 @@
 import 'package:crypto_station/constants.dart';
 import 'package:crypto_station/helper.dart';
 import 'package:crypto_station/models/user.dart';
+import 'package:crypto_station/providers/auth_providers.dart';
 import 'package:crypto_station/providers/home_providers.dart';
+import 'package:crypto_station/routes/app_routes.dart';
 import 'package:crypto_station/views/add_offer_screen.dart';
 import 'package:crypto_station/views/favourite_screen.dart';
 import 'package:crypto_station/views/homepage_screen.dart';
@@ -18,6 +20,7 @@ class HomeController extends GetxController {
   RxList allHomePageOffer = [].obs;
   RxBool orderDone = false.obs;
   RxBool isLoading = false.obs;
+  RxList otherUserProfile = [].obs;
 
   @override
   void onInit() async {
@@ -83,8 +86,9 @@ class HomeController extends GetxController {
     isLoading.value = true;
     await HomeProvider().getHomePageAllOffers().then((value) {
       allHomePageOffer.value = value["offer"];
-    });isLoading.value = false;
-
+      print("VVVV<VV<V< ${value["offer"][0]['status']}");
+    });
+    isLoading.value = false;
   }
 
 
@@ -103,4 +107,5 @@ class HomeController extends GetxController {
     });
     isLoading.value = false;
   }
+
 }

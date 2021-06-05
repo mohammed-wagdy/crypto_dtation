@@ -68,7 +68,6 @@ class OffersController extends GetxController {
         Helper.errorSnackBar("خطأ", value['message']);
       }
       isLoading.value = false;
-      print("FDFDIIDFIDISODSDJDWK ${value}");
     });
   }
 

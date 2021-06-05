@@ -169,4 +169,35 @@ class AuthProvider {
     return response_body;
   }
 
+
+
+  // Get User Profile
+  Future getUserProfile({user_id}) async {
+    var url = Uri.parse("${baseUrl}get/profile");
+    var response = await http.post(url,body: {
+      "user_id": user_id
+    },headers: {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ${box.read("access_token")}',
+    });
+    var response_body = json.decode(response.body);
+    return response_body;
+  }
+
+
+  // Set Rate
+  Future setRate({user_id, user_offer_id, rate, message}) async {
+    var url = Uri.parse("${baseUrl}set/rate");
+    var response = await http.post(url,body: {
+      "user_id": user_id,
+      "user_offer_id": user_offer_id,
+      "rate": rate,
+      "message": message,
+    },headers: {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ${box.read("access_token")}',
+    });
+    var response_body = json.decode(response.body);
+    return response_body;
+  }
 }

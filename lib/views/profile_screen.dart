@@ -138,8 +138,6 @@ class ProfileScreen extends GetView<ProfileController> {
                                                     image: DecorationImage(
                                                       fit: BoxFit.cover,
                                                       image:
-                                                      controller.user.value.image == null || controller.user.value.image == "user.png" ?
-                                                      NetworkImage("https://www.pngjoy.com/pngm/136/2750635_gray-circle-login-user-icon-png-transparent-png.png") :
                                                       NetworkImage("${controller.user.value.image.toString()}"),
                                                     )),
                                               ),
@@ -404,7 +402,7 @@ class ProfileScreen extends GetView<ProfileController> {
                             Row(
                               children: [
                                 Row(
-                                  children: Helper.getStarsList(2.5),
+                                  children: Helper.getStarsList(double.parse(controller.user.value.rate.toString())),
                                 ),
                                 SizedBox(
                                   width: 40,

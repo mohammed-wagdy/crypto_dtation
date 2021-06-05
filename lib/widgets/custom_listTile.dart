@@ -1,8 +1,12 @@
 import 'package:crypto_station/constants.dart';
+import 'package:crypto_station/controllers/notifications_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CustomListTile extends StatelessWidget {
+
+  NotificationsController controller = Get.put(NotificationsController());
 
   final VoidCallback onTapFunction;
   final String text;
@@ -28,10 +32,10 @@ class CustomListTile extends StatelessWidget {
           color: Color(0XFFff2a2a),
           borderRadius: BorderRadius.all(Radius.circular(5.0))
         ),
-        child: Padding(
+        child: Obx(()=>Padding(
           padding: const EdgeInsets.only(top: 5),
-          child: Text("6",style: TextStyle(color: whiteColor,fontWeight: FontWeight.bold),),
-        ),
+          child: Text(controller.unreadNotiList.value.length.toString(),style: TextStyle(color: whiteColor,fontWeight: FontWeight.bold),),
+        )),
       ) : SizedBox(),
       title: Text(text, style: TextStyle(
         color: Color(0XFF1a4b6b),

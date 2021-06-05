@@ -1,4 +1,5 @@
 import 'package:crypto_station/constants.dart';
+import 'package:crypto_station/controllers/general_controller.dart';
 import 'package:crypto_station/controllers/home_controller.dart';
 import 'package:crypto_station/widgets/custom_button.dart';
 import 'package:crypto_station/widgets/custom_dark_appbar.dart';
@@ -9,19 +10,24 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class TermsAndConditions extends GetView<HomeController> {
+class TermsAndConditions extends GetView<GeneralController> {
 
+  GeneralController controller = Get.put(GeneralController());
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Obx(()=>Scaffold(
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
           child: CustomDarkAppBar(
             appBarTitle: "الشروط والأحكام",
             drawerContext: context,
           )),
-      body: Container(
+      body:
+
+      controller.isLoading.value ? Center(child: Image.asset("assets/images/ajaxLoader.gif",width: 30,)) :
+
+      Container(
         width: double.infinity,
         padding: EdgeInsets.symmetric(horizontal: 20),
         child: SingleChildScrollView(
@@ -33,8 +39,16 @@ class TermsAndConditions extends GetView<HomeController> {
 
               SizedBox(height: 30,),
 
+              controller.TermsText.value.isEmpty
+                  ?
+              Center(child: CustomText(
+                text: "لا يوجد بيانات",
+                textSize: 17,
+                textColor: mainColor,
+              ),)
+                  :
               CustomText(
-                text: "هناك العديد من الأنواع المتوفرة لنصوص لوريم إبسيوم . ولكن الغالبية تم تعديلها بشكل ما يعبر عن إدخال بعض النوادر أو الكلمات العشوائية إلي نص . إن كنت تريد أن تستخدم نص لوريم ابسيوم كل ما عليك ان تتحقق اولا ان ليس هناك أي كلمات أو عبارات محرجه أو غير لائقة مخبأة في هذا النص بينما تعمل جميع مولدات النصوص لوريم أبسيوم علي الأنترنت علي إعادة تكرار مقاطع من نص لوريم أبسيوم نفسه عده مرات هناك العديد من الأنواع المتوفرة لنصوص لوريم إبسيوم . ولكن الغالبية تم تعديلها بشكل ما يعبر عن إدخال بعض النوادر أو الكلمات العشوائية إلي نص . ",
+                text: controller.TermsText.value,
                 textSize: 17,
                 textColor: mainColor,
               ),
@@ -43,6 +57,6 @@ class TermsAndConditions extends GetView<HomeController> {
           ),
         ),
       ),
-    );
+    ));
   }
 }
