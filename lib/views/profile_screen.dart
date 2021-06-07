@@ -408,7 +408,7 @@ class ProfileScreen extends GetView<ProfileController> {
                                   width: 40,
                                 ),
                                 Image.network(
-                                  "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_Egypt.svg/640px-Flag_of_Egypt.svg.png",
+                                  controller.user.value.country!['image'],
                                   width: 20,
                                 ),
                               ],

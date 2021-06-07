@@ -17,8 +17,8 @@ class AuthController extends GetxController {
   RxBool isLoading = false.obs;
   User user = new User();
   GetStorage box = GetStorage();
-  RxList allCountries = [Text("mohamed"),Text("mohamed"),Text("mohamed")].obs;
-
+  RxList allCountries = [].obs;
+  var countrySelect;
   RxDouble rateCount = 0.0.obs;
   TextEditingController messageController = TextEditingController();
 
@@ -77,7 +77,8 @@ class AuthController extends GetxController {
             Helper.errorSnackBar("خطأ", "من فضلك قم بإدخال كود التفعيل أولا");
           }else {
             box.write("currentUser", value['user']);
-             box.write("access_token", value['access_token']);
+            box.write("access_token", value['access_token']);
+            print("FOFOFOFOFOF 2222 ${box.read("currentUser")}");
             Get.offAllNamed(Routes.HOME);
           }
         }else {
@@ -94,6 +95,8 @@ class AuthController extends GetxController {
 
   // Register
   Future register() async {
+    print("MMBMBMBBMBMBM ${countrySelect}");
+
     if(fullNameController.text.isEmpty) {
       Helper.errorSnackBar("خطأ", "من فضلك أدخل أسمك بالكامل");
     } else if(emailController.text.isEmpty) {
@@ -109,12 +112,14 @@ class AuthController extends GetxController {
       Helper.errorSnackBar("خطأ", "من فضلك أدخل رقم الموبايل");
     }else if(walletAddressController.text.isEmpty) {
       Helper.errorSnackBar("خطأ", "من فضلك أدخل عنوان المحفظة");
+    }else if(countrySelect == null){
+      Helper.errorSnackBar("خطأ", "من فضلك أختر الدولة");
     }
     else {
       isLoading.value = true;
      await AuthProvider().register(
         phone: mobileNumberController.text,
-        country_id: "1",
+        country_id: countrySelect.toString(),
         email: emailController.text,
         full_name: fullNameController.text,
         password: passwordController.text,
@@ -211,7 +216,7 @@ class AuthController extends GetxController {
   Future getAllCountries() async {
     await AuthProvider().getAllCountries().then((value) {
       print("RRRRRR ${value}");
-      //allCountries.value = value['country'];
+      allCountries.value = value['country'];
     });
   }
 

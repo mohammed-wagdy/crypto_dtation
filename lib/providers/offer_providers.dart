@@ -45,4 +45,24 @@ class OffersProvider {
   }
 
 
+  // advanced search
+  Future advancedSearch({name , type , country_id, today_day , quantity}) async {
+    var url = Uri.parse("${baseUrl}offer/search");
+    var response = await http.post(url , body: {
+      "name": name,
+      "type": type,
+      "country_id": country_id,
+      "today_day": today_day,
+      "quantity": quantity,
+    },headers: {
+      // 'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ${box.read("access_token")}',
+    }
+    );
+    var response_body = json.decode(response.body);
+    return response_body;
+  }
+
+
 }

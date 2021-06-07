@@ -14,14 +14,15 @@ class AuthScreen extends GetView<AuthController> {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
-      child: Scaffold(
+      child: Obx(()=>Scaffold(
         backgroundColor: whiteColor,
         body: SafeArea(
           bottom: true,
           top: true,
           child: Column(
             children: [
-              Image.network("https://cdn.dribbble.com/users/6623125/screenshots/14841425/crypto_4x.png",height: 150,),
+              Image.asset("assets/images/loginAbout.jpeg",width: 300,),
+              //  Image.network("https://cdn.dribbble.com/users/6623125/screenshots/14841425/crypto_4x.png",height: 150,),
               TabBar(
                 indicator: BoxDecoration(
                   border: Border(bottom: BorderSide(color: mainColor,width: 3)),
@@ -99,52 +100,52 @@ class AuthScreen extends GetView<AuthController> {
                               alignment: Alignment.center,
                               child: GestureDetector(
                                 onTap: (){
-                                    Get.defaultDialog(
+                                  Get.defaultDialog(
 
-                                      titleStyle: TextStyle(height: 0.0),
-                                      radius: 5.0,
-                                      title: "",
-                                      content: SingleChildScrollView(
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(5.0),
-                                          child: Column(
-                                            children: [
-                                              Container(
-                                                child: GestureDetector(
-                                                  onTap: (){
-                                                    Get.back();
-                                                  },
-                                                  child: Icon(Icons.close,color: mainColor,),
-                                                ),
-                                                alignment: Alignment.topLeft,
+                                    titleStyle: TextStyle(height: 0.0),
+                                    radius: 5.0,
+                                    title: "",
+                                    content: SingleChildScrollView(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(5.0),
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              child: GestureDetector(
+                                                onTap: (){
+                                                  Get.back();
+                                                },
+                                                child: Icon(Icons.close,color: mainColor,),
                                               ),
-                                              Image.network("https://cdn.dribbble.com/users/6623125/screenshots/14841425/crypto_4x.png",height: 65,),
-                                              SizedBox(height: 15.0,),
-                                              CustomTextFormField(
-                                                textLabel: "البريد الألكتروني",
-                                                keyboardType: TextInputType.emailAddress,
-                                                textController: controller.emailController,
+                                              alignment: Alignment.topLeft,
+                                            ),
+                                            Image.network("https://cdn.dribbble.com/users/6623125/screenshots/14841425/crypto_4x.png",height: 65,),
+                                            SizedBox(height: 15.0,),
+                                            CustomTextFormField(
+                                              textLabel: "البريد الألكتروني",
+                                              keyboardType: TextInputType.emailAddress,
+                                              textController: controller.emailController,
+                                            ),
+                                            SizedBox(height: 15.0,),
+                                            Obx(() =>
+                                            controller.isLoading.value ?  Center(child: Image.asset("assets/images/ajaxLoader.gif",width: 30,),) :
+                                            Container(
+                                              width: double.infinity,
+                                              child: CustomButton(
+                                                buttonText: "إستعادة كلمة المرور",
+                                                buttonTextSize: 17.0,
+                                                buttonTextFontWeight: FontWeight.w700,
+                                                buttonOnPress: () {
+                                                  controller.resetPassword();
+                                                },
                                               ),
-                                              SizedBox(height: 15.0,),
-                                              Obx(() =>
-                                                  controller.isLoading.value ?  Center(child: Image.asset("assets/images/ajaxLoader.gif",width: 30,),) :
-                                                  Container(
-                                                width: double.infinity,
-                                                child: CustomButton(
-                                                  buttonText: "إستعادة كلمة المرور",
-                                                  buttonTextSize: 17.0,
-                                                  buttonTextFontWeight: FontWeight.w700,
-                                                  buttonOnPress: () {
-                                                    controller.resetPassword();
-                                                  },
-                                                ),
-                                              ),)
+                                            ),)
 
-                                            ],
-                                          ),
+                                          ],
                                         ),
                                       ),
-                                    );
+                                    ),
+                                  );
                                 },
                                 child: CustomText(
                                   text: "هل نسيت كلمة المرور ؟!",
@@ -157,19 +158,19 @@ class AuthScreen extends GetView<AuthController> {
 
                             SizedBox(height: 20.0,),
                             Container(
-                              width: double.infinity,
-                              child:
-                              Obx(() =>
-                              controller.isLoading.value ?  Center(child: Image.asset("assets/images/ajaxLoader.gif",width: 30,),) :
-                              CustomButton(
-                                buttonText: "الدخول",
-                                buttonTextSize: 17.0,
-                                buttonTextFontWeight: FontWeight.w700,
-                                buttonOnPress: () {
-                                  controller.login();
-                                },
-                              ),
-                              )
+                                width: double.infinity,
+                                child:
+                                Obx(() =>
+                                controller.isLoading.value ?  Center(child: Image.asset("assets/images/ajaxLoader.gif",width: 30,),) :
+                                CustomButton(
+                                  buttonText: "الدخول",
+                                  buttonTextSize: 17.0,
+                                  buttonTextFontWeight: FontWeight.w700,
+                                  buttonOnPress: () {
+                                    controller.login();
+                                  },
+                                ),
+                                )
 
                             ),
                           ],
@@ -289,18 +290,20 @@ class AuthScreen extends GetView<AuthController> {
                                 hint:  Text("أختر الدولة"),
                                 items: controller.allCountries.value.map((country){
                                   return  DropdownMenuItem (
-                                    value: "1",
+                                    value: country['id'],
                                     child: Row(
                                       children: <Widget>[
-                                        Icon(Icons.arrow_forward_ios),
+                                        Image.network("https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_Egypt.svg/255px-Flag_of_Egypt.svg.png",width: 25,),
+                                        // Image.network(country['name'],width: 25,),
                                         SizedBox(width: 10,),
-                                        Text("Mohamed Wagdy", style:  TextStyle(color: Colors.black),),
+                                        Text(country['name'], style:  TextStyle(color: Colors.black),),
                                       ],),
                                   );
                                 }).toList(),
                                 onChanged: (newVal) {
-                                  print("SDSDSDS ${newVal}");
+                                  controller.countrySelect = newVal;
                                 },
+                                value: controller.countrySelect,
                               ),
                             ),
                             SizedBox(height: 20.0,),
@@ -326,7 +329,7 @@ class AuthScreen extends GetView<AuthController> {
             ],
           ),
         ),
-      ),
+      )),
     );
   }
 }

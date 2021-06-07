@@ -16,7 +16,7 @@ class SearchResultScreen extends GetView<HomeController> {
               appBarTitle: "نتائج البحث",
               drawerContext: context,
             )),
-        body: GridUserBlock(),
+        body: GridUserBlock(listOffers: Get.arguments,),
     );
   }
 }

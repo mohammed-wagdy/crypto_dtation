@@ -11,6 +11,7 @@ class User {
   String? image;
   String? phone;
   String? rate;
+  Map? country;
 
   User();
 
@@ -29,6 +30,7 @@ class User {
       image = jsonMap['image'];
       phone = jsonMap['phone'];
       rate = jsonMap['rate'];
+      country = jsonMap['country'];
     } catch (e) {
     }
   }
@@ -49,6 +51,7 @@ class User {
     map['image'] = image;
     map['phone'] = phone;
     map['rate'] = rate;
+    map['country'] = country;
     return map;
   }
 }

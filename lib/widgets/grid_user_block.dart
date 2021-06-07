@@ -1,4 +1,5 @@
 import 'package:crypto_station/constants.dart';
+import 'package:crypto_station/controllers/favourite_controller.dart';
 import 'package:crypto_station/controllers/home_controller.dart';
 import 'package:crypto_station/helper.dart';
 import 'package:crypto_station/routes/app_routes.dart';
@@ -27,6 +28,7 @@ class GridUserBlock extends StatelessWidget {
 
     TextEditingController payType = TextEditingController();
     HomeController homController = Get.put(HomeController());
+    FavouriteController favController = Get.put(FavouriteController());
 
     return
 
@@ -106,7 +108,8 @@ class GridUserBlock extends StatelessWidget {
                             ),
                             GestureDetector(
                               onTap: () {
-                                print('fdfddf');
+                                 favController.addToFavourite(offer_id: listOffers![index]['id'].toString());
+                                print("OFFER ID IS ${listOffers![index]['id']}");
                               },
                               child: Icon(Icons.favorite,color: favouriteColor,),
                             )
