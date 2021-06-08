@@ -48,6 +48,7 @@ class AuthController extends GetxController {
     rememberMe.value = value;
   }
 
+
   // Login
   Future login() async {
     if(emailController.text.isEmpty) {

@@ -13,7 +13,6 @@ class Offer {
   Offer();
 
   Offer.fromJSON(Map<String, dynamic> jsonMap) {
-    print("FODFODFDO ${jsonMap}");
     try {
       id = jsonMap['id'].toString();
       user_id = jsonMap['user_id'];

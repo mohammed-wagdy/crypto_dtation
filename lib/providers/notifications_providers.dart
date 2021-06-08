@@ -12,8 +12,8 @@ class NotificationsProvider {
   final String baseUrl = "http://crypto.supersoftdemo.com/public/api/";
 
   // Get All Notifications
-  Future getAllNotifications({user_id}) async {
-    var url = Uri.parse("${baseUrl}get/notification");
+  Future getAllNotifications({user_id, page}) async {
+    var url = Uri.parse("${baseUrl}get/notification?page=$page");
     var response = await http.post(url,
         body: {
       "user_id":user_id

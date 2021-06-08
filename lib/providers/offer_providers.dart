@@ -30,10 +30,62 @@ class OffersProvider {
 
 
   // Get Offers With Filter
-  Future getOffersWithFilter({search_val}) async {
-    var url = Uri.parse("${baseUrl}get/all/offers");
+  Future getOffersWithFilter({search_val,page}) async {
+    print("FMFMFFMFMFMF ${search_val}");
+    var url = Uri.parse("${baseUrl}get/all/offers?page=$page");
     var response = await http.post(url , body: {
       search_val: search_val,
+    },headers: {
+      // 'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ${box.read("access_token")}',
+    }
+    );
+    var response_body = json.decode(response.body);
+    return response_body;
+  }
+
+
+
+
+
+  // Get All Offers
+  Future getAllOffers({page}) async {
+    var url = Uri.parse("${baseUrl}get/all/offers?page=$page");
+    var response = await http.post(url,headers: {
+      // 'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ${box.read("access_token")}',
+    }
+    );
+    var response_body = json.decode(response.body);
+    return response_body;
+  }
+
+
+
+  Future getMyOffersWithFilter({search_val, user_id,page}) async {
+    print("FMFMFFMFMFMF ${search_val}");
+    var url = Uri.parse("${baseUrl}get/all/user/offers?page=$page");
+    var response = await http.post(url , body: {
+      search_val: search_val,
+      "user_id": user_id
+    },headers: {
+      // 'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ${box.read("access_token")}',
+    }
+    );
+    var response_body = json.decode(response.body);
+    return response_body;
+  }
+
+
+  // Get My Offers
+  Future getMyOffers({user_id,page}) async {
+    var url = Uri.parse("${baseUrl}get/all/offers?page=$page");
+    var response = await http.post(url , body: {
+      "user_id": user_id,
     },headers: {
       // 'Content-Type': 'application/json',
       'Accept': 'application/json',

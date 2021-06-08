@@ -56,14 +56,14 @@ class HomePageScreen extends GetView<HomeController> {
                 titleName: "العروض المنتهية",
                 count: controller.finishedOfferCount.value,
                 onTapFunc: () {
-                  Get.toNamed(Routes.SHOW_OFFERS_FROM_HOMEPAGE_FINISHED, arguments: [controller.allFinishedOfersData.value, "العروض المنتهية"]);
+                  Get.toNamed(Routes.SHOW_OFFERS_FROM_HOMEPAGE_FINISHED);
                 },
               ),
               SliderWidget(
                 titleName: "العروض قيد المراجعة",
                 count: controller.pendingOfferCount.value,
                 onTapFunc: () {
-                  Get.toNamed(Routes.SHOW_OFFERS_FROM_HOMEPAGE_PENDING, arguments: [controller.allPendingOfersData.value, "العروض قيد المراجعة"]);
+                  Get.toNamed(Routes.SHOW_OFFERS_FROM_HOMEPAGE_PENDING);
                 },
               ),
             ],

@@ -15,7 +15,8 @@ class NotificationScreen extends GetView<NotificationsController> {
   Widget build(BuildContext context) {
 
     NotificationsController controller = Get.put(NotificationsController());
-
+    controller.getAllNotifications();
+    controller.getCountNotifications();
 
     return Obx(()=>Scaffold(
         appBar: PreferredSize(
@@ -64,7 +65,7 @@ class NotificationScreen extends GetView<NotificationsController> {
                               border: Border.all(color: grayColor),
                               shape: BoxShape.circle,
                               image: DecorationImage(
-                                image: NetworkImage("${controller.notiList[index]['user_make_action_id']['image']}"),
+                                image: NetworkImage("http://crypto.supersoftdemo.com/public/image/user/${controller.notiList[index]['user_get_notifi']['image']}"),
                               )
                           ),
                         ),

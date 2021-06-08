@@ -1,4 +1,5 @@
 import 'package:crypto_station/constants.dart';
+import 'package:crypto_station/controllers/notifications_controller.dart';
 import 'package:crypto_station/helper.dart';
 import 'package:crypto_station/models/user.dart';
 import 'package:crypto_station/providers/auth_providers.dart';
@@ -28,11 +29,6 @@ class HomeController extends GetxController {
   RxInt specialOfferCount = 0.obs;
 
 
-
-  RxList allFinishedOfersData = [].obs;
-  RxList allPendingOfersData = [].obs;
-  RxList allUserOfersData = [].obs;
-
   @override
   void onInit() async {
     // TODO: implement onInit
@@ -42,6 +38,8 @@ class HomeController extends GetxController {
     await getPendingOffers(page: page.value);
     await getSpecialOffers(page: page.value);
     controller = PersistentTabController(initialIndex: currentIndex.value);
+  await  Get.find<NotificationsController>().getAllNotifications();
+  await  Get.find<NotificationsController>().getCountNotifications();
   }
 
   final List<Widget> pages = [

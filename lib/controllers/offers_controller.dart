@@ -20,6 +20,8 @@ class OffersController extends GetxController {
   Offer offer = new Offer();
   GetStorage box = GetStorage();
   RxBool isLoading = false.obs;
+  RxInt pageMy = 1.obs;
+  RxInt pageAll = 1.obs;
   // Add Offer Attr
   TextEditingController paymentTypeController = TextEditingController();
   TextEditingController quantityController = TextEditingController();
@@ -51,9 +53,10 @@ class OffersController extends GetxController {
 
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
-    getUserData();
+  await getSpecialOffers(page: 1);
+   await getUserData();
   }
 
 
@@ -100,13 +103,53 @@ class OffersController extends GetxController {
     isLoading.value = true;
     await OffersProvider().getOffersWithFilter(search_val:search_val).then((value) {
       if(value['status'] == 1) {
-        print("VOVOVOVVOVOV ${value}");
-        filteredOffers.value = value['offer'];
+        print("FMFMFSEWEW ${value['offers']['data']}");
+        filteredOffers.value = value['offers']['data'];
       }
     });
     isLoading.value = false;
   }
 
+
+
+  // Get All Offers
+  Future getAllOffers() async {
+    isLoading.value = true;
+    await OffersProvider().getAllOffers().then((value) {
+      if(value['status'] == 1) {
+        filteredOffers.value = value['offers']['data'];
+      }
+    });
+    isLoading.value = false;
+  }
+
+
+
+  // Get Offers With Search
+  Future getMyOffersWithFilter({search_val,user_id}) async {
+    isLoading.value = true;
+    await OffersProvider().getMyOffersWithFilter(search_val:search_val,user_id: user_id).then((value) {
+      if(value['status'] == 1) {
+        filteredOffers.value = value['offers']['data'];
+      }
+    });
+    isLoading.value = false;
+  }
+
+
+
+
+  // Get My Offers
+  Future getMyOffers({user_id}) async {
+    isLoading.value = true;
+    await OffersProvider().getMyOffers(user_id:user_id).then((value) {
+      if(value['status'] == 1) {
+        print("MY OFFERS ${value}");
+        filteredOffers.value = value['offers']['data'];
+      }
+    });
+    isLoading.value = false;
+  }
 
   // advanced search
   Future advancedSearch() async {
@@ -239,4 +282,53 @@ class OffersController extends GetxController {
     await Future.delayed(Duration(milliseconds: 1000));
     refreshController.loadComplete();
   }
+
+
+
+  void onRefreshOffersFilters() async {
+    pageMy.value = 1;
+    await OffersProvider().getMyOffers(page: pageMy.value,user_id: box.read("currentUser")['id'].toString()).then((value) {
+      filteredOffers.value = value['offers']['data'];
+    });
+
+    // monitor network fetch
+    await Future.delayed(Duration(milliseconds: 1000));
+    // if failed,use refreshFailed()
+    refreshController.refreshCompleted();
+  }
+
+
+  void onLoadingAllOffersFilters() async {
+    pageMy.value ++;
+    await OffersProvider().getMyOffers(page: pageMy.value,user_id: box.read("currentUser")['id'].toString()).then((value) {
+      filteredOffers.value = [...filteredOffers.value , ...value['offers']['data']];
+    });
+
+    await Future.delayed(Duration(milliseconds: 1000));
+    refreshController.loadComplete();
+  }
+
+
+  void onRefreshOffersFiltersAll() async {
+    pageAll.value = 1;
+    await OffersProvider().getAllOffers(page: 1).then((value) {
+      filteredOffers.value = value['offers']['data'];
+    });
+    // monitor network fetch
+    await Future.delayed(Duration(milliseconds: 1000));
+    // if failed,use refreshFailed()
+    refreshController.refreshCompleted();
+  }
+
+
+  void onLoadingAllOffersFiltersAll() async {
+    pageAll.value ++;
+    await OffersProvider().getAllOffers(page: pageAll.value).then((value) {
+      filteredOffers.value = [...filteredOffers.value , ...value['offers']['data']];
+    });
+
+    await Future.delayed(Duration(milliseconds: 1000));
+    refreshController.loadComplete();
+  }
+
 }

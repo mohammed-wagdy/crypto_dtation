@@ -14,16 +14,17 @@ class NotificationsController extends GetxController {
   void onInit() async {
     // TODO: implement onInit
     super.onInit();
-    getAllNotifications();
-    getCountNotifications();
+    await getAllNotifications();
+   await getCountNotifications();
   }
 
 
   // Get All Notifications
   Future getAllNotifications() async {
     isLoading.value = true;
-   await NotificationsProvider().getAllNotifications(user_id: box.read("currentUser")['id'].toString()).then((value) {
-      notiList.value = value["notifi"];
+   await NotificationsProvider().getAllNotifications(user_id: box.read("currentUser")['id'].toString(),page: 1).then((value) {
+     print("F<FFF<F<FF< ${value["notifi"]['data'].length}");
+      notiList.value = value["notifi"]['data'];
     });
     isLoading.value = false;
   }
@@ -32,6 +33,9 @@ class NotificationsController extends GetxController {
   Future markAsSeenNotification({notification_id}) async {
     isLoading.value = true;
     await NotificationsProvider().markAsSeenNotification(notification_id: notification_id).then((value) {
+      print("FMFMFMFMMSMSMDSDMSDM ${value}");
+      getAllNotifications();
+      getCountNotifications();
       if(value['status'] == 1) {
         Helper.successSnackBar("جيد", value['message']);
       }
@@ -40,8 +44,7 @@ class NotificationsController extends GetxController {
   }
 
   // Get Count Of Un Seen Notifications
-  getCountNotifications() {
-
+  getCountNotifications() async {
     if(notiList.length > 0) {
       for(var prop in notiList){
         if(prop['seen'] == "0") {

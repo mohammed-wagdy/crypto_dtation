@@ -1,4 +1,5 @@
 import 'package:crypto_station/controllers/home_controller.dart';
+import 'package:crypto_station/controllers/notifications_controller.dart';
 import 'package:crypto_station/routes/app_pages.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';

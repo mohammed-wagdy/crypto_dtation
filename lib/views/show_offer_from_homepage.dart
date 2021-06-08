@@ -17,14 +17,13 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class ShowOfferFromHomepage extends GetView<OffersController> {
 
-
-
+  HomeController homController = Get.put(HomeController());
+  FavouriteController favController = Get.put(FavouriteController());
   GetStorage _box = GetStorage();
 
   @override
   Widget build(BuildContext context) {
-    HomeController homController = Get.put(HomeController());
-    FavouriteController favController = Get.put(FavouriteController());
+
     controller.getSpecialOffers(page: 1);
 
     return Obx(() => Scaffold(
