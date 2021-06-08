@@ -7,11 +7,13 @@ class SliderWidget extends StatelessWidget {
   final String titleName;
   final int count;
   final bool changeColor;
+  final VoidCallback onTapFunc;
 
   SliderWidget({
     required this.titleName,
     required this.count,
     this.changeColor = false,
+    required this.onTapFunc,
 });
 
   @override
@@ -50,17 +52,20 @@ class SliderWidget extends StatelessWidget {
                 onTap: () {
 
                 },
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: nameColor,
-                      borderRadius: BorderRadius.only(bottomRight: Radius.circular(20.0),topRight: Radius.circular(20.0))
-                  ),
-                  padding: EdgeInsets.all(10.0),
-                  child: CustomText(
-                    text: "عرض المزيد",
-                    textColor: whiteColor,
-                    textSize: 16,
-                    textFontWeight: FontWeight.w500,
+                child: GestureDetector(
+                  onTap: onTapFunc,
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: nameColor,
+                        borderRadius: BorderRadius.only(bottomRight: Radius.circular(20.0),topRight: Radius.circular(20.0))
+                    ),
+                    padding: EdgeInsets.all(10.0),
+                    child: CustomText(
+                      text: "عرض المزيد",
+                      textColor: whiteColor,
+                      textSize: 16,
+                      textFontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
               )

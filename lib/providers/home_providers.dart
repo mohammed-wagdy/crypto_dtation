@@ -8,11 +8,9 @@ class HomeProvider {
   final String baseUrl = "http://crypto.supersoftdemo.com/public/api/";
 
   // Get All Offers In Homepage
-  Future getHomePageAllOffers() async {
-    var url = Uri.parse("${baseUrl}get/all/offers");
-    var response = await http.post(url,body: {
-    //  "accepted": "accepted"
-    },headers: {
+  Future getHomePageAllOffers({page}) async {
+    var url = Uri.parse("${baseUrl}get/all/offers?page=$page");
+    var response = await http.post(url,headers: {
       // 'Content-Type': 'application/json',
       'Accept': 'application/json',
       'Authorization': 'Bearer ${box.read("access_token")}',
@@ -39,6 +37,67 @@ class HomeProvider {
     var response_body = json.decode(response.body);
     return response_body;
   }
+
+
+
+  // Get finished offers Homepage
+  Future getFinishedOffers({page}) async {
+    var url = Uri.parse("${baseUrl}get/all/offers?page=$page");
+    var response = await http.post(url,
+        body: {
+            "finished": "finished"
+        },
+        headers: {
+      // 'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ${box.read("access_token")}',
+    }
+    );
+    var response_body = json.decode(response.body);
+    return response_body;
+  }
+
+
+
+  // Get pending offers Homepage
+  Future getPendingOffers({page}) async {
+    var url = Uri.parse("${baseUrl}get/all/offers?page=$page");
+    var response = await http.post(url,
+        body: {
+          "pending": "pending"
+        },
+        headers: {
+          // 'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ${box.read("access_token")}',
+        }
+    );
+    var response_body = json.decode(response.body);
+    return response_body;
+  }
+
+
+
+
+  // Get special offers Homepage
+  Future getspecialdOffers({page}) async {
+    var url = Uri.parse("${baseUrl}get/all/offers?page=$page");
+    var response = await http.post(url,
+        body: {
+          "user_id": box.read("currentUser")['id'].toString()
+        },
+        headers: {
+          // 'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ${box.read("access_token")}',
+        }
+    );
+    var response_body = json.decode(response.body);
+    return response_body;
+  }
+
+
+  //
 
 
 

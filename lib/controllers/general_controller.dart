@@ -20,7 +20,7 @@ class GeneralController extends GetxController {
     isLoading.value = true;
     await GeneralProvider().getPrivacy().then((value) {
       if(value['status'] == 1) {
-        if(value['about'].length > 0) {
+        if(value['privacy'].length > 0) {
           privacyText.value = value['privacy'][0]["text"];
         }
       }
@@ -76,9 +76,10 @@ class GeneralController extends GetxController {
   // Terms And Conditions
   Future getTermsAndConditions() async {
     isLoading.value = true;
-    await GeneralProvider().getAboutUs().then((value) {
+    await GeneralProvider().getTermsAndConditions().then((value) {
+      print("MMMMMMMMMMMMMMMM ${value}");
       if(value['status'] == 1) {
-        if(value['about'].length > 0) {
+        if(value['license'].length > 0) {
           TermsText.value = value['license'][0]["text"];
         }
       }

@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:crypto_station/constants.dart';
 import 'package:crypto_station/controllers/home_controller.dart';
 import 'package:crypto_station/helper.dart';
+import 'package:crypto_station/routes/app_routes.dart';
 import 'package:crypto_station/widgets/custom_appbar.dart';
 import 'package:crypto_station/widgets/custom_text.dart';
 import 'package:crypto_station/widgets/grid_user_block.dart';
@@ -39,42 +40,31 @@ class HomePageScreen extends GetView<HomeController> {
       backgroundColor: whiteColor,
       body: Column(children: [
 
-        // Input Search
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: TextFormField(
-            controller: controller.searchInput,
-            keyboardType: TextInputType.text,
-            cursorColor: mainColor,
-            decoration: InputDecoration(
-              filled: true,
-              prefixIcon: Icon(Icons.search,size: 25,color: Colors.grey,),
-              hintText: "البحث ...",
-              hintStyle: TextStyle(color: Colors.grey),
-              // fillColor: inputFillColor,
-              contentPadding: EdgeInsets.all(15.0),
-              border: OutlineInputBorder(borderSide: BorderSide(color: inputBorderColor,),borderRadius: BorderRadius.all(Radius.circular(10.0))),
-              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: inputBorderColor),borderRadius: BorderRadius.all(Radius.circular(10.0))),
-              focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: mainColor.withOpacity(0.5)),borderRadius: BorderRadius.all(Radius.circular(10.0))),
-            ),
-          ),
-        ),
 
         // Slider
         CarouselSlider(
             items: [
               SliderWidget(
                 titleName: "العروض الخاصة",
-                count: 20,
+                count: controller.specialOfferCount.value,
                 changeColor: true,
+                onTapFunc: () {
+                  Get.toNamed(Routes.SHOW_OFFERS_FROM_HOMEPAGE);
+                },
               ),
               SliderWidget(
                 titleName: "العروض المنتهية",
-                count: 60,
+                count: controller.finishedOfferCount.value,
+                onTapFunc: () {
+                  Get.toNamed(Routes.SHOW_OFFERS_FROM_HOMEPAGE_FINISHED, arguments: [controller.allFinishedOfersData.value, "العروض المنتهية"]);
+                },
               ),
               SliderWidget(
                 titleName: "العروض قيد المراجعة",
-                count: 45,
+                count: controller.pendingOfferCount.value,
+                onTapFunc: () {
+                  Get.toNamed(Routes.SHOW_OFFERS_FROM_HOMEPAGE_PENDING, arguments: [controller.allPendingOfersData.value, "العروض قيد المراجعة"]);
+                },
               ),
             ],
             options: CarouselOptions(

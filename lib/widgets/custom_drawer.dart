@@ -62,6 +62,7 @@ class customDrawer extends StatelessWidget {
                 onTapFunction: (){
                   Get.back();
                   Get.find<HomeController>().controller.index = 3;
+                  print("FMFMFFMFMFMFFMFMFMSD ${Get.find<HomeController>().controller.index}");
                 },
                 text: "حسابي",
                 listIcon: Icon(Icons.verified_user,color: Color(0XFF1a4b6b),)
@@ -71,6 +72,7 @@ class customDrawer extends StatelessWidget {
                 onTapFunction: (){
                   Get.back();
                   Get.find<HomeController>().controller.index = 1;
+                  print("FMFMFFMFMFMFFMFMFMSD ${Get.find<HomeController>().controller.index}");
                 },
                 text: "عروضي",
                 listIcon: Icon(Icons.verified_user,color: Color(0XFF1a4b6b),)

@@ -24,9 +24,6 @@ class GridUserBlock extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    print("FOFFOFOOFLIST ${listOffers}");
-
-    TextEditingController payType = TextEditingController();
     HomeController homController = Get.put(HomeController());
     FavouriteController favController = Get.put(FavouriteController());
 
@@ -75,7 +72,7 @@ class GridUserBlock extends StatelessWidget {
                         shape: BoxShape.circle,
                         image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: NetworkImage(listOffers![index]["user"]["image"]),
+                          image: NetworkImage("http://crypto.supersoftdemo.com/public/image/user/${listOffers![index]["user"]["image"]}"),
                         )
                     ),
                   ),
@@ -109,7 +106,6 @@ class GridUserBlock extends StatelessWidget {
                             GestureDetector(
                               onTap: () {
                                  favController.addToFavourite(offer_id: listOffers![index]['id'].toString());
-                                print("OFFER ID IS ${listOffers![index]['id']}");
                               },
                               child: Icon(Icons.favorite,color: favouriteColor,),
                             )
@@ -124,7 +120,8 @@ class GridUserBlock extends StatelessWidget {
                             Row(
                               children: Helper.getStarsList(double.parse(listOffers![index]["user"]["rate"])),),
                             SizedBox(width: 20,),
-                            Image.network("https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_Egypt.svg/640px-Flag_of_Egypt.svg.png",width: 20,),
+                            //
+                            Image.network("http://crypto.supersoftdemo.com/public/image/country/${listOffers![index]["country"]['image']}",width: 20,),
                           ],
                         )
 
@@ -233,7 +230,7 @@ class GridUserBlock extends StatelessWidget {
                                           shape: BoxShape.circle,
                                           image: DecorationImage(
                                             fit:BoxFit.cover,
-                                            image: NetworkImage(listOffers![index]["user"]["image"],),
+                                            image: NetworkImage("http://crypto.supersoftdemo.com/public/image/user/${listOffers![index]["user"]["image"]}"),
                                           )
                                       ),
                                     ),
@@ -270,7 +267,7 @@ class GridUserBlock extends StatelessWidget {
                                               Row(
                                                 children: Helper.getStarsList(double.parse(listOffers![index]["user"]["rate"])),),
                                               SizedBox(width: 20,),
-                                              Image.network("https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_Egypt.svg/640px-Flag_of_Egypt.svg.png",width: 20,),
+                                              Image.network("http://crypto.supersoftdemo.com/public/image/country/${listOffers![index]["country"]['image']}",width: 20,),
                                             ],
                                           )
 
@@ -428,10 +425,10 @@ class GridUserBlock extends StatelessWidget {
                                       flex:2,
                                       child: Row(
                                         children: [
-                                          Image.network("https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_Egypt.svg/640px-Flag_of_Egypt.svg.png",width: 20,),
+                                          Image.network("http://crypto.supersoftdemo.com/public/image/country/${listOffers![index]["country"]['image']}",width: 20,),
                                           SizedBox(width: 10,),
                                           CustomText(
-                                            text: "مصر",
+                                            text: listOffers![index]["country"]['name'],
                                             textColor: nameColor,
                                             textFontWeight: FontWeight.w500,
                                             textSize: 14.0,

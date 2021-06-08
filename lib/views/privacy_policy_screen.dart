@@ -12,6 +12,7 @@ class PrivacyAndPolicy extends GetView<GeneralController> {
 
   @override
   Widget build(BuildContext context) {
+    controller.getPrivacy();
     return Obx(()=>Scaffold(
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),

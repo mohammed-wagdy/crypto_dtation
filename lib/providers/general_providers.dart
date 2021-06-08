@@ -14,7 +14,10 @@ class GeneralProvider {
   // Privacy
   Future getPrivacy() async {
     var url = Uri.parse("${baseUrl}get/privacy");
-    var response = await http.get(url);
+    var response = await http.get(url,headers: {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ${box.read("access_token")}',
+    });
     var response_body = json.decode(response.body);
     return response_body;
   }
@@ -51,7 +54,10 @@ class GeneralProvider {
   // Terms And Conditions
   Future getTermsAndConditions() async {
     var url = Uri.parse("${baseUrl}get/license");
-    var response = await http.get(url);
+    var response = await http.get(url,headers: {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ${box.read("access_token")}',
+    });
     var response_body = json.decode(response.body);
     return response_body;
   }

@@ -12,21 +12,35 @@ import 'package:crypto_station/views/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class HomeController extends GetxController {
   final currentIndex = 0.obs;
   PersistentTabController controller = PersistentTabController();
   TextEditingController searchInput = TextEditingController();
   RxList allHomePageOffer = [].obs;
+  RxInt page = 1.obs;
   RxBool orderDone = false.obs;
   RxBool isLoading = false.obs;
   RxList otherUserProfile = [].obs;
+  RxInt finishedOfferCount = 0.obs;
+  RxInt pendingOfferCount = 0.obs;
+  RxInt specialOfferCount = 0.obs;
+
+
+
+  RxList allFinishedOfersData = [].obs;
+  RxList allPendingOfersData = [].obs;
+  RxList allUserOfersData = [].obs;
 
   @override
   void onInit() async {
     // TODO: implement onInit
     super.onInit();
-   await getHomePageAllOffers();
+    await getHomePageAllOffers(page: page.value);
+    await getFinishedOffers(page: page.value);
+    await getPendingOffers(page: page.value);
+    await getSpecialOffers(page: page.value);
     controller = PersistentTabController(initialIndex: currentIndex.value);
   }
 
@@ -81,23 +95,39 @@ class HomeController extends GetxController {
   }
 
 
-  // Get HomePage Offers
-  Future getHomePageAllOffers() async {
+
+
+  // Get Finished Offers
+  Future getFinishedOffers({page}) async {
+    await HomeProvider().getFinishedOffers(page: page).then((value) {
+      finishedOfferCount.value = value['offers']['data'].length;
+    });
+  }
+
+
+  // Get Pending Offers
+  Future getPendingOffers({page}) async {
+    await HomeProvider().getPendingOffers(page: page).then((value) {
+      pendingOfferCount.value = value['offers']['data'].length;
+    });
+  }
+
+
+  // Get Special Offers
+  Future getSpecialOffers({page}) async {
     isLoading.value = true;
-    await HomeProvider().getHomePageAllOffers().then((value) {
-      allHomePageOffer.value = value["offer"];
-      print("VVVV<VV<V< ${value["offer"][0]['status']}");
+    await HomeProvider().getspecialdOffers(page: page).then((value) {
+      specialOfferCount.value = value['offers']['data'].length;
     });
     isLoading.value = false;
   }
-
 
   // Order Offer
   Future orderOffer({user_id , offer_id}) async {
     isLoading.value = true;
     await HomeProvider().orderOffer(
-    user_id: user_id,
-      offer_id: offer_id
+        user_id: user_id,
+        offer_id: offer_id
     ).then((value) {
       print("FOOOOOOOMMMMM ${value}");
       if(value['status'] == 1) {
@@ -107,5 +137,17 @@ class HomeController extends GetxController {
     });
     isLoading.value = false;
   }
+
+
+  // Get HomePage Offers
+  Future getHomePageAllOffers({page}) async {
+    isLoading.value = true;
+    await HomeProvider().getHomePageAllOffers(page: page).then((value) {
+      allHomePageOffer.value = value["offers"]['data'];
+    });
+    isLoading.value = false;
+  }
+
+
 
 }

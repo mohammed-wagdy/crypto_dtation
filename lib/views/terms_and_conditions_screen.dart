@@ -16,6 +16,7 @@ class TermsAndConditions extends GetView<GeneralController> {
 
   @override
   Widget build(BuildContext context) {
+    controller.getTermsAndConditions();
     return Obx(()=>Scaffold(
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),

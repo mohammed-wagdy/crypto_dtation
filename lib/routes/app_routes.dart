@@ -21,4 +21,7 @@ abstract class Routes {
   static const ALL_USER_REQUESTS = '/all_user_requests';
   static const ALL_OTHERS_REQUESTS = '/all_others_requests';
   static const OTHER_USER_PROFILE = '/other_user_profile';
+  static const SHOW_OFFERS_FROM_HOMEPAGE = '/show_offers_from_homepage';
+  static const SHOW_OFFERS_FROM_HOMEPAGE_PENDING = '/show_offers_from_homepage_pending';
+  static const SHOW_OFFERS_FROM_HOMEPAGE_FINISHED = '/show_offers_from_homepage_finished';
 }

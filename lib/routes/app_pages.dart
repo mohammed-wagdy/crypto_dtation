@@ -24,6 +24,9 @@ import 'package:crypto_station/views/offers_screen.dart';
 import 'package:crypto_station/views/other_user.dart';
 import 'package:crypto_station/views/privacy_policy_screen.dart';
 import 'package:crypto_station/views/search_resault.dart';
+import 'package:crypto_station/views/show_offer_from_homepage.dart';
+import 'package:crypto_station/views/show_offers_finished.dart';
+import 'package:crypto_station/views/show_offers_pending.dart';
 import 'package:crypto_station/views/terms_and_conditions_screen.dart';
 import 'package:get/get.dart';
 
@@ -54,5 +57,8 @@ class AppPages {
      GetPage(name: Routes.ALL_USER_REQUESTS         , page: () => AllUserRequests()    , binding: ProfileBinding()),
      GetPage(name: Routes.ALL_OTHERS_REQUESTS         , page: () => AllOtherRequests()    , binding: AuthBinding()),
      GetPage(name: Routes.OTHER_USER_PROFILE         , page: () => OtherUserProfileScreen()    , binding: AuthBinding()),
+     GetPage(name: Routes.SHOW_OFFERS_FROM_HOMEPAGE         , page: () => ShowOfferFromHomepage()    , binding: OffersBinding()),
+     GetPage(name: Routes.SHOW_OFFERS_FROM_HOMEPAGE_FINISHED         , page: () => ShowOfferFromHomepageFinished()    , binding: HomeBinding()),
+     GetPage(name: Routes.SHOW_OFFERS_FROM_HOMEPAGE_PENDING         , page: () => ShowOfferFromHomepagePending()    , binding: HomeBinding()),
   ];
 }

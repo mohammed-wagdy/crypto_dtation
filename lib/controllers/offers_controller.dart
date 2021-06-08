@@ -4,11 +4,13 @@ import 'package:crypto_station/controllers/profile_controller.dart';
 import 'package:crypto_station/helper.dart';
 import 'package:crypto_station/models/offer.dart';
 import 'package:crypto_station/models/user.dart';
+import 'package:crypto_station/providers/home_providers.dart';
 import 'package:crypto_station/providers/offer_providers.dart';
 import 'package:crypto_station/routes/app_routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class OffersController extends GetxController {
 
@@ -29,6 +31,15 @@ class OffersController extends GetxController {
   RxList allOffersAfterAdvancedFilter = [].obs;
 
 
+
+  RefreshController refreshController = RefreshController(initialRefresh: false);
+  RxList allFinishedOfersData = [].obs;
+  RxList allPendingOfersData = [].obs;
+  RxList allUserOfersData = [].obs;
+
+  RxInt pageSpecial = 1.obs;
+  RxInt pageFinished = 1.obs;
+  RxInt pagePending = 1.obs;
   // search attr
   TextEditingController userNameController = TextEditingController();
   RxBool search_sell_type = false.obs;
@@ -125,4 +136,107 @@ class OffersController extends GetxController {
     isLoading.value = false;
   }
 
+
+
+
+
+
+  // Get Finished Offers
+  Future getFinishedOffers({page}) async {
+    isLoading.value = true;
+    await HomeProvider().getFinishedOffers(page: page).then((value) {
+      allFinishedOfersData.value = value['offers']['data'];
+    });
+    isLoading.value = false;
+  }
+
+
+  // Get Pending Offers
+  Future getPendingOffers({page}) async {
+    isLoading.value = true;
+    await HomeProvider().getPendingOffers(page: page).then((value) {
+      allPendingOfersData.value = value['offers']['data'];
+    });
+    isLoading.value = false;
+  }
+
+
+  // Get Special Offers
+  Future getSpecialOffers({page}) async {
+    isLoading.value = true;
+    await HomeProvider().getspecialdOffers(page: page).then((value) {
+      allUserOfersData.value = value['offers']['data'];
+    });
+    isLoading.value = false;
+  }
+
+
+
+  void onRefreshAllUsers() async {
+    pageSpecial.value = 1;
+    await HomeProvider().getspecialdOffers(page: pageSpecial.value ).then((value) {
+      allUserOfersData.value = value['offers']['data'];
+    });
+    // monitor network fetch
+    await Future.delayed(Duration(milliseconds: 1000));
+    // if failed,use refreshFailed()
+    refreshController.refreshCompleted();
+  }
+
+
+  void onLoadingAllUsers() async {
+    pageSpecial.value ++;
+    await HomeProvider().getspecialdOffers(page: pageSpecial.value).then((value) {
+      allUserOfersData.value = [...allUserOfersData.value , ...value['offers']['data']];
+    });
+    await Future.delayed(Duration(milliseconds: 1000));
+    refreshController.loadComplete();
+  }
+
+
+
+
+  void onRefreshFinished() async {
+    pageFinished.value = 1;
+    await HomeProvider().getspecialdOffers(page: pageFinished.value ).then((value) {
+      allFinishedOfersData.value = value['offers']['data'];
+    });
+    // monitor network fetch
+    await Future.delayed(Duration(milliseconds: 1000));
+    // if failed,use refreshFailed()
+    refreshController.refreshCompleted();
+  }
+
+
+  void onLoadingAllFinished() async {
+    pageFinished.value ++;
+    await HomeProvider().getspecialdOffers(page: pageFinished.value).then((value) {
+      allFinishedOfersData.value = [...allFinishedOfersData.value , ...value['offers']['data']];
+    });
+    await Future.delayed(Duration(milliseconds: 1000));
+    refreshController.loadComplete();
+  }
+
+
+
+  void onRefreshPending() async {
+    pagePending.value = 1;
+    await HomeProvider().getspecialdOffers(page: pagePending.value ).then((value) {
+      allPendingOfersData.value = value['offers']['data'];
+    });
+    // monitor network fetch
+    await Future.delayed(Duration(milliseconds: 1000));
+    // if failed,use refreshFailed()
+    refreshController.refreshCompleted();
+  }
+
+
+  void onLoadingAllPending() async {
+    pagePending.value ++;
+    await HomeProvider().getspecialdOffers(page: pagePending.value).then((value) {
+      allPendingOfersData.value = [...allPendingOfersData.value , ...value['offers']['data']];
+    });
+    await Future.delayed(Duration(milliseconds: 1000));
+    refreshController.loadComplete();
+  }
 }

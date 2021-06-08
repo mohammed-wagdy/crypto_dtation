@@ -21,7 +21,7 @@ class AuthScreen extends GetView<AuthController> {
           top: true,
           child: Column(
             children: [
-              Image.asset("assets/images/loginAbout.jpeg",width: 300,),
+              Image.asset("assets/images/loginAbout.png",width: 300,),
               //  Image.network("https://cdn.dribbble.com/users/6623125/screenshots/14841425/crypto_4x.png",height: 150,),
               TabBar(
                 indicator: BoxDecoration(
@@ -293,7 +293,7 @@ class AuthScreen extends GetView<AuthController> {
                                     value: country['id'],
                                     child: Row(
                                       children: <Widget>[
-                                        Image.network("https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_Egypt.svg/255px-Flag_of_Egypt.svg.png",width: 25,),
+                                        Image.network(country['image'],width: 25,),
                                         // Image.network(country['name'],width: 25,),
                                         SizedBox(width: 10,),
                                         Text(country['name'], style:  TextStyle(color: Colors.black),),

@@ -12,12 +12,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class AboutUs extends GetView<GeneralController> {
 
+  GeneralController controller = Get.put(GeneralController());
 
   @override
   Widget build(BuildContext context) {
 
-    GeneralController controller = Get.put(GeneralController());
-
+    controller.getAboutUs();
     return Obx(()=> Scaffold(
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
@@ -35,7 +35,7 @@ class AboutUs extends GetView<GeneralController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
 
-              Center(child: Image.network("https://cdn.dribbble.com/users/6623125/screenshots/14841425/crypto_4x.png",height: 200,)),
+              Center(child: Image.asset("assets/images/loginAbout.png",width: 300,),),
 
               SizedBox(height: 30,),
 
