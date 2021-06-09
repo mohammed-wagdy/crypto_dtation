@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:ui';
 import 'package:crypto_station/constants.dart';
+import 'package:crypto_station/controllers/profile_controller.dart';
 import 'package:crypto_station/helper.dart';
 import 'package:crypto_station/models/user.dart';
 import 'package:crypto_station/providers/auth_providers.dart';
@@ -225,7 +226,7 @@ class AuthController extends GetxController {
   Future getUserProfile({user_id}) async {
     isLoading.value = true;
     await AuthProvider().getUserProfile(user_id: user_id).then((value) {
-      print("RRRRRR ${value['user'][0]}");
+      print("FFFFFFFFFFMMMMDDDDDDD ${value}");
       if(value['status'] == 1) {
         otherUserProfile.value = value['user'][0];
       }
@@ -277,20 +278,20 @@ class AuthController extends GetxController {
   Future setRate({user_id , user_offer_id}) async {
     if(messageController.text.isEmpty) {
       Helper.errorSnackBar("خطأ", "من فضلك أدخل التعليق");
+    }else {
+      await AuthProvider().setRate(
+        message: messageController.text,
+        rate: rateCount.value.toString(),
+        user_offer_id: user_offer_id,
+        user_id: user_id,
+      ).then((value) {
+        if(value['status'] == 1) {
+          Helper.successSnackBar("جيد", value['message']);
+          Get.find<ProfileController>().getRates(user_id: user_id);
+          messageController.text = "";
+        }
+      });
     }
-    isLoading.value = true;
-    await AuthProvider().setRate(
-      message: messageController.text,
-      rate: rateCount.value.toString(),
-      user_offer_id: user_offer_id,
-      user_id: user_id,
-    ).then((value) {
-      if(value['status'] == 1) {
-        Helper.successSnackBar("جيد", value['message']);
-        messageController.text = "";
-      }
-    });
-    isLoading.value = false;
   }
 
 

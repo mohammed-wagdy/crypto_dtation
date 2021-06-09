@@ -1,4 +1,5 @@
 
+import 'package:crypto_station/controllers/home_controller.dart';
 import 'package:crypto_station/helper.dart';
 import 'package:crypto_station/providers/favourite_providers.dart';
 import 'package:get/get.dart';
@@ -12,10 +13,10 @@ class FavouriteController extends GetxController {
   RxList favList = [].obs;
 
   @override
-  void onInit() {
+  void onInit() async {
     // TODO: implement onInit
     super.onInit();
-    getFavouriteList();
+   await getFavouriteList();
   }
 
 
@@ -23,8 +24,9 @@ class FavouriteController extends GetxController {
   Future getFavouriteList() async {
     isLoading.value = true;
     await FavouriteProvider().getFavouriteList(user_id: box.read("currentUser")['id'].toString()).then((value) {
+      print("FMFMFEKREKRKE ${value}");
       if(value['status'] == 1) {
-        favList.value = value['fav'];
+        favList.value = value['fav']['data'];
       }
     });
     isLoading.value = false;
@@ -33,10 +35,12 @@ class FavouriteController extends GetxController {
 
   // Add Offer To Favourite
   Future addToFavourite({offer_id}) async {
+    print("FMFMMMM ${box.read("currentUser")['id'].toString()}");
+    print("FMFMMMM ${offer_id}");
     isLoading.value = true;
     await FavouriteProvider().addToFavourite(user_id: box.read("currentUser")['id'].toString(),offer_id: offer_id).then((value) {
-      print("VVVVVVVVVVVVVVVVVVVVVVVV ${value}");
       if(value['status'] == 1) {
+        Get.find<HomeController>().getHomePageAllOffers();
         Helper.successSnackBar("جيد", value['message']);
       }
     });
@@ -48,8 +52,8 @@ class FavouriteController extends GetxController {
   Future deleteFromFavourite({offer_id}) async {
     isLoading.value = true;
     await FavouriteProvider().deleteFromFavourite(offer_id: offer_id).then((value) {
-      print("VVVVVVVVVVVVVVVVVVVVVVVV ${value}");
       if(value['status'] == 1) {
+        Get.find<HomeController>().getHomePageAllOffers();
         Helper.successSnackBar("جيد", value['message']);
       }
     });

@@ -18,6 +18,7 @@ class ProfileScreen extends GetView<ProfileController> {
   ProfileController controller = Get.put(ProfileController());
   @override
   Widget build(BuildContext context) {
+    controller.getRates(user_id: controller.user.value.id);
     return Obx(() => Scaffold(
       //key: controller.scaffoldKey,
       appBar: PreferredSize(
@@ -29,39 +30,7 @@ class ProfileScreen extends GetView<ProfileController> {
       body: ListView(
         //  crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Input Search
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: TextFormField(
-                controller: controller.searchInput,
-                keyboardType: TextInputType.text,
-                cursorColor: mainColor,
-                decoration: InputDecoration(
-                  filled: true,
-                  prefixIcon: Icon(
-                    Icons.search,
-                    size: 25,
-                    color: Colors.grey,
-                  ),
-                  hintText: "البحث ...",
-                  hintStyle: TextStyle(color: Colors.grey),
-                  // fillColor: inputFillColor,
-                  contentPadding: EdgeInsets.all(15.0),
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: inputBorderColor,
-                      ),
-                      borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: inputBorderColor),
-                      borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: mainColor.withOpacity(0.5)),
-                      borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                ),
-              ),
-            ),
-
+            SizedBox(height: 15,),
             // User Data
             Container(
               padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
@@ -258,7 +227,7 @@ class ProfileScreen extends GetView<ProfileController> {
                                                           width: 40,
                                                         ),
                                                         Image.network(
-                                                          "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_Egypt.svg/640px-Flag_of_Egypt.svg.png",
+                                                          controller.user.value.country!['image'],
                                                           width: 20,
                                                         ),
                                                       ],
@@ -830,7 +799,7 @@ class ProfileScreen extends GetView<ProfileController> {
                                     shape: BoxShape.circle,
                                     image: DecorationImage(
                                       image: NetworkImage(
-                                          "https://static01.nyt.com/images/2020/11/20/multimedia/00Gates-1/00Gates-1-mobileMasterAt3x.jpg"),
+                                          "${controller.rates[index]['user']['image']}"),
                                     )),
                               ),
 
@@ -851,7 +820,7 @@ class ProfileScreen extends GetView<ProfileController> {
                                         Expanded(
                                           child: CustomText(
                                             userName: true,
-                                            text: " محمد وجدي محمد ",
+                                            text: controller.rates[index]['user']['full_name'],
                                             textColor: nameColor,
                                             textSize: 16.0,
                                             textFontWeight: FontWeight.bold,
@@ -868,13 +837,13 @@ class ProfileScreen extends GetView<ProfileController> {
                                     Row(
                                       children: [
                                         Row(
-                                          children: Helper.getStarsList(2.5),
+                                          children: Helper.getStarsList(double.parse(controller.rates[index]['user']['rate'])),
                                         ),
                                         SizedBox(
                                           width: 40,
                                         ),
                                         Image.network(
-                                          "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_Egypt.svg/640px-Flag_of_Egypt.svg.png",
+                                          "${controller.rates[index]['user']['country']['image']}",
                                           width: 20,
                                         ),
                                       ],
@@ -887,12 +856,14 @@ class ProfileScreen extends GetView<ProfileController> {
                           SizedBox(
                             height: 10,
                           ),
-                          CustomText(
-                            text:
-                            "تم إضافة العرض الخاص بك وهو الأن قيد المراجعة من قبل الإدارة وسيتم إرسال بريد ألكتروني عند الموافقة علي العرض او يمكنك متابعة التطبيق",
-                            textColor: Colors.grey,
-                            textSize: 13.0,
-                            textFontWeight: FontWeight.w500,
+                          Align(
+                            child: CustomText(
+                              text:controller.rates[index]['message'],
+                              textColor: Colors.grey,
+                              textSize: 13.0,
+                              textFontWeight: FontWeight.w500,
+                            ),
+                            alignment: Alignment.centerRight,
                           ),
                         ],
                       ),
@@ -907,7 +878,9 @@ class ProfileScreen extends GetView<ProfileController> {
                         buttonText: "جميع التعليقات",
                         buttonTextColor: nameColor,
                         buttonTextSize: 15.0,
-                        buttonOnPress: () {}),
+                        buttonOnPress: () {
+                          Get.toNamed(Routes.GET_ALL_RATES_OTHER_USER,arguments : controller.user.value.id);
+                        }),
                   ],
                 ),
               ],

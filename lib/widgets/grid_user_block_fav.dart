@@ -21,7 +21,6 @@ class GridUserBlockWithStatusFav extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    print("FFFFFFFFFFFFFFFVMVM ${listOffersFiltered![0]['offer']}");
 
     HomeController homController = Get.put(HomeController());
 

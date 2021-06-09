@@ -140,9 +140,12 @@ class ProfileController extends GetxController {
   }
 
   // Get Rates Of My Profile
-  Future getRates() async {
+  Future getRates({user_id}) async {
+    print("VVVVVVVVVVVVVVVV ${user_id}");
     isLoading.value = true;
-    await AuthProvider().getRates(user_id: user.value.id).then((value) {
+    await AuthProvider().getRates(user_id: user_id).then((value) {
+      print("FMFMDddddddFMDFKDKF ${value}");
+
       rates.value = value['rates'];
     });
     isLoading.value = false;
@@ -174,7 +177,7 @@ class ProfileController extends GetxController {
     getOffersCount();
     getOrdersCount();
     getOrdersRequestsCount();
-    getRates();
+   // getRates();
   }
 
 }

@@ -144,7 +144,9 @@ class AuthProvider {
 
   // Get Rates
   Future getRates({user_id}) async {
+    print("VMDFMDM ${user_id}");
     var url = Uri.parse("${baseUrl}get/rate");
+    print("VMDFMDM ${url}");
     var response = await http.post(url,body: {
       "user_id": user_id
     },headers: {
@@ -154,6 +156,7 @@ class AuthProvider {
     var response_body = json.decode(response.body);
     return response_body;
   }
+
 
 
   // Delete Offer

@@ -17,6 +17,7 @@ import 'package:crypto_station/views/auth_screen.dart';
 import 'package:crypto_station/views/confirm_code_screen.dart';
 import 'package:crypto_station/views/contact_us_screen.dart';
 import 'package:crypto_station/views/favourite_screen.dart';
+import 'package:crypto_station/views/get_all_rates_other_user.dart';
 import 'package:crypto_station/views/home_screen.dart';
 import 'package:crypto_station/views/notifications_screen.dart';
 import 'package:crypto_station/views/offer_details_screen.dart';
@@ -60,5 +61,6 @@ class AppPages {
      GetPage(name: Routes.SHOW_OFFERS_FROM_HOMEPAGE         , page: () => ShowOfferFromHomepage()    , binding: OffersBinding()),
      GetPage(name: Routes.SHOW_OFFERS_FROM_HOMEPAGE_FINISHED         , page: () => ShowOfferFromHomepageFinished()    , binding: HomeBinding()),
      GetPage(name: Routes.SHOW_OFFERS_FROM_HOMEPAGE_PENDING         , page: () => ShowOfferFromHomepagePending()    , binding: HomeBinding()),
+     GetPage(name: Routes.GET_ALL_RATES_OTHER_USER         , page: () => GetAllRatesOtherUsers()    , binding: ProfileBinding()),
   ];
 }

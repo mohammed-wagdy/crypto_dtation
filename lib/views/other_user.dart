@@ -3,7 +3,6 @@ import 'package:crypto_station/controllers/auth_controller.dart';
 import 'package:crypto_station/controllers/profile_controller.dart';
 import 'package:crypto_station/helper.dart';
 import 'package:crypto_station/routes/app_routes.dart';
-import 'package:crypto_station/widgets/custom_appbar.dart';
 import 'package:crypto_station/widgets/custom_button.dart';
 import 'package:crypto_station/widgets/custom_dark_appbar.dart';
 import 'package:crypto_station/widgets/custom_text.dart';
@@ -19,11 +18,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 class OtherUserProfileScreen extends GetView<ProfileController> {
   ProfileController controller = Get.put(ProfileController());
   AuthController authController = Get.put(AuthController());
+  var user_offer_id = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
-
-    authController.getUserProfile(user_id: Get.arguments);
+    print("FMFWEWEWIEWIWIEWIE ${user_offer_id}");
+    authController.getUserProfile(user_id: user_offer_id);
+    controller.getRates(user_id: user_offer_id);
     // authController.getOffersCount(user_id: Get.arguments);
     // authController.getOrdersCount(user_id: Get.arguments);
     // authController.getOrdersRequestsCount(user_id: Get.arguments);
@@ -34,7 +35,7 @@ class OtherUserProfileScreen extends GetView<ProfileController> {
           preferredSize: const Size.fromHeight(60),
           child: CustomDarkAppBar(
             noBackground: true,
-            appBarTitle: 'CRYPTO STATION',
+            appBarTitle: 'بروفايل المستخدم',
             drawerContext: context,
           )),
       backgroundColor: whiteColor,
@@ -45,6 +46,7 @@ class OtherUserProfileScreen extends GetView<ProfileController> {
       ListView(
         //  crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            SizedBox(height: 15,),
             // User Data
             Container(
               padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
@@ -120,7 +122,7 @@ class OtherUserProfileScreen extends GetView<ProfileController> {
                                   width: 40,
                                 ),
                                 Image.network(
-                                  "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_Egypt.svg/640px-Flag_of_Egypt.svg.png",
+                                  "${authController.otherUserProfile['country']['image']}",
                                   width: 20,
                                 ),
                               ],
@@ -375,6 +377,7 @@ class OtherUserProfileScreen extends GetView<ProfileController> {
             ),
 
             // Write Comment Rate
+            controller.user.value.id != Get.arguments ?
             Container(
               margin: EdgeInsets.symmetric(horizontal: 16),
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -465,7 +468,7 @@ class OtherUserProfileScreen extends GetView<ProfileController> {
                                   width: 40,
                                 ),
                                 Image.network(
-                                  "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_Egypt.svg/640px-Flag_of_Egypt.svg.png",
+                                  controller.user.value.country!['image'],
                                   width: 20,
                                 ),
                               ],
@@ -486,6 +489,8 @@ class OtherUserProfileScreen extends GetView<ProfileController> {
                       isTextArea: true,
                       keyboardType: TextInputType.text),
 
+
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -495,13 +500,13 @@ class OtherUserProfileScreen extends GetView<ProfileController> {
                           buttonTextColor: nameColor,
                           buttonTextSize: 15.0,
                           buttonOnPress: () {
-                              authController.setRate(user_offer_id: Get.arguments.toString(),user_id: controller.user.value.id.toString());
+                              authController.setRate(user_id: user_offer_id,user_offer_id: controller.user.value.id.toString(),);
                           }),
                     ],
                   )
                 ],
               ),
-            ),
+            ) : SizedBox(),
 
             SizedBox(
               height: 10,
@@ -545,7 +550,7 @@ class OtherUserProfileScreen extends GetView<ProfileController> {
                                     shape: BoxShape.circle,
                                     image: DecorationImage(
                                       image: NetworkImage(
-                                          "https://static01.nyt.com/images/2020/11/20/multimedia/00Gates-1/00Gates-1-mobileMasterAt3x.jpg"),
+                                          "${controller.rates[index]['user']['image']}"),
                                     )),
                               ),
 
@@ -566,7 +571,7 @@ class OtherUserProfileScreen extends GetView<ProfileController> {
                                         Expanded(
                                           child: CustomText(
                                             userName: true,
-                                            text: " محمد وجدي محمد ",
+                                            text: controller.rates[index]['user']['full_name'],
                                             textColor: nameColor,
                                             textSize: 16.0,
                                             textFontWeight: FontWeight.bold,
@@ -583,13 +588,13 @@ class OtherUserProfileScreen extends GetView<ProfileController> {
                                     Row(
                                       children: [
                                         Row(
-                                          children: Helper.getStarsList(2.5),
+                                          children: Helper.getStarsList(double.parse(controller.rates[index]['user']['rate'])),
                                         ),
                                         SizedBox(
                                           width: 40,
                                         ),
                                         Image.network(
-                                          "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_Egypt.svg/640px-Flag_of_Egypt.svg.png",
+                                          "${controller.rates[index]['user']['country']['image']}",
                                           width: 20,
                                         ),
                                       ],
@@ -602,12 +607,15 @@ class OtherUserProfileScreen extends GetView<ProfileController> {
                           SizedBox(
                             height: 10,
                           ),
-                          CustomText(
-                            text:
-                            "تم إضافة العرض الخاص بك وهو الأن قيد المراجعة من قبل الإدارة وسيتم إرسال بريد ألكتروني عند الموافقة علي العرض او يمكنك متابعة التطبيق",
-                            textColor: Colors.grey,
-                            textSize: 13.0,
-                            textFontWeight: FontWeight.w500,
+                          Align(
+                            child: CustomText(
+                              text:
+                              controller.rates[index]['message'],
+                              textColor: Colors.grey,
+                              textSize: 13.0,
+                              textFontWeight: FontWeight.w500,
+                            ),
+                            alignment: Alignment.centerRight,
                           ),
                         ],
                       ),
@@ -622,7 +630,9 @@ class OtherUserProfileScreen extends GetView<ProfileController> {
                         buttonText: "جميع التعليقات",
                         buttonTextColor: nameColor,
                         buttonTextSize: 15.0,
-                        buttonOnPress: () {}),
+                        buttonOnPress: () {
+                          Get.toNamed(Routes.GET_ALL_RATES_OTHER_USER,arguments : user_offer_id);
+                        }),
                   ],
                 ),
               ],
