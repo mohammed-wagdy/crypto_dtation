@@ -44,9 +44,6 @@ class SearchResultScreen extends GetView<HomeController> {
             crossAxisSpacing: 10,
             mainAxisSpacing: 10,
             childAspectRatio:
-            smallScreen ?
-            MediaQuery.of(context).size.width / (MediaQuery.of(context).size.height / 3.2)
-                :
             MediaQuery.of(context).size.width /
                 (MediaQuery.of(context).size.height / 4.2),
           ),
