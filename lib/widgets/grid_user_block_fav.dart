@@ -21,7 +21,8 @@ class GridUserBlockWithStatusFav extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-
+    final isTablet = Tools.isTablet(MediaQuery.of(context));
+    final smallScreen = MediaQuery.of(context).size.width < 410;
     HomeController homController = Get.put(HomeController());
 
     return
@@ -32,7 +33,11 @@ class GridUserBlockWithStatusFav extends StatelessWidget {
           crossAxisCount: MediaQuery.of(context).orientation == Orientation.landscape ? 3: 1,
           crossAxisSpacing: 10,
           mainAxisSpacing: 10,
-          childAspectRatio: MediaQuery.of(context).size.width /
+          childAspectRatio:
+          smallScreen ?
+          MediaQuery.of(context).size.width / (MediaQuery.of(context).size.height / 3.2)
+              :
+          MediaQuery.of(context).size.width /
               (MediaQuery.of(context).size.height / 4.2),
         ),
         itemBuilder: (context,index) {

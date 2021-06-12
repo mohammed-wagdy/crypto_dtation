@@ -1,5 +1,9 @@
 
+import 'dart:io';
+import 'dart:math';
+
 import 'package:crypto_station/constants.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -45,5 +49,28 @@ class Helper {
           return Icon(Icons.star_border, size: size, color: rateColor);
         }));
     return list;
+  }
+}
+
+
+
+
+class Tools {
+  /// check tablet screen
+  static bool isTablet(MediaQueryData query) {
+    if (kIsWeb) {
+      return true;
+    }
+
+    if (Platform.isWindows || Platform.isMacOS) {
+      return false;
+    }
+
+    var size = query.size;
+    var diagonal =
+    sqrt((size.width * size.width) + (size.height * size.height));
+
+    var isTablet = diagonal > 1090.0;
+    return isTablet;
   }
 }

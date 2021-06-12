@@ -1,5 +1,6 @@
 import 'package:crypto_station/constants.dart';
 import 'package:crypto_station/controllers/auth_controller.dart';
+import 'package:crypto_station/helper.dart';
 import 'package:crypto_station/widgets/custom_button.dart';
 import 'package:crypto_station/widgets/custom_text.dart';
 import 'package:crypto_station/widgets/custom_text_form_field.dart';
@@ -12,6 +13,8 @@ class AuthScreen extends GetView<AuthController> {
 
   @override
   Widget build(BuildContext context) {
+    final isTablet = Tools.isTablet(MediaQuery.of(context));
+    final smallScreen = MediaQuery.of(context).size.width < 410;
     return DefaultTabController(
       length: 2,
       child: Obx(()=>Scaffold(
@@ -21,7 +24,7 @@ class AuthScreen extends GetView<AuthController> {
           top: true,
           child: Column(
             children: [
-              Image.asset("assets/images/loginAbout.png",width: 300,),
+              Image.asset("assets/images/loginAbout.png",width: 250,),
               //  Image.network("https://cdn.dribbble.com/users/6623125/screenshots/14841425/crypto_4x.png",height: 150,),
               TabBar(
                 indicator: BoxDecoration(
