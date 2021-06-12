@@ -48,10 +48,12 @@ class TermsAndConditions extends GetView<GeneralController> {
                 textColor: mainColor,
               ),)
                   :
-              CustomText(
-                text: controller.TermsText.value,
-                textSize: 17,
-                textColor: mainColor,
+              Center(
+                child: CustomText(
+                  text: controller.TermsText.value,
+                  textSize: 17,
+                  textColor: mainColor,
+                ),
               ),
 
             ],

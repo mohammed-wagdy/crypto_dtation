@@ -14,6 +14,7 @@ class FavouriteProvider {
   // Get Favourite List
   Future getFavouriteList({user_id}) async {
     var url = Uri.parse("${baseUrl}get/fav");
+    print("DFMDF ${url}");
     var response = await http.post(url,body: {
       "user_id": user_id
     },headers: {

@@ -2,6 +2,7 @@ import 'package:crypto_station/constants.dart';
 import 'package:crypto_station/controllers/favourite_controller.dart';
 import 'package:crypto_station/controllers/home_controller.dart';
 import 'package:crypto_station/helper.dart';
+import 'package:crypto_station/routes/app_routes.dart';
 import 'package:crypto_station/widgets/custom_button.dart';
 import 'package:crypto_station/widgets/custom_text.dart';
 import 'package:crypto_station/widgets/custom_text_form_field.dart';
@@ -79,6 +80,8 @@ class FavouriteScreen extends GetView<FavouriteController> {
                       (MediaQuery.of(context).size.height / 4.2),
                 ),
                 itemBuilder: (context,index) {
+                  String imageUrl =  controller.favList[index]['offer']["country"]['image'];
+
                   DateTime dateTime = DateTime.parse(controller.favList[index]['offer']["created_at"],);
                   String offerDate =  DateFormat('yyyy-MM-dd').format(dateTime);
                   return Stack(
@@ -130,17 +133,30 @@ class FavouriteScreen extends GetView<FavouriteController> {
                                         // crossAxisAlignment: CrossAxisAlignment.stretch,
                                         children: [
                                           Expanded(
-                                            child: CustomText(
-                                              userName: true,
-                                              text: controller.favList[index]['user']['full_name'].toString(),
-                                              textColor: nameColor,
-                                              textSize: 18.0,
-                                              textFontWeight: FontWeight.bold,
+                                            child: GestureDetector(
+                                              onTap: (){
+                                                Get.toNamed(Routes.OTHER_USER_PROFILE , arguments: controller.favList[index]["user"]["id"].toString());
+                                              },
+                                              child: CustomText(
+                                                userName: true,
+                                                text: controller.favList[index]['user']['full_name'].toString(),
+                                                textColor: nameColor,
+                                                textSize: 18.0,
+                                                textFontWeight: FontWeight.bold,
+                                              ),
                                             ),
                                           ),
+                                          controller.favList[index].isEmpty ?
                                           GestureDetector(
                                             onTap: () {
-                                              print('fdfddf');
+                                              controller.addToFavourite(offer_id: controller.favList[index]['offer_id'].toString());
+                                            },
+                                            child: Icon(Icons.favorite_border_outlined,color: Colors.grey,),
+                                          )
+                                              :
+                                          GestureDetector(
+                                            onTap: () {
+                                              controller.deleteFromFavourite(offer_id: controller.favList[index]['offer_id'].toString());
                                             },
                                             child: Icon(Icons.favorite,color: favouriteColor,),
                                           )
@@ -155,7 +171,8 @@ class FavouriteScreen extends GetView<FavouriteController> {
                                           Row(
                                             children: Helper.getStarsList(double.parse(controller.favList[index]['user']['rate'])),),
                                           SizedBox(width: 20,),
-                                          Image.network("https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_Egypt.svg/640px-Flag_of_Egypt.svg.png",width: 20,),
+
+                                          Image.network("http://crypto.supersoftdemo.com/public/image/country/${imageUrl.substring(50)}",width: 20,),
                                         ],
                                       )
 
@@ -301,8 +318,7 @@ class FavouriteScreen extends GetView<FavouriteController> {
                                                                 Row(
                                                                   children: Helper.getStarsList(double.parse(controller.favList[index]["user"]["rate"])),),
                                                                 SizedBox(width: 20,),
-                                                                Image.network("https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_Egypt.svg/640px-Flag_of_Egypt.svg.png",width: 20,),
-                                                              ],
+                                                                Image.network("http://crypto.supersoftdemo.com/public/image/country/${imageUrl.substring(50)}",width: 20,),                                                              ],
                                                             )
 
                                                           ],
@@ -641,6 +657,7 @@ class FavouriteScreen extends GetView<FavouriteController> {
               ListView.builder(
                   itemCount: controller.favList.length,
                   itemBuilder: (BuildContext context, int index) {
+                    String imageUrl =  controller.favList[index]['offer']["country"]['image'];
                     DateTime dateTime = DateTime.parse(controller.favList[index]['offer']["created_at"],);
                     String offerDate =  DateFormat('yyyy-MM-dd').format(dateTime);
                     return Stack(
@@ -687,18 +704,31 @@ class FavouriteScreen extends GetView<FavouriteController> {
                                         children: [
                                           Row(
                                             children: [
-                                              CustomText(
-                                                text: controller.favList[index]['user']['full_name'].toString(),
-                                                textColor: nameColor,
-                                                textSize: 16.0,
-                                                textFontWeight: FontWeight.bold,
+                                              GestureDetector(
+                                                onTap: (){
+                                                  Get.toNamed(Routes.OTHER_USER_PROFILE , arguments: controller.favList[index]["user"]["id"].toString());
+                                                },
+                                                child: CustomText(
+                                                  text: controller.favList[index]['user']['full_name'].toString(),
+                                                  textColor: nameColor,
+                                                  textSize: 16.0,
+                                                  textFontWeight: FontWeight.bold,
+                                                ),
                                               ),
                                               SizedBox(width: 10,),
-                                              Image.network("https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_Egypt.svg/640px-Flag_of_Egypt.svg.png",width: 20,),
+                                              Image.network("http://crypto.supersoftdemo.com/public/image/country/${imageUrl.substring(50)}",width: 20,),
                                               SizedBox(width: 20,),
+                                              controller.favList[index].isEmpty ?
                                               GestureDetector(
                                                 onTap: () {
-                                                  print('fdfddf');
+                                                  controller.addToFavourite(offer_id: controller.favList[index]['offer_id'].toString());
+                                                },
+                                                child: Icon(Icons.favorite_border_outlined,color: Colors.grey,),
+                                              )
+                                                  :
+                                              GestureDetector(
+                                                onTap: () {
+                                                  controller.deleteFromFavourite(offer_id: controller.favList[index]['offer_id'].toString());
                                                 },
                                                 child: Icon(Icons.favorite,color: favouriteColor,),
                                               )
@@ -846,7 +876,7 @@ class FavouriteScreen extends GetView<FavouriteController> {
                                                                   Row(
                                                                     children: Helper.getStarsList(double.parse(controller.favList[index]["user"]["rate"])),),
                                                                   SizedBox(width: 20,),
-                                                                  Image.network("https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_Egypt.svg/640px-Flag_of_Egypt.svg.png",width: 20,),
+                                                                  Image.network("http://crypto.supersoftdemo.com/public/image/country/${imageUrl.substring(50)}",width: 20,),                                                                  // Image.network("https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_Egypt.svg/640px-Flag_of_Egypt.svg.png",width: 20,),
                                                                 ],
                                                               )
 

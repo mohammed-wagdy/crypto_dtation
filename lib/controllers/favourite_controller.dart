@@ -1,5 +1,8 @@
 
 import 'package:crypto_station/controllers/home_controller.dart';
+import 'package:crypto_station/controllers/home_offers_slider_controller.dart';
+import 'package:crypto_station/controllers/offers_controller.dart';
+import 'package:crypto_station/controllers/profile_controller.dart';
 import 'package:crypto_station/helper.dart';
 import 'package:crypto_station/providers/favourite_providers.dart';
 import 'package:get/get.dart';
@@ -24,9 +27,10 @@ class FavouriteController extends GetxController {
   Future getFavouriteList() async {
     isLoading.value = true;
     await FavouriteProvider().getFavouriteList(user_id: box.read("currentUser")['id'].toString()).then((value) {
-      print("FMFMFEKREKRKE ${value}");
       if(value['status'] == 1) {
-        favList.value = value['fav']['data'];
+        favList.value = value['fav'];
+        print("FMFMFEKREKRKE ${value['fav'].length}");
+        print("FMFMFEKREKRKE ${value['fav']}");
       }
     });
     isLoading.value = false;
@@ -40,8 +44,17 @@ class FavouriteController extends GetxController {
     isLoading.value = true;
     await FavouriteProvider().addToFavourite(user_id: box.read("currentUser")['id'].toString(),offer_id: offer_id).then((value) {
       if(value['status'] == 1) {
-        Get.find<HomeController>().getHomePageAllOffers();
         Helper.successSnackBar("جيد", value['message']);
+        Get.find<HomeController>().getHomePageAllOffers();
+        Get.find<OffersController>().getAllOffers();
+        Get.find<OffersController>().getMyOffers();
+        Get.find<HomeOffersSliderController>().getPendingOffers(page: 1);
+        Get.find<HomeOffersSliderController>().getFinishedOffers(page: 1);
+        Get.find<HomeOffersSliderController>().getSpecialOffers(page: 1);
+        Get.find<ProfileController>().getOrdersRequestsCount();
+        Get.find<ProfileController>().getOffersCount();
+        Get.find<ProfileController>().getOrdersCount();
+
       }
     });
     isLoading.value = false;
@@ -50,11 +63,22 @@ class FavouriteController extends GetxController {
 
   // Delete Offer From Favourite
   Future deleteFromFavourite({offer_id}) async {
+    print("FMFMFFMFMMF ${offer_id}");
     isLoading.value = true;
     await FavouriteProvider().deleteFromFavourite(offer_id: offer_id).then((value) {
+      print("FMFMFFMFMMF ${value}");
       if(value['status'] == 1) {
-        Get.find<HomeController>().getHomePageAllOffers();
         Helper.successSnackBar("جيد", value['message']);
+        getFavouriteList();
+        Get.find<HomeController>().getHomePageAllOffers();
+        Get.find<OffersController>().getAllOffers();
+        Get.find<OffersController>().getMyOffers();
+        Get.find<HomeOffersSliderController>().getPendingOffers(page: 1);
+        Get.find<HomeOffersSliderController>().getFinishedOffers(page: 1);
+        Get.find<HomeOffersSliderController>().getSpecialOffers(page: 1);
+        Get.find<ProfileController>().getOrdersRequestsCount();
+        Get.find<ProfileController>().getOffersCount();
+        Get.find<ProfileController>().getOrdersCount();
       }
     });
     isLoading.value = false;

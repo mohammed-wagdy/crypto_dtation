@@ -4,7 +4,9 @@ import 'package:crypto_station/controllers/favourite_controller.dart';
 import 'package:crypto_station/controllers/home_controller.dart';
 import 'package:crypto_station/controllers/offers_controller.dart';
 import 'package:crypto_station/widgets/custom_button.dart';
+import 'package:crypto_station/widgets/custom_dark_appbar.dart';
 import 'package:crypto_station/widgets/custom_text.dart';
+import 'package:crypto_station/widgets/custom_text_form_2.dart';
 import 'package:crypto_station/widgets/custom_text_form_field.dart';
 import 'package:crypto_station/widgets/grid_user_block.dart';
 import 'package:crypto_station/widgets/grid_user_with_status.dart';
@@ -15,28 +17,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
-class AddOfferScreen extends GetView<OffersController> {
+class UpdateOfferScreen extends GetView<OffersController> {
 
   OffersController controller = Get.put(OffersController());
   AuthController Authcontroller = Get.put(AuthController());
+  var offerData = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
-
+    print("BBNNBBNN ${offerData}");
     // // Set Values
-    controller.paymentTypeController.text = "";
-    controller.lowQuantitycontroller.text = "";
-    controller.quantityController.text = "";
-    controller.payPriceController.text = "";
-    controller.countrySelect = null;
-
-    print("FODFODOFOFODFDIDI ${controller.user.value.id}");
+    controller.paymentTypeController.text = offerData['payment_type'];
+    controller.lowQuantitycontroller.text = offerData['low_quantity'];
+    controller.quantityController.text = offerData['quantity'];
+    controller.payPriceController.text = offerData['pay_price'];
+    controller.sell_type.value = offerData['type'] == "pay" ? false : true;
+    controller.buy_type.value = offerData['type'] == "pay" ? true : false;
+    // // controller.countrySelect = offerData['country_id'];
     return Obx(() => Scaffold(
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
-          child: SpecialAppBar(
+          child: CustomDarkAppBar(
+            appBarTitle: "تعديل العرض",
             drawerContext: context,
-            appBarTitle: "إضافة عرض",
           )),
       body: Container(
         padding: EdgeInsets.all(16.0),
@@ -100,9 +103,12 @@ class AddOfferScreen extends GetView<OffersController> {
               SizedBox(height: 10,),
 
 
-              CustomTextFormField(
+              CustomTextFormField2(
+                // isNormal : true,
+                // isInitialValue: true,
+                //   initVal: offerData["payment_type"],
                   textLabel: "طريقة الدفع",
-                  textController: controller.paymentTypeController,
+                textController: controller.paymentTypeController,
                   keyboardType: TextInputType.text
               ),
 
@@ -118,6 +124,7 @@ class AddOfferScreen extends GetView<OffersController> {
                     textSize: 16.0,
                   ),
                   SizedBox(width: 40,),
+
                   DropdownButton(
                     isExpanded: true,
                     dropdownColor: Colors.white,
@@ -139,19 +146,47 @@ class AddOfferScreen extends GetView<OffersController> {
                     },
                     value: controller.countrySelect,
                   ),
+
+                  // Row(
+                  //   children: [
+                  //     Image.network("https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_Egypt.svg/640px-Flag_of_Egypt.svg.png",width: 20,),
+                  //     SizedBox(width: 10,),
+                  //     CustomText(
+                  //       text: "مصر",
+                  //     ),
+                  //   ],
+                  // ),
                 ],
               ),
 
               SizedBox(height: 15,),
 
 
+              Row(
+                children: [
+                  CustomText(
+                    text: "عمولة الوساطة",
+                    textColor: textLabelColor,
+                    textFontWeight: FontWeight.w500,
+                    textSize: 16.0,
+                  ),
+                  SizedBox(width: 40,),
+                  CustomText(
+                    textColor: nameColor,
+                    text: "علي المشتري (${offerData['percent']})",
+                  ),
+                ],
+              ),
 
               SizedBox(height: 15,),
 
               Row(
                 children: [
                   Expanded(
-                    child: CustomTextFormField(
+                    child: CustomTextFormField2(
+                      // isNormal: true,
+                      // initVal: offerData['quantity'],
+                      //   isInitialValue: true,
                         textLabel: "الكمية",
                         textController: controller.quantityController,
                         keyboardType: TextInputType.number
@@ -159,7 +194,10 @@ class AddOfferScreen extends GetView<OffersController> {
                   ),
                   SizedBox(width: 10,),
                   Expanded(
-                    child: CustomTextFormField(
+                    child: CustomTextFormField2(
+                        // isNormal: true,
+                        // initVal: offerData['low_quantity'],
+                        // isInitialValue: true,
                         textLabel: "أقل كمية",
                         textController: controller.lowQuantitycontroller,
                         keyboardType: TextInputType.number
@@ -167,7 +205,10 @@ class AddOfferScreen extends GetView<OffersController> {
                   ),
                   SizedBox(width: 10,),
                   Expanded(
-                    child: CustomTextFormField(
+                    child: CustomTextFormField2(
+                        // isNormal: true,
+                        // initVal: offerData['pay_price'],
+                        // isInitialValue: true,
                         textLabel: "سعر الصرف",
                         textController: controller.payPriceController,
                         keyboardType: TextInputType.number
@@ -196,15 +237,59 @@ class AddOfferScreen extends GetView<OffersController> {
 
               SizedBox(height: 40,),
 
-             controller.isLoading.value ? Center(child: Image.asset("assets/images/ajaxLoader.gif",width: 30,),) : Container(
+              controller.isLoading.value ? Center(child: Image.asset("assets/images/ajaxLoader.gif",width: 30,),) : Container(
                 width: double.infinity,
                 child: CustomButton(
-                    buttonText: "إضافة",
+                    buttonText: "حفظ التعديل",
                     buttonTextFontWeight: FontWeight.w500,
-                    buttonOnPress: () async {
-                      await controller.addOffer();
+                    buttonOnPress: ()  async {
+                      print("VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV");
+                      await controller.updateOffer(offer_id: offerData['id'].toString());
+                      // Get.find<HomeController>().controller.index = 0;
+                      // showDialog(context: context, builder: (context) {
+                      //   return AlertDialog(
+                      //     content: Column(
+                      //       mainAxisSize: MainAxisSize.min,
+                      //       crossAxisAlignment: CrossAxisAlignment.center,
+                      //       children: [
+                      //         Row(
+                      //           mainAxisAlignment: MainAxisAlignment.end,
+                      //           children: [
+                      //             GestureDetector(
+                      //               onTap:(){
+                      //                 Get.back();
+                      //               },
+                      //               child: Icon(Icons.close,size: 20,color: mainColor,),
+                      //             )
+                      //           ],
+                      //         ),
+                      //         SizedBox(height: 15,),
+                      //         Image.asset("assets/images/rightIcon.PNG",width: 50,),
+                      //         SizedBox(height: 15,),
+                      //         CustomText(
+                      //           text: "تم إضافة العرض بنجاح وهو الأن قيد المراجعة تابع البريد الألكتروني أو الأشعارات للمتابعة",
+                      //           textFontWeight: FontWeight.w500,
+                      //           textColor: mainColor,
+                      //           textSize: 18.0,
+                      //         ),
+                      //         SizedBox(height: 15,),
+                      //         Container(
+                      //           width: double.infinity,
+                      //           child:
+                      //           CustomButton(
+                      //             buttonText: "إضافة عرض جديد",
+                      //             buttonOnPress: () {
+                      //               Get.find<HomeController>().controller.index = 2;
+                      //               Get.back();
+                      //             },
+                      //           ),
+                      //         )
+                      //       ],
+                      //     ),
+                      //   );
+                      // });
                     }
-                    ),
+                ),
               )
 
             ],

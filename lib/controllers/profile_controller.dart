@@ -121,6 +121,7 @@ class ProfileController extends GetxController {
   Future getOrdersCount() async {
     isLoading.value = true;
     await AuthProvider().getOrdersCount(user_id: user.value.id).then((value) {
+      print("FMFMFMFMSDSMSDDS 2 ${value}");
       orderCount.value = value['count'];
       allOrders.value = value['offers'];
       print("FOOOO 3 ${box.read("access_token")}");
@@ -133,6 +134,7 @@ class ProfileController extends GetxController {
   Future getOrdersRequestsCount() async {
     isLoading.value = true;
     await AuthProvider().getOrdersRequestsCount(user_id: user.value.id).then((value) {
+      print("FMFMFMFMSDSMSDDS 1 ${value}");
       orderRequestCount.value = value['count'];
       allRequests.value = value['offers'];
     });

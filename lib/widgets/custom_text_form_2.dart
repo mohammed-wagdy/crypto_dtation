@@ -3,7 +3,7 @@ import 'package:crypto_station/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class CustomTextFormField extends StatelessWidget {
+class CustomTextFormField2 extends StatelessWidget {
 
   final String textLabel;
   final TextEditingController? textController;
@@ -16,7 +16,7 @@ class CustomTextFormField extends StatelessWidget {
   final bool isInitialValue;
   final String? initVal;
 
-  CustomTextFormField({
+  CustomTextFormField2({
     required this.textLabel,
     this.textController,
     required this.keyboardType,
@@ -32,7 +32,6 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return
-      isInitialValue ?
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -44,59 +43,22 @@ class CustomTextFormField extends StatelessWidget {
           ),
           SizedBox(height: 10.0,),
           TextFormField(
-            textAlign: isNormal ? TextAlign.start :TextAlign.center,
-            style: TextStyle(
-              fontWeight: isNormal ? FontWeight.normal : FontWeight.bold,
-              fontSize: isNormal ? 16.0 : 25.0,
-              height: 1.7
-            ),
-            initialValue: initVal,
             readOnly: isReadOnly ?  true : false,
             maxLines: isTextArea ? 4 : 1,
-           // controller: textController,
+            controller: textController,
             keyboardType: keyboardType,
             obscureText: isSecure,
             cursorColor: mainColor,
             decoration: InputDecoration(
               filled: true,
               // fillColor: inputFillColor,
-              contentPadding: EdgeInsets.only(left: 15,right: 15,bottom: 0,top: 0),
+              contentPadding: EdgeInsets.all(15.0),
               border: OutlineInputBorder(borderSide: BorderSide(color: inputBorderColor,),borderRadius: BorderRadius.all(Radius.circular(10.0))),
               enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: inputBorderColor),borderRadius: BorderRadius.all(Radius.circular(10.0))),
               focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: mainColor.withOpacity(0.5)),borderRadius: BorderRadius.all(Radius.circular(10.0))),
             ),
           )
         ],
-      )
-
-          :
-      Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        CustomText(
-          text: textLabel,
-          textColor: textLabelColor,
-          textFontWeight: FontWeight.w500,
-          textSize: textLabelSize,
-        ),
-        SizedBox(height: 10.0,),
-        TextFormField(
-          readOnly: isReadOnly ?  true : false,
-          maxLines: isTextArea ? 4 : 1,
-          controller: textController,
-          keyboardType: keyboardType,
-          obscureText: isSecure,
-          cursorColor: mainColor,
-          decoration: InputDecoration(
-            filled: true,
-            // fillColor: inputFillColor,
-            contentPadding: EdgeInsets.all(15.0),
-            border: OutlineInputBorder(borderSide: BorderSide(color: inputBorderColor,),borderRadius: BorderRadius.all(Radius.circular(10.0))),
-            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: inputBorderColor),borderRadius: BorderRadius.all(Radius.circular(10.0))),
-            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: mainColor.withOpacity(0.5)),borderRadius: BorderRadius.all(Radius.circular(10.0))),
-          ),
-        )
-      ],
-    );
+      );
   }
 }

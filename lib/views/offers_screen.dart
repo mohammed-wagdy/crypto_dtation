@@ -1,8 +1,10 @@
 import 'package:crypto_station/constants.dart';
+import 'package:crypto_station/controllers/favourite_controller.dart';
 import 'package:crypto_station/controllers/home_controller.dart';
 import 'package:crypto_station/controllers/notifications_controller.dart';
 import 'package:crypto_station/controllers/offers_controller.dart';
 import 'package:crypto_station/helper.dart';
+import 'package:crypto_station/routes/app_routes.dart';
 import 'package:crypto_station/widgets/custom_button.dart';
 import 'package:crypto_station/widgets/custom_text.dart';
 import 'package:crypto_station/widgets/custom_text_form_field.dart';
@@ -16,7 +18,7 @@ import 'package:intl/intl.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class OffersScreen extends GetView<OffersController> {
-
+  FavouriteController favController = Get.put(FavouriteController());
 
 
   @override
@@ -32,7 +34,11 @@ class OffersScreen extends GetView<OffersController> {
             drawerContext: context,
             appBarTitle: "العروض",
           )),
-      body: Column(
+      body:
+
+
+
+      Column(
         children: [
 
           Container(
@@ -315,6 +321,7 @@ class OffersScreen extends GetView<OffersController> {
             child:
 
           controller.isLoading.value ?  Center(child: Image.asset("assets/images/ajaxLoader.gif",width: 30,),) :
+          controller.filteredOffers.value.isEmpty ?  Center(child: Text("لا يوجد عروض",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),),) :
 
           controller.selectMyOffers.value  == true ?
           SmartRefresher(
@@ -393,7 +400,7 @@ class OffersScreen extends GetView<OffersController> {
                                       shape: BoxShape.circle,
                                       image: DecorationImage(
                                         fit: BoxFit.cover,
-                                        image: NetworkImage(controller.filteredOffers.value[index]['user']['image']),
+                                        image: NetworkImage("http://crypto.supersoftdemo.com/public/image/user/${controller.filteredOffers.value[index]['user']['image']}"),
                                       )
                                   ),
                                 ),
@@ -411,17 +418,30 @@ class OffersScreen extends GetView<OffersController> {
                                         // crossAxisAlignment: CrossAxisAlignment.stretch,
                                         children: [
                                           Expanded(
-                                            child: CustomText(
-                                              userName: true,
-                                              text: controller.filteredOffers.value[index]['user']['full_name'].toString(),
-                                              textColor: nameColor,
-                                              textSize: 18.0,
-                                              textFontWeight: FontWeight.bold,
+                                            child: GestureDetector(
+                                              onTap: (){
+                                                Get.toNamed(Routes.OTHER_USER_PROFILE , arguments: controller.filteredOffers.value[index]["user"]["id"].toString());
+                                              },
+                                              child: CustomText(
+                                                userName: true,
+                                                text: controller.filteredOffers.value[index]['user']['full_name'].toString(),
+                                                textColor: nameColor,
+                                                textSize: 18.0,
+                                                textFontWeight: FontWeight.bold,
+                                              ),
                                             ),
                                           ),
+                                          controller.filteredOffers.value[index]["fav"].isEmpty ?
                                           GestureDetector(
                                             onTap: () {
-                                              print('fdfddf');
+                                              favController.addToFavourite(offer_id: controller.filteredOffers.value[index]['id'].toString());
+                                            },
+                                            child: Icon(Icons.favorite_border_outlined,color: Colors.grey,),
+                                          )
+                                              :
+                                          GestureDetector(
+                                            onTap: () {
+                                              favController.deleteFromFavourite(offer_id: controller.filteredOffers.value[index]['id'].toString());
                                             },
                                             child: Icon(Icons.favorite,color: favouriteColor,),
                                           )
@@ -958,7 +978,7 @@ class OffersScreen extends GetView<OffersController> {
                                             shape: BoxShape.circle,
                                             image: DecorationImage(
                                               fit: BoxFit.cover,
-                                              image: NetworkImage(controller.filteredOffers.value[index]['user']['image']),
+                                              image: NetworkImage("http://crypto.supersoftdemo.com/public/image/user/${controller.filteredOffers.value[index]['user']['image']}"),
                                             )
                                         ),
                                       ),
@@ -968,18 +988,31 @@ class OffersScreen extends GetView<OffersController> {
                                         children: [
                                           Row(
                                             children: [
-                                              CustomText(
-                                                text: controller.filteredOffers.value[index]['user']['full_name'].toString(),
-                                                textColor: nameColor,
-                                                textSize: 16.0,
-                                                textFontWeight: FontWeight.bold,
+                                              GestureDetector(
+                                                onTap: (){
+                                                  Get.toNamed(Routes.OTHER_USER_PROFILE , arguments: controller.filteredOffers.value[index]["user"]["id"].toString());
+                                                },
+                                                child: CustomText(
+                                                  text: controller.filteredOffers.value[index]['user']['full_name'].toString(),
+                                                  textColor: nameColor,
+                                                  textSize: 16.0,
+                                                  textFontWeight: FontWeight.bold,
+                                                ),
                                               ),
                                               SizedBox(width: 10,),
                                               Image.network("http://crypto.supersoftdemo.com/public/image/country/${controller.filteredOffers[index]["country"]['image']}",width: 20,),
                                               SizedBox(width: 20,),
+                                              controller.filteredOffers.value[index]["fav"].isEmpty ?
                                               GestureDetector(
                                                 onTap: () {
-                                                  print('fdfddf');
+                                                  favController.addToFavourite(offer_id: controller.filteredOffers.value[index]['id'].toString());
+                                                },
+                                                child: Icon(Icons.favorite_border_outlined,color: Colors.grey,),
+                                              )
+                                                  :
+                                              GestureDetector(
+                                                onTap: () {
+                                                  favController.deleteFromFavourite(offer_id: controller.filteredOffers.value[index]['id'].toString());
                                                 },
                                                 child: Icon(Icons.favorite,color: favouriteColor,),
                                               )
@@ -1540,7 +1573,7 @@ class OffersScreen extends GetView<OffersController> {
                                   shape: BoxShape.circle,
                                   image: DecorationImage(
                                     fit: BoxFit.cover,
-                                    image: NetworkImage(controller.filteredOffers.value[index]['user']['image']),
+                                    image: NetworkImage("http://crypto.supersoftdemo.com/public/image/user/${controller.filteredOffers.value[index]['user']['image']}")
                                   )
                               ),
                             ),
@@ -1558,17 +1591,30 @@ class OffersScreen extends GetView<OffersController> {
                                     // crossAxisAlignment: CrossAxisAlignment.stretch,
                                     children: [
                                       Expanded(
-                                        child: CustomText(
-                                          userName: true,
-                                          text: controller.filteredOffers.value[index]['user']['full_name'].toString(),
-                                          textColor: nameColor,
-                                          textSize: 18.0,
-                                          textFontWeight: FontWeight.bold,
+                                        child: GestureDetector(
+                                          onTap: (){
+                                            Get.toNamed(Routes.OTHER_USER_PROFILE , arguments: controller.filteredOffers.value[index]["user"]["id"].toString());
+                                          },
+                                          child: CustomText(
+                                            userName: true,
+                                            text: controller.filteredOffers.value[index]['user']['full_name'].toString(),
+                                            textColor: nameColor,
+                                            textSize: 18.0,
+                                            textFontWeight: FontWeight.bold,
+                                          ),
                                         ),
                                       ),
+                                      controller.filteredOffers.value[index]["fav"].isEmpty ?
                                       GestureDetector(
                                         onTap: () {
-                                          print('fdfddf');
+                                          favController.addToFavourite(offer_id: controller.filteredOffers.value[index]['id'].toString());
+                                        },
+                                        child: Icon(Icons.favorite_border_outlined,color: Colors.grey,),
+                                      )
+                                          :
+                                      GestureDetector(
+                                        onTap: () {
+                                          favController.deleteFromFavourite(offer_id: controller.filteredOffers.value[index]['id'].toString());
                                         },
                                         child: Icon(Icons.favorite,color: favouriteColor,),
                                       )
@@ -2115,18 +2161,31 @@ class OffersScreen extends GetView<OffersController> {
                                         children: [
                                           Row(
                                             children: [
-                                              CustomText(
-                                                text: controller.filteredOffers.value[index]['user']['full_name'].toString(),
-                                                textColor: nameColor,
-                                                textSize: 16.0,
-                                                textFontWeight: FontWeight.bold,
+                                              GestureDetector(
+                                                onTap: (){
+                                                  Get.toNamed(Routes.OTHER_USER_PROFILE , arguments: controller.filteredOffers.value[index]["user"]["id"].toString());
+                                                },
+                                                child: CustomText(
+                                                  text: controller.filteredOffers.value[index]['user']['full_name'].toString(),
+                                                  textColor: nameColor,
+                                                  textSize: 16.0,
+                                                  textFontWeight: FontWeight.bold,
+                                                ),
                                               ),
                                               SizedBox(width: 10,),
                                               Image.network("http://crypto.supersoftdemo.com/public/image/country/${controller.filteredOffers[index]["country"]['image']}",width: 20,),
                                               SizedBox(width: 20,),
+                                              controller.filteredOffers.value[index]["fav"].isEmpty ?
                                               GestureDetector(
                                                 onTap: () {
-                                                  print('fdfddf');
+                                                  favController.addToFavourite(offer_id: controller.filteredOffers.value[index]['id'].toString());
+                                                },
+                                                child: Icon(Icons.favorite_border_outlined,color: Colors.grey,),
+                                              )
+                                                  :
+                                              GestureDetector(
+                                                onTap: () {
+                                                  favController.deleteFromFavourite(offer_id: controller.filteredOffers.value[index]['id'].toString());
                                                 },
                                                 child: Icon(Icons.favorite,color: favouriteColor,),
                                               )

@@ -1,6 +1,7 @@
 import 'package:crypto_station/constants.dart';
 import 'package:crypto_station/controllers/favourite_controller.dart';
 import 'package:crypto_station/controllers/home_controller.dart';
+import 'package:crypto_station/controllers/home_offers_slider_controller.dart';
 import 'package:crypto_station/controllers/offers_controller.dart';
 import 'package:crypto_station/helper.dart';
 import 'package:crypto_station/routes/app_routes.dart';
@@ -15,15 +16,16 @@ import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-class ShowOfferFromHomepagePending extends GetView<OffersController> {
+class ShowOfferFromHomepagePending extends GetView<HomeOffersSliderController> {
 
-
+  HomeController homController = Get.put(HomeController());
+  HomeOffersSliderController controller = Get.put(HomeOffersSliderController());
+  FavouriteController favController = Get.put(FavouriteController());
   GetStorage _box = GetStorage();
 
   @override
   Widget build(BuildContext context) {
-    HomeController homController = Get.put(HomeController());
-    FavouriteController favController = Get.put(FavouriteController());
+
     controller.getPendingOffers(page: 1);
 
     return Obx(() => Scaffold(
@@ -145,9 +147,17 @@ class ShowOfferFromHomepagePending extends GetView<OffersController> {
                                           ),
                                         ),
                                       ),
+                                      controller.allPendingOfersData.value[index]["fav"].isEmpty ?
                                       GestureDetector(
                                         onTap: () {
                                           favController.addToFavourite(offer_id: controller.allPendingOfersData.value[index]['id'].toString());
+                                        },
+                                        child: Icon(Icons.favorite_border_outlined,color: Colors.grey,),
+                                      )
+                                          :
+                                      GestureDetector(
+                                        onTap: () {
+                                          favController.deleteFromFavourite(offer_id: controller.allPendingOfersData.value[index]['id'].toString());
                                         },
                                         child: Icon(Icons.favorite,color: favouriteColor,),
                                       )

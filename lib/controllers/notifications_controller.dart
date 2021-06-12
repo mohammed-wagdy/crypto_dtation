@@ -25,6 +25,7 @@ class NotificationsController extends GetxController {
    await NotificationsProvider().getAllNotifications(user_id: box.read("currentUser")['id'].toString(),page: 1).then((value) {
      print("F<FFF<F<FF< ${value["notifi"]['data'].length}");
       notiList.value = value["notifi"]['data'];
+     print("F<FFF<F<FF< ${value["notifi"]['data']}");
     });
     isLoading.value = false;
   }

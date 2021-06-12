@@ -16,7 +16,7 @@ import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class HomeController extends GetxController {
-  final currentIndex = 0.obs;
+  RxInt currentIndex = 0.obs;
   PersistentTabController controller = PersistentTabController();
   TextEditingController searchInput = TextEditingController();
   RxList allHomePageOffer = [].obs;
@@ -27,17 +27,18 @@ class HomeController extends GetxController {
   RxInt finishedOfferCount = 0.obs;
   RxInt pendingOfferCount = 0.obs;
   RxInt specialOfferCount = 0.obs;
-
+  RefreshController refreshController = RefreshController(initialRefresh: false);
 
   @override
   void onInit() async {
     // TODO: implement onInit
     super.onInit();
+    controller = PersistentTabController(initialIndex: currentIndex.value);
     await getHomePageAllOffers(page: page.value);
     await getFinishedOffers(page: page.value);
     await getPendingOffers(page: page.value);
     await getSpecialOffers(page: page.value);
-    controller = PersistentTabController(initialIndex: currentIndex.value);
+    Get.put(NotificationsController());
   await  Get.find<NotificationsController>().getAllNotifications();
   await  Get.find<NotificationsController>().getCountNotifications();
   }
@@ -89,6 +90,7 @@ class HomeController extends GetxController {
   }
 
   void changePage({pageIndex}) {
+    print("FFMFMFMFMFMFMEEEEEEEEEEE ${pageIndex}");
     currentIndex.value = pageIndex;
   }
 
@@ -142,8 +144,32 @@ class HomeController extends GetxController {
     isLoading.value = true;
     await HomeProvider().getHomePageAllOffers(page: page).then((value) {
       allHomePageOffer.value = value["offers"]['data'];
+      print("FFFMFMFFMFMFMFdsssss ${allHomePageOffer.value}");
     });
     isLoading.value = false;
+  }
+
+
+
+  void onRefresh() async {
+    page.value = 1;
+    await HomeProvider().getspecialdOffers(page: page.value ).then((value) {
+      allHomePageOffer.value = value['offers']['data'];
+    });
+    // monitor network fetch
+    await Future.delayed(Duration(milliseconds: 1000));
+    // if failed,use refreshFailed()
+    refreshController.refreshCompleted();
+  }
+
+
+  void onLoading() async {
+    page.value ++;
+    await HomeProvider().getspecialdOffers(page: page.value).then((value) {
+      allHomePageOffer.value = [...allHomePageOffer.value , ...value['offers']['data']];
+    });
+    await Future.delayed(Duration(milliseconds: 1000));
+    refreshController.loadComplete();
   }
 
 

@@ -18,6 +18,7 @@ class NotificationScreen extends GetView<NotificationsController> {
     controller.getAllNotifications();
     controller.getCountNotifications();
 
+
     return Obx(()=>Scaffold(
         appBar: PreferredSize(
             preferredSize: const Size.fromHeight(60),
@@ -38,6 +39,7 @@ class NotificationScreen extends GetView<NotificationsController> {
           itemBuilder: (BuildContext context , int index) {
             DateTime dateTime = DateTime.parse(controller.notiList[index]['created_at'],);
             String offerDate =  DateFormat('yyyy-MM-dd hh:mm').format(dateTime);
+            print("DMDMDDMDMDMDSDSDSDS ${controller.notiList[index]['user_get_notifi']['image']}");
             return Container(
                 padding: EdgeInsets.all(10.0),
                 margin: EdgeInsets.symmetric(horizontal: 16.0,vertical: 10),

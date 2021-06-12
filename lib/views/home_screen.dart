@@ -1,13 +1,20 @@
 import 'package:crypto_station/constants.dart';
+import 'package:crypto_station/controllers/favourite_controller.dart';
 import 'package:crypto_station/controllers/home_controller.dart';
+import 'package:crypto_station/controllers/offers_controller.dart';
 import 'package:crypto_station/controllers/profile_controller.dart';
 import 'package:crypto_station/widgets/custom_appbar.dart';
 import 'package:crypto_station/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 class HomeScreen extends GetView<HomeController> {
+
+  HomeController controller = Get.put(HomeController());
+
+  GetStorage box = GetStorage();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,11 +49,17 @@ class HomeScreen extends GetView<HomeController> {
           onItemSelected: (index) {
             controller.currentIndex.value = index;
             controller.controller.index = index;
-            if(controller.currentIndex.value == 0) {
+            controller.changePage(pageIndex: index);
+            if(controller.currentIndex.value == 3) {
               Get.put(ProfileController()).getUserData();
-              controller.getHomePageAllOffers();
-            } else if(controller.currentIndex.value == 0) {
-              Get.put(ProfileController()).getUserData();
+              Get.put(ProfileController()).getRates();
+              // controller.getHomePageAllOffers();
+            }else if(controller.currentIndex.value == 0) {
+              Get.put(HomeController()).getHomePageAllOffers();
+            }else if(controller.currentIndex.value == 1) {
+              Get.put(OffersController()).getMyOffers(user_id: box.read("currentUser")['id'].toString());
+            }else if(controller.currentIndex.value == 4) {
+              Get.put(FavouriteController()).getFavouriteList();
             }
           },
           screenTransitionAnimation: ScreenTransitionAnimation( // Screen transition animation on change of selected tab.

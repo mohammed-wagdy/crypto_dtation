@@ -25,4 +25,5 @@ abstract class Routes {
   static const SHOW_OFFERS_FROM_HOMEPAGE_PENDING = '/show_offers_from_homepage_pending';
   static const SHOW_OFFERS_FROM_HOMEPAGE_FINISHED = '/show_offers_from_homepage_finished';
   static const GET_ALL_RATES_OTHER_USER = '/get_all_rates_other_user';
+  static const UPDATE_OFFER = '/update_offer';
 }

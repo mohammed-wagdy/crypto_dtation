@@ -1,5 +1,8 @@
 import 'package:crypto_station/constants.dart';
+import 'package:crypto_station/controllers/favourite_controller.dart';
 import 'package:crypto_station/controllers/home_controller.dart';
+import 'package:crypto_station/controllers/offers_controller.dart';
+import 'package:crypto_station/controllers/profile_controller.dart';
 import 'package:crypto_station/routes/app_routes.dart';
 import 'package:crypto_station/widgets/custom_listTile.dart';
 import 'package:crypto_station/widgets/custom_text.dart';
@@ -10,6 +13,7 @@ import 'package:get_storage/get_storage.dart';
 class customDrawer extends StatelessWidget {
 
   GetStorage box = GetStorage();
+  HomeController homeController = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
@@ -50,46 +54,49 @@ class customDrawer extends StatelessWidget {
             ),
 
             CustomListTile(
-                onTapFunction: (){
+                onTapFunction: () async{
                   Get.back();
                   Get.find<HomeController>().controller.index = 0;
+                await  Get.put(HomeController()).getHomePageAllOffers();
                 },
                 text: "الرئيسية",
                 listIcon: Icon(Icons.home, color: Color(0XFF1a4b6b),)
             ),
 
             CustomListTile(
-                onTapFunction: (){
-                  Get.back();
-                  Get.find<HomeController>().controller.index = 3;
-                  print("FMFMFFMFMFMFFMFMFMSD ${Get.find<HomeController>().controller.index}");
+                onTapFunction: () async {
+                   Get.back();
+                    Get.find<HomeController>().controller.index = 3;
+                    await Get.put(ProfileController()).getUserData();
+                    await  Get.put(ProfileController()).getRates();
                 },
                 text: "حسابي",
                 listIcon: Icon(Icons.verified_user,color: Color(0XFF1a4b6b),)
             ),
 
             CustomListTile(
-                onTapFunction: (){
+                onTapFunction: () async{
                   Get.back();
                   Get.find<HomeController>().controller.index = 1;
-                  print("FMFMFFMFMFMFFMFMFMSD ${Get.find<HomeController>().controller.index}");
+                  await Get.put(OffersController()).getMyOffers(user_id: box.read("currentUser")['id'].toString());
                 },
                 text: "عروضي",
                 listIcon: Icon(Icons.verified_user,color: Color(0XFF1a4b6b),)
             ),
 
-            CustomListTile(
-                onTapFunction: (){
+            // CustomListTile(
+            //     onTapFunction: (){
+            //
+            //     },
+            //     text: "صفقاتي",
+            //     listIcon: Icon(Icons.verified_user, color: Color(0XFF1a4b6b),)
+            // ),
 
-                },
-                text: "صفقاتي",
-                listIcon: Icon(Icons.verified_user, color: Color(0XFF1a4b6b),)
-            ),
-
             CustomListTile(
-                onTapFunction: (){
+                onTapFunction: () async{
                   Get.back();
                   Get.find<HomeController>().controller.index = 4;
+                  await Get.put(FavouriteController()).getFavouriteList();
                 },
                 text: "المفضلة",
                 listIcon: Icon(Icons.verified_user, color: Color(0XFF1a4b6b),)
@@ -153,11 +160,11 @@ class customDrawer extends StatelessWidget {
                 listIcon: Icon(Icons.add_alert, color: Color(0XFF1a4b6b),)
             ),
 
-            CustomListTile(
-                onTapFunction: (){},
-                text: "مشاركة التطبيق",
-                listIcon: Icon(Icons.add_alert, color: Color(0XFF1a4b6b),)
-            ),
+            // CustomListTile(
+            //     onTapFunction: (){},
+            //     text: "مشاركة التطبيق",
+            //     listIcon: Icon(Icons.add_alert, color: Color(0XFF1a4b6b),)
+            // ),
 
             CustomListTile(
                 onTapFunction: (){

@@ -1,6 +1,7 @@
 import 'package:crypto_station/constants.dart';
 import 'package:crypto_station/controllers/profile_controller.dart';
 import 'package:crypto_station/helper.dart';
+import 'package:crypto_station/routes/app_routes.dart';
 import 'package:crypto_station/widgets/custom_button.dart';
 import 'package:intl/intl.dart';
 import 'package:crypto_station/widgets/custom_dark_appbar.dart';
@@ -16,6 +17,7 @@ class AllUserOffers extends GetView<ProfileController> {
   Widget build(BuildContext context) {
 
     controller.getOffersCount();
+    print("FMVVMVMVMV12345 ${controller.allOffers.value}");
 
     return Obx(() => Scaffold(
         appBar: PreferredSize(
@@ -267,10 +269,10 @@ class AllUserOffers extends GetView<ProfileController> {
                                 flex:2,
                                 child: Row(
                                   children: [
-                                    Image.network("https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_Egypt.svg/640px-Flag_of_Egypt.svg.png",width: 20,),
+                                    Image.network("${controller.allOffers.value[index]['country']['image']}",width: 20,),
                                     SizedBox(width: 10,),
                                     CustomText(
-                                      text: "مصر",
+                                      text: controller.allOffers.value[index]['country']['name'],
                                       textColor: nameColor,
                                       textFontWeight: FontWeight.w500,
                                       textSize: 14.0,
@@ -372,11 +374,14 @@ class AllUserOffers extends GetView<ProfileController> {
 
                           SizedBox(height: 20,),
 
+                          controller.allOffers.value[index]['status'] == "pending" ?
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               TextButton.icon(
-                                  onPressed: (){},
+                                  onPressed: (){
+                                    Get.toNamed(Routes.UPDATE_OFFER, arguments: controller.allOffers.value[index]);
+                                  },
                                   label: CustomText(
                                   text: "تعديل العرض",
                                     textSize: 15,
@@ -446,7 +451,7 @@ class AllUserOffers extends GetView<ProfileController> {
                                 icon: Icon(Icons.delete,color: mainColor,size: 14,),)
 
                             ],
-                          )
+                          ) : SizedBox()
 
                           //
                           // SizedBox(height: 10,),

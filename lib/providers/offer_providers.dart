@@ -29,6 +29,29 @@ class OffersProvider {
   }
 
 
+  // Update Offer
+  Future updateOffer({user_id, payment_type, type, pay_price, quantity, low_quantity, country_id,offer_id}) async {
+    var url = Uri.parse("${baseUrl}offer/update");
+    var response = await http.post(url , body: {
+      "user_id": user_id,
+      "payment_type": payment_type,
+      "type": type,
+      "pay_price": pay_price,
+      "quantity": quantity,
+      "low_quantity": low_quantity,
+      "country_id": country_id,
+      "offer_id": offer_id
+    },headers: {
+      // 'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ${box.read("access_token")}',
+    }
+    );
+    var response_body = json.decode(response.body);
+    return response_body;
+  }
+
+
   // Get Offers With Filter
   Future getOffersWithFilter({search_val,page}) async {
     print("FMFMFFMFMFMF ${search_val}");

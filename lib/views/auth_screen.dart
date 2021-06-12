@@ -119,7 +119,7 @@ class AuthScreen extends GetView<AuthController> {
                                               ),
                                               alignment: Alignment.topLeft,
                                             ),
-                                            Image.network("https://cdn.dribbble.com/users/6623125/screenshots/14841425/crypto_4x.png",height: 65,),
+                                            Image.asset("assets/images/forgetPassword.png",),
                                             SizedBox(height: 15.0,),
                                             CustomTextFormField(
                                               textLabel: "البريد الألكتروني",

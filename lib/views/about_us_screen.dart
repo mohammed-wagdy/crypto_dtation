@@ -46,10 +46,12 @@ class AboutUs extends GetView<GeneralController> {
                 textColor: mainColor,
               ),)
                   :
-              CustomText(
-                text: controller.aboutText.value,
-                textSize: 17,
-                textColor: mainColor,
+              Center(
+                child: CustomText(
+                  text: controller.aboutText.value,
+                  textSize: 17,
+                  textColor: mainColor,
+                ),
               ),
 
               SizedBox(height: 20,),

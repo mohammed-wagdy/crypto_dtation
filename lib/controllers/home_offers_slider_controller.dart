@@ -12,7 +12,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-class OffersController extends GetxController {
+class HomeOffersSliderController extends GetxController {
 
   RxBool isGrid = false.obs;
   RxBool selectMyOffers = true.obs;
@@ -55,13 +55,13 @@ class OffersController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-  await getSpecialOffers(page: 1);
-   await getUserData();
+    await getSpecialOffers(page: 1);
+    await getUserData();
   }
 
 
   // Get User Data
-   getUserData() {
+  getUserData() {
     // Get User Data From Memory ...
     user.value = User.fromJSON(box.read("currentUser"));
   }
@@ -96,7 +96,7 @@ class OffersController extends GetxController {
           offer = Offer.fromJSON(value['offer']);
           // Helper.successSnackBar("جيد", value['message']);
           Get.find<ProfileController>().getOffersCount();
-       //   Get.find<HomeController>().getHomePageAllOffers();
+          //   Get.find<HomeController>().getHomePageAllOffers();
           Helper.successSnackBar("جيد", value['message']);
           paymentTypeController.text = "";
           payPriceController.text = "";
@@ -140,21 +140,18 @@ class OffersController extends GetxController {
           payment_type: paymentTypeController.text,
           type: sell_type.value == false ? "pay" : "sale"
       ).then((value) {
+        print("VMMMMVVVVMMMMVVVM ${value}");
         if(value['status'] == 1) {
-          Get.find<ProfileController>().getOffersCount();
           Helper.successSnackBar("جيد", value['message']);
-
           // offer = Offer.fromJSON(value['offer']);
           // Helper.successSnackBar("جيد", value['message']);
-       //   Get.find<HomeController>().getHomePageAllOffers();
+          Get.find<ProfileController>().getOffersCount();
+          //   Get.find<HomeController>().getHomePageAllOffers();
         }else {
           Helper.errorSnackBar("خطأ", value['message']);
         }
         isLoading.value = false;
-
       });
-    await  Get.find<ProfileController>().getOffersCount();
-      Get.toNamed(Routes.ALL_USER_OFFERS);
     }
   }
 
@@ -205,7 +202,7 @@ class OffersController extends GetxController {
     isLoading.value = true;
     await OffersProvider().getMyOffers(user_id:user_id).then((value) {
       if(value['status'] == 1) {
-        print("MY OFFERS ${value['offers']['data']}");
+        print("MY OFFERS ${value}");
         filteredOffers.value = value['offers']['data'];
       }
     });
@@ -224,10 +221,10 @@ class OffersController extends GetxController {
 
     isLoading.value = true;
     await OffersProvider().advancedSearch(
-        name: userNameController.text,
-        type: search_sell_type.value == false ? "pay" : "sale",
-        country_id: countrySelect.toString(),
-        today_day: today_day.value ? "1" : "0",
+      name: userNameController.text,
+      type: search_sell_type.value == false ? "pay" : "sale",
+      country_id: countrySelect.toString(),
+      today_day: today_day.value ? "1" : "0",
       quantity: search_small_to_big.value == false ? "1" : "2",
     ).then((value) {
       print("FMFMMMDDKWDKWEFOEJFE ${value}");

@@ -761,6 +761,10 @@ class ProfileScreen extends GetView<ProfileController> {
               height: 10,
             ),
 
+
+            // controller.isLoading.value ?
+            // Center(child: Image.asset("assets/images/ajaxLoader.gif",width: 30,),)
+            //     :
             controller.rates.value.isEmpty ? Center(child: Text("لا يوجد تقييمات"),) :
             Column(
               children: [
