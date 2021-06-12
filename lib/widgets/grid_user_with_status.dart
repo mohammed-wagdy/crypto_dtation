@@ -969,7 +969,7 @@ class GridUserBlockWithStatus extends StatelessWidget {
             ),
             Positioned(
               left: 15,
-              top: 65,
+              top: isTablet ?  95 : 65,
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 1,horizontal: 2),
                 decoration: BoxDecoration(
