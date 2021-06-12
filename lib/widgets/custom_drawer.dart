@@ -7,6 +7,7 @@ import 'package:crypto_station/routes/app_routes.dart';
 import 'package:crypto_station/widgets/custom_listTile.dart';
 import 'package:crypto_station/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -71,7 +72,7 @@ class customDrawer extends StatelessWidget {
                     await  Get.put(ProfileController()).getRates();
                 },
                 text: "حسابي",
-                listIcon: Icon(Icons.verified_user,color: Color(0XFF1a4b6b),)
+                listIcon: Icon(FontAwesomeIcons.userAlt,color: Color(0XFF1a4b6b),size: 20,)
             ),
 
             CustomListTile(
@@ -81,7 +82,7 @@ class customDrawer extends StatelessWidget {
                   await Get.put(OffersController()).getMyOffers(user_id: box.read("currentUser")['id'].toString());
                 },
                 text: "عروضي",
-                listIcon: Icon(Icons.verified_user,color: Color(0XFF1a4b6b),)
+                listIcon: Icon(FontAwesomeIcons.tasks,color: Color(0XFF1a4b6b),size: 20,)
             ),
 
             // CustomListTile(
@@ -99,7 +100,7 @@ class customDrawer extends StatelessWidget {
                   await Get.put(FavouriteController()).getFavouriteList();
                 },
                 text: "المفضلة",
-                listIcon: Icon(Icons.verified_user, color: Color(0XFF1a4b6b),)
+                listIcon: Icon(Icons.favorite, color: Color(0XFF1a4b6b),)
             ),
 
             CustomListTile(
@@ -131,7 +132,8 @@ class customDrawer extends StatelessWidget {
                   Get.toNamed(Routes.CONTACT);
                 },
                 text: "تواصل معنا",
-                listIcon: Icon(Icons.add_alert, color: Color(0XFF1a4b6b),)
+                isImage: true,
+                listImage: Image.asset("assets/images/ContactUsIcon.png",width: 20,)
             ),
 
 
@@ -140,7 +142,8 @@ class customDrawer extends StatelessWidget {
                   Get.toNamed(Routes.ABOUT);
                 },
                 text: "من نحن",
-                listIcon: Icon(Icons.add_alert, color: Color(0XFF1a4b6b),)
+                isImage: true,
+                listImage: Image.asset("assets/images/AboutUsIcon.png",width: 20,)
             ),
 
 
@@ -149,7 +152,8 @@ class customDrawer extends StatelessWidget {
                   Get.toNamed(Routes.TERMS);
                 },
                 text: "الشروط والأحكام",
-                listIcon: Icon(Icons.add_alert, color: Color(0XFF1a4b6b),)
+                isImage: true,
+                listImage: Image.asset("assets/images/ConditionIcon.png",width: 20,)
             ),
 
             CustomListTile(
@@ -157,7 +161,8 @@ class customDrawer extends StatelessWidget {
                   Get.toNamed(Routes.PRIVACY);
                 },
                 text: "سياسة الخصوصية",
-                listIcon: Icon(Icons.add_alert, color: Color(0XFF1a4b6b),)
+                isImage: true,
+                listImage: Image.asset("assets/images/PrivacyIcon.png",width: 20,)
             ),
 
             // CustomListTile(

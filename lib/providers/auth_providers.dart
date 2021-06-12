@@ -69,25 +69,49 @@ class AuthProvider {
     print("dfffffffF ${box.read("currentUser")['image'].split('/').last}");
     print("dfffffffF ${image_url?.path}");
     String fileName = image_url?.path.split('/').last;
-    FormData formData = FormData.fromMap({
-      "image": await MultipartFile?.fromFile(image_url?.path, filename:fileName),
-      "password": password,
-      "user_id": user_id,
-      "phone": phone,
-      "wallet_address": wallet_address,
-      "country_id": country_id,
-      "full_name": full_name
-    });
     var dio = Dio();
-    final response = await dio.post("http://crypto.supersoftdemo.com/public/api/update/profile",data: formData,
-      options: Options(
-          headers: {
-            // 'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'Authorization': 'Bearer ${box.read("access_token")}',
-          }
-      ));
-    return response.data;
+
+    if(image_url?.path != null) {
+      FormData formData = FormData.fromMap({
+        "image": await MultipartFile?.fromFile(image_url?.path, filename:fileName),
+        "password": password,
+        "user_id": user_id,
+        "phone": phone,
+        "wallet_address": wallet_address,
+        "country_id": country_id,
+        "full_name": full_name
+      });
+
+      final response = await dio.post("http://crypto.supersoftdemo.com/public/api/update/profile",data: formData,
+          options: Options(
+              headers: {
+                // 'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': 'Bearer ${box.read("access_token")}',
+              }
+          ));
+      return response.data;
+    }else {
+      FormData formData = FormData.fromMap({
+       // "image": await MultipartFile?.fromFile(image_url?.path, filename:fileName),
+        "password": password,
+        "user_id": user_id,
+        "phone": phone,
+        "wallet_address": wallet_address,
+        "country_id": country_id,
+        "full_name": full_name
+      });
+
+      final response = await dio.post("http://crypto.supersoftdemo.com/public/api/update/profile",data: formData,
+          options: Options(
+              headers: {
+                // 'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': 'Bearer ${box.read("access_token")}',
+              }
+          ));
+      return response.data;
+    }
   }
 
 

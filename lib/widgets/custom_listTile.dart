@@ -10,20 +10,24 @@ class CustomListTile extends StatelessWidget {
 
   final VoidCallback onTapFunction;
   final String text;
-  final Icon listIcon;
+  final Icon? listIcon;
+  final Image? listImage;
   final bool isTrailing;
+  final bool isImage;
 
   CustomListTile({
+    this.listImage,
     required this.onTapFunction,
     required this.text,
-    required this.listIcon,
+    this.listIcon,
     this.isTrailing = false,
+    this.isImage = false
   });
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: listIcon,
+      leading: isImage ? listImage : listIcon,
       onTap: onTapFunction,
       dense: true,
 
