@@ -22,6 +22,7 @@ class OffersController extends GetxController {
   RxBool isLoading = false.obs;
   RxInt pageMy = 1.obs;
   RxInt pageAll = 1.obs;
+  RxInt searchFilterOfferPage = 1.obs;
   // Add Offer Attr
   TextEditingController paymentTypeController = TextEditingController();
   TextEditingController quantityController = TextEditingController();
@@ -213,8 +214,8 @@ class OffersController extends GetxController {
   }
 
   // advanced search
-  Future advancedSearch() async {
-    print("HJKGLFKD ${userNameController.text}");
+  Future advancedSearch({page}) async {
+    print("HJKGLFKD${userNameController.text}");
     print("HJKGLFKD ${search_sell_type}");
     print("HJKGLFKD ${search_buy_type}");
     print("HJKGLFKD ${search_small_to_big}");
@@ -224,19 +225,18 @@ class OffersController extends GetxController {
 
     isLoading.value = true;
     await OffersProvider().advancedSearch(
+      page: searchFilterOfferPage.value,
         name: userNameController.text,
-        type: search_sell_type.value == false ? "pay" : "sale",
-        country_id: countrySelect.toString(),
-        today_day: today_day.value ? "1" : "0",
-      quantity: search_small_to_big.value == false ? "1" : "2",
+        type: search_sell_type.value == false && search_buy_type.value == false  ? " " : search_sell_type.value == false ? "pay" : "sale",
+        country_id: countrySelect == null ? " " : countrySelect.toString(),
+        today_day: today_day.value == false ? " " : "1",
+        quantity: search_small_to_big.value == false && search_big_to_small.value == false  ? " " : search_small_to_big.value == false ? "1" : "2",
     ).then((value) {
-      print("FMFMMMDDKWDKWEFOEJFE ${value}");
       if(value['status'] == 1) {
         Helper.successSnackBar("جيد", value['message']);
         allOffersAfterAdvancedFilter.value = value['offers']['data'];
-        Get.toNamed(Routes.SEARCH_RESULT , arguments:allOffersAfterAdvancedFilter.value);
+        Get.toNamed(Routes.SEARCH_RESULT);
       }
-      print("VOVOVOVVOVOV ${value}");
     });
     isLoading.value = false;
   }
@@ -392,5 +392,6 @@ class OffersController extends GetxController {
     await Future.delayed(Duration(milliseconds: 1000));
     refreshController.loadComplete();
   }
+
 
 }

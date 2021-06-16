@@ -121,8 +121,13 @@ class OffersProvider {
 
 
   // advanced search
-  Future advancedSearch({name , type , country_id, today_day , quantity}) async {
-    var url = Uri.parse("${baseUrl}offer/search");
+  Future advancedSearch({name , type , country_id, today_day , quantity,page}) async {
+    print("DMFMFMFDMMF name ${name}");
+    print("DMFMFMFDMMF type ${type}");
+    print("DMFMFMFDMMF country_id ${country_id}");
+    print("DMFMFMFDMMF today_day ${today_day}");
+    print("DMFMFMFDMMF quantity ${quantity}");
+    var url = Uri.parse("${baseUrl}offer/search?page=$page");
     var response = await http.post(url , body: {
       "name": name,
       "type": type,

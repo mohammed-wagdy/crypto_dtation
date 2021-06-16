@@ -586,7 +586,9 @@ class FavouriteScreen extends GetView<FavouriteController> {
                                                   Container(
                                                     width: double.infinity,
                                                     child:
-                                                    controller.favList[index]["user"]["id"] != box.read("currentUser")['id'] ?
+                                                    controller.favList[index]["user"]["id"] != box.read("currentUser")['id'] &&
+                                                    controller.favList[index]['status'] == "accepted"
+                                                        ?
                                                     CustomButton(
                                                       buttonText: "طلب العرض",
                                                       buttonOnPress: () {
@@ -1145,7 +1147,10 @@ class FavouriteScreen extends GetView<FavouriteController> {
                                                     Container(
                                                       width: double.infinity,
                                                       child:
-                                                      controller.favList[index]["user"]["id"] != box.read("currentUser")['id'] ?
+                                                      controller.favList[index]["user"]["id"] != box.read("currentUser")['id']
+                                                          &&
+                                                          controller.favList[index]['status'] == "accepted"
+                                                          ?
                                                       CustomButton(
                                                         buttonText: "طلب العرض",
                                                         buttonOnPress: () {

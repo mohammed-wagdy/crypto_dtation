@@ -25,10 +25,10 @@ class CustomText extends StatelessWidget {
       text,
       textAlign: textTextAlign,
       style: TextStyle(
-         height: 1.4,
-        color: textColor,
-        fontWeight: textFontWeight,
-        fontSize: textSize
+          height: 1.4,
+          color: textColor,
+          fontWeight: textFontWeight,
+          fontSize: textSize
       ),
     ) : Text(
       text,

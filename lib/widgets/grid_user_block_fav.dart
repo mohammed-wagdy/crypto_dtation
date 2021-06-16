@@ -526,7 +526,10 @@ class GridUserBlockWithStatusFav extends StatelessWidget {
                                           Container(
                                             width: double.infinity,
                                             child:
-                                            listOffersFiltered![index]["user"]["id"] != _box.read("currentUser")['id'] ?
+                                            listOffersFiltered![index]["user"]["id"] != _box.read("currentUser")['id']
+                                                &&
+                                                listOffersFiltered![index]['status'] == "accepted"
+                                                ?
                                             CustomButton(
                                               buttonText: "طلب العرض",
                                               buttonOnPress: () {

@@ -1,4 +1,5 @@
 import 'package:crypto_station/constants.dart';
+import 'package:crypto_station/controllers/advanced_search_controller.dart';
 import 'package:crypto_station/controllers/auth_controller.dart';
 import 'package:crypto_station/controllers/favourite_controller.dart';
 import 'package:crypto_station/controllers/home_controller.dart';
@@ -13,9 +14,9 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:country_list_pick/country_list_pick.dart';
 
-class AdvancedSearchScreen extends GetView<OffersController> {
+class AdvancedSearchScreen extends GetView<AdvancedSearchController> {
 
-  OffersController controller = Get.put(OffersController());
+  AdvancedSearchController controller = Get.put(AdvancedSearchController());
   AuthController authController = Get.put(AuthController());
 
   @override
@@ -122,8 +123,7 @@ class AdvancedSearchScreen extends GetView<OffersController> {
                         value: country['id'],
                         child: Row(
                           children: <Widget>[
-                            Image.network("https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_Egypt.svg/255px-Flag_of_Egypt.svg.png",width: 25,),
-                            // Image.network(country['name'],width: 25,),
+                            Image.network(country['image'],width: 25,),
                             SizedBox(width: 10,),
                             Text(country['name'], style:  TextStyle(color: Colors.black),),
                           ],),

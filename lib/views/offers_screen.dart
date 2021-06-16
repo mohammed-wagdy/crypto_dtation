@@ -871,7 +871,10 @@ class OffersScreen extends GetView<OffersController> {
                                                   Container(
                                                     width: double.infinity,
                                                     child:
-                                                    controller.filteredOffers.value[index]["user"]["id"] != box.read("currentUser")['id'] ?
+                                                    controller.filteredOffers.value[index]["user"]["id"] != box.read("currentUser")['id']
+                                                        &&
+                                                        controller.filteredOffers.value[index]['status'] == "accepted"
+                                                        ?
                                                     CustomButton(
                                                       buttonText: "طلب العرض",
                                                       buttonOnPress: () {
@@ -1429,7 +1432,10 @@ class OffersScreen extends GetView<OffersController> {
                                                     Container(
                                                       width: double.infinity,
                                                       child:
-                                                      controller.filteredOffers.value[index]["user"]["id"] != box.read("currentUser")['id'] ?
+                                                      controller.filteredOffers.value[index]["user"]["id"] != box.read("currentUser")['id']
+                                                          &&
+                                                          controller.filteredOffers.value[index]['status'] == "accepted"
+                                                          ?
                                                       CustomButton(
                                                         buttonText: "طلب العرض",
                                                         buttonOnPress: () {
@@ -2045,7 +2051,10 @@ class OffersScreen extends GetView<OffersController> {
                                               Container(
                                                 width: double.infinity,
                                                 child:
-                                                controller.filteredOffers.value[index]["user"]["id"] != box.read("currentUser")['id'] ?
+                                                controller.filteredOffers.value[index]["user"]["id"] != box.read("currentUser")['id']
+                                                    &&
+                                                    controller.filteredOffers.value[index]['status'] == "accepted"
+                                                    ?
                                                 CustomButton(
                                                   buttonText: "طلب العرض",
                                                   buttonOnPress: () {
@@ -2603,7 +2612,10 @@ class OffersScreen extends GetView<OffersController> {
                                                     Container(
                                                       width: double.infinity,
                                                       child:
-                                                      controller.filteredOffers.value[index]["user"]["id"] != box.read("currentUser")['id'] ?
+                                                      controller.filteredOffers.value[index]["user"]["id"] != box.read("currentUser")['id']
+                                                          &&
+                                                          controller.filteredOffers.value[index]['status'] == "accepted"
+                                                          ?
                                                       CustomButton(
                                                         buttonText: "طلب العرض",
                                                         buttonOnPress: () {
