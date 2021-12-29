@@ -2164,7 +2164,7 @@ class OffersScreen extends GetView<OffersController> {
                                             shape: BoxShape.circle,
                                             image: DecorationImage(
                                               fit: BoxFit.cover,
-                                              image: NetworkImage(controller.filteredOffers.value[index]['user']['image']),
+                                              image: NetworkImage("http://crypto.supermsoft.com/public/image/user/${controller.filteredOffers.value[index]['user']['image']}"),
                                             )
                                         ),
                                       ),
