@@ -176,7 +176,7 @@ class HomePageScreen extends GetView<HomeController> {
                                           shape: BoxShape.circle,
                                           image: DecorationImage(
                                             fit: BoxFit.cover,
-                                            image: NetworkImage("http://crypto.supersoftdemo.com/public/image/user/${controller.allHomePageOffer.value[index]["user"]["image"]}"),
+                                            image: NetworkImage("http://crypto.supermsoft.com/public/image/user/${controller.allHomePageOffer.value[index]["user"]["image"]}"),
                                           )
                                       ),
                                     ),
@@ -234,7 +234,7 @@ class HomePageScreen extends GetView<HomeController> {
                                                 children: Helper.getStarsList(double.parse(controller.allHomePageOffer.value[index]["user"]["rate"])),),
                                               SizedBox(width: 20,),
                                               //
-                                              Image.network("http://crypto.supersoftdemo.com/public/image/country/${controller.allHomePageOffer.value[index]["country"]['image']}",width: 20,),
+                                              Image.network("http://crypto.supermsoft.com/public/image/country/${controller.allHomePageOffer.value[index]["country"]['image']}",width: 20,),
                                             ],
                                           )
 
@@ -343,7 +343,7 @@ class HomePageScreen extends GetView<HomeController> {
                                                                 shape: BoxShape.circle,
                                                                 image: DecorationImage(
                                                                   fit:BoxFit.cover,
-                                                                  image: NetworkImage("http://crypto.supersoftdemo.com/public/image/user/${controller.allHomePageOffer.value[index]["user"]["image"]}"),
+                                                                  image: NetworkImage("http://crypto.supermsoft.com/public/image/user/${controller.allHomePageOffer.value[index]["user"]["image"]}"),
                                                                 )
                                                             ),
                                                           ),
@@ -380,7 +380,7 @@ class HomePageScreen extends GetView<HomeController> {
                                                                     Row(
                                                                       children: Helper.getStarsList(double.parse(controller.allHomePageOffer.value[index]["user"]["rate"])),),
                                                                     SizedBox(width: 20,),
-                                                                    Image.network("http://crypto.supersoftdemo.com/public/image/country/${controller.allHomePageOffer.value[index]["country"]['image']}",width: 20,),
+                                                                    Image.network("http://crypto.supermsoft.com/public/image/country/${controller.allHomePageOffer.value[index]["country"]['image']}",width: 20,),
                                                                   ],
                                                                 )
 
@@ -538,7 +538,7 @@ class HomePageScreen extends GetView<HomeController> {
                                                             flex:2,
                                                             child: Row(
                                                               children: [
-                                                                Image.network("http://crypto.supersoftdemo.com/public/image/country/${controller.allHomePageOffer.value[index]["country"]['image']}",width: 20,),
+                                                                Image.network("http://crypto.supermsoft.com/public/image/country/${controller.allHomePageOffer.value[index]["country"]['image']}",width: 20,),
                                                                 SizedBox(width: 10,),
                                                                 CustomText(
                                                                   text: controller.allHomePageOffer.value[index]["country"]['name'],

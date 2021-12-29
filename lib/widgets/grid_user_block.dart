@@ -77,7 +77,7 @@ class GridUserBlock extends StatelessWidget {
                           shape: BoxShape.circle,
                           image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: NetworkImage("http://crypto.supersoftdemo.com/public/image/user/${listOffers![index]["user"]["image"]}"),
+                            image: NetworkImage("http://crypto.supermsoft.com/public/image/user/${listOffers![index]["user"]["image"]}"),
                           )
                       ),
                     ),
@@ -135,7 +135,7 @@ class GridUserBlock extends StatelessWidget {
                                 children: Helper.getStarsList(double.parse(listOffers![index]["user"]["rate"])),),
                               SizedBox(width: 20,),
                               //
-                              Image.network("http://crypto.supersoftdemo.com/public/image/country/${listOffers![index]["country"]['image']}",width: 20,),
+                              Image.network("http://crypto.supermsoft.com/public/image/country/${listOffers![index]["country"]['image']}",width: 20,),
                             ],
                           )
 
@@ -244,7 +244,7 @@ class GridUserBlock extends StatelessWidget {
                                                 shape: BoxShape.circle,
                                                 image: DecorationImage(
                                                   fit:BoxFit.cover,
-                                                  image: NetworkImage("http://crypto.supersoftdemo.com/public/image/user/${listOffers![index]["user"]["image"]}"),
+                                                  image: NetworkImage("http://crypto.supermsoft.com/public/image/user/${listOffers![index]["user"]["image"]}"),
                                                 )
                                             ),
                                           ),
@@ -281,7 +281,7 @@ class GridUserBlock extends StatelessWidget {
                                                     Row(
                                                       children: Helper.getStarsList(double.parse(listOffers![index]["user"]["rate"])),),
                                                     SizedBox(width: 20,),
-                                                    Image.network("http://crypto.supersoftdemo.com/public/image/country/${listOffers![index]["country"]['image']}",width: 20,),
+                                                    Image.network("http://crypto.supermsoft.com/public/image/country/${listOffers![index]["country"]['image']}",width: 20,),
                                                   ],
                                                 )
 
@@ -439,7 +439,7 @@ class GridUserBlock extends StatelessWidget {
                                             flex:2,
                                             child: Row(
                                               children: [
-                                                Image.network("http://crypto.supersoftdemo.com/public/image/country/${listOffers![index]["country"]['image']}",width: 20,),
+                                                Image.network("http://crypto.supermsoft.com/public/image/country/${listOffers![index]["country"]['image']}",width: 20,),
                                                 SizedBox(width: 10,),
                                                 CustomText(
                                                   text: listOffers![index]["country"]['name'],

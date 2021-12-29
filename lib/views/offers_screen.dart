@@ -403,7 +403,7 @@ class OffersScreen extends GetView<OffersController> {
                                       shape: BoxShape.circle,
                                       image: DecorationImage(
                                         fit: BoxFit.cover,
-                                        image: NetworkImage("http://crypto.supersoftdemo.com/public/image/user/${controller.filteredOffers.value[index]['user']['image']}"),
+                                        image: NetworkImage("http://crypto.supermsoft.com/public/image/user/${controller.filteredOffers.value[index]['user']['image']}"),
                                       )
                                   ),
                                 ),
@@ -459,7 +459,7 @@ class OffersScreen extends GetView<OffersController> {
                                           Row(
                                             children: Helper.getStarsList(double.parse(controller.filteredOffers.value[index]['user']['rate'])),),
                                           SizedBox(width: 20,),
-                                          Image.network("http://crypto.supersoftdemo.com/public/image/country/${controller.filteredOffers[index]["country"]['image']}",width: 20,),
+                                          Image.network("http://crypto.supermsoft.com/public/image/country/${controller.filteredOffers[index]["country"]['image']}",width: 20,),
                                         ],
                                       )
 
@@ -568,7 +568,7 @@ class OffersScreen extends GetView<OffersController> {
                                                             shape: BoxShape.circle,
                                                             image: DecorationImage(
                                                               fit:BoxFit.cover,
-                                                              image: NetworkImage("http://crypto.supersoftdemo.com/public/image/user/${controller.filteredOffers.value[index]["user"]["image"]}"),
+                                                              image: NetworkImage("http://crypto.supermsoft.com/public/image/user/${controller.filteredOffers.value[index]["user"]["image"]}"),
                                                             )
                                                         ),
                                                       ),
@@ -605,7 +605,7 @@ class OffersScreen extends GetView<OffersController> {
                                                                 Row(
                                                                   children: Helper.getStarsList(double.parse(controller.filteredOffers.value[index]["user"]["rate"])),),
                                                                 SizedBox(width: 20,),
-                                                                Image.network("http://crypto.supersoftdemo.com/public/image/country/${controller.filteredOffers[index]["country"]['image']}",width: 20,),
+                                                                Image.network("http://crypto.supermsoft.com/public/image/country/${controller.filteredOffers[index]["country"]['image']}",width: 20,),
                                                               ],
                                                             )
 
@@ -763,7 +763,7 @@ class OffersScreen extends GetView<OffersController> {
                                                         flex:2,
                                                         child: Row(
                                                           children: [
-                                                            Image.network("http://crypto.supersoftdemo.com/public/image/country/${controller.filteredOffers[index]["country"]['image']}",width: 20,),
+                                                            Image.network("http://crypto.supermsoft.com/public/image/country/${controller.filteredOffers[index]["country"]['image']}",width: 20,),
                                                             SizedBox(width: 10,),
                                                             CustomText(
                                                               text: "مصر",
@@ -984,7 +984,7 @@ class OffersScreen extends GetView<OffersController> {
                                             shape: BoxShape.circle,
                                             image: DecorationImage(
                                               fit: BoxFit.cover,
-                                              image: NetworkImage("http://crypto.supersoftdemo.com/public/image/user/${controller.filteredOffers.value[index]['user']['image']}"),
+                                              image: NetworkImage("http://crypto.supermsoft.com/public/image/user/${controller.filteredOffers.value[index]['user']['image']}"),
                                             )
                                         ),
                                       ),
@@ -1006,7 +1006,7 @@ class OffersScreen extends GetView<OffersController> {
                                                 ),
                                               ),
                                               SizedBox(width: 10,),
-                                              Image.network("http://crypto.supersoftdemo.com/public/image/country/${controller.filteredOffers[index]["country"]['image']}",width: 20,),
+                                              Image.network("http://crypto.supermsoft.com/public/image/country/${controller.filteredOffers[index]["country"]['image']}",width: 20,),
                                               SizedBox(width: 20,),
                                               controller.filteredOffers.value[index]["fav"].isEmpty ?
                                               GestureDetector(
@@ -1129,7 +1129,7 @@ class OffersScreen extends GetView<OffersController> {
                                                               shape: BoxShape.circle,
                                                               image: DecorationImage(
                                                                 fit:BoxFit.cover,
-                                                                image: NetworkImage("http://crypto.supersoftdemo.com/public/image/user/${controller.filteredOffers.value[index]["user"]["image"]}"),
+                                                                image: NetworkImage("http://crypto.supermsoft.com/public/image/user/${controller.filteredOffers.value[index]["user"]["image"]}"),
                                                               )
                                                           ),
                                                         ),
@@ -1166,7 +1166,7 @@ class OffersScreen extends GetView<OffersController> {
                                                                   Row(
                                                                     children: Helper.getStarsList(double.parse(controller.filteredOffers.value[index]["user"]["rate"])),),
                                                                   SizedBox(width: 20,),
-                                                                  Image.network("http://crypto.supersoftdemo.com/public/image/country/${controller.filteredOffers[index]["country"]['image']}",width: 20,),
+                                                                  Image.network("http://crypto.supermsoft.com/public/image/country/${controller.filteredOffers[index]["country"]['image']}",width: 20,),
                                                                 ],
                                                               )
 
@@ -1324,7 +1324,7 @@ class OffersScreen extends GetView<OffersController> {
                                                           flex:2,
                                                           child: Row(
                                                             children: [
-                                                              Image.network("http://crypto.supersoftdemo.com/public/image/country/${controller.filteredOffers[index]["country"]['image']}",width: 20,),
+                                                              Image.network("http://crypto.supermsoft.com/public/image/country/${controller.filteredOffers[index]["country"]['image']}",width: 20,),
                                                               SizedBox(width: 10,),
                                                               CustomText(
                                                                 text: "مصر",
@@ -1583,7 +1583,7 @@ class OffersScreen extends GetView<OffersController> {
                                   shape: BoxShape.circle,
                                   image: DecorationImage(
                                     fit: BoxFit.cover,
-                                    image: NetworkImage("http://crypto.supersoftdemo.com/public/image/user/${controller.filteredOffers.value[index]['user']['image']}")
+                                    image: NetworkImage("http://crypto.supermsoft.com/public/image/user/${controller.filteredOffers.value[index]['user']['image']}")
                                   )
                               ),
                             ),
@@ -1639,7 +1639,7 @@ class OffersScreen extends GetView<OffersController> {
                                       Row(
                                         children: Helper.getStarsList(double.parse(controller.filteredOffers.value[index]['user']['rate'])),),
                                       SizedBox(width: 20,),
-                                      Image.network("http://crypto.supersoftdemo.com/public/image/country/${controller.filteredOffers[index]["country"]['image']}",width: 20,),
+                                      Image.network("http://crypto.supermsoft.com/public/image/country/${controller.filteredOffers[index]["country"]['image']}",width: 20,),
                                     ],
                                   )
 
@@ -1748,7 +1748,7 @@ class OffersScreen extends GetView<OffersController> {
                                                         shape: BoxShape.circle,
                                                         image: DecorationImage(
                                                           fit:BoxFit.cover,
-                                                          image: NetworkImage("http://crypto.supersoftdemo.com/public/image/user/${controller.filteredOffers.value[index]["user"]["image"]}"),
+                                                          image: NetworkImage("http://crypto.supermsoft.com/public/image/user/${controller.filteredOffers.value[index]["user"]["image"]}"),
                                                         )
                                                     ),
                                                   ),
@@ -1785,7 +1785,7 @@ class OffersScreen extends GetView<OffersController> {
                                                             Row(
                                                               children: Helper.getStarsList(double.parse(controller.filteredOffers.value[index]["user"]["rate"])),),
                                                             SizedBox(width: 20,),
-                                                            Image.network("http://crypto.supersoftdemo.com/public/image/country/${controller.filteredOffers[index]["country"]['image']}",width: 20,),
+                                                            Image.network("http://crypto.supermsoft.com/public/image/country/${controller.filteredOffers[index]["country"]['image']}",width: 20,),
                                                           ],
                                                         )
 
@@ -1943,7 +1943,7 @@ class OffersScreen extends GetView<OffersController> {
                                                     flex:2,
                                                     child: Row(
                                                       children: [
-                                                        Image.network("http://crypto.supersoftdemo.com/public/image/country/${controller.filteredOffers[index]["country"]['image']}",width: 20,),
+                                                        Image.network("http://crypto.supermsoft.com/public/image/country/${controller.filteredOffers[index]["country"]['image']}",width: 20,),
                                                         SizedBox(width: 10,),
                                                         CustomText(
                                                           text: "مصر",
@@ -2186,7 +2186,7 @@ class OffersScreen extends GetView<OffersController> {
                                                 ),
                                               ),
                                               SizedBox(width: 10,),
-                                              Image.network("http://crypto.supersoftdemo.com/public/image/country/${controller.filteredOffers[index]["country"]['image']}",width: 20,),
+                                              Image.network("http://crypto.supermsoft.com/public/image/country/${controller.filteredOffers[index]["country"]['image']}",width: 20,),
                                               SizedBox(width: 20,),
                                               controller.filteredOffers.value[index]["fav"].isEmpty ?
                                               GestureDetector(
@@ -2309,7 +2309,7 @@ class OffersScreen extends GetView<OffersController> {
                                                               shape: BoxShape.circle,
                                                               image: DecorationImage(
                                                                 fit:BoxFit.cover,
-                                                                image: NetworkImage("http://crypto.supersoftdemo.com/public/image/user/${controller.filteredOffers.value[index]["user"]["image"]}",),
+                                                                image: NetworkImage("http://crypto.supermsoft.com/public/image/user/${controller.filteredOffers.value[index]["user"]["image"]}",),
                                                               )
                                                           ),
                                                         ),
@@ -2346,7 +2346,7 @@ class OffersScreen extends GetView<OffersController> {
                                                                   Row(
                                                                     children: Helper.getStarsList(double.parse(controller.filteredOffers.value[index]["user"]["rate"])),),
                                                                   SizedBox(width: 20,),
-                                                                  Image.network("http://crypto.supersoftdemo.com/public/image/country/${controller.filteredOffers[index]["country"]['image']}",width: 20,),
+                                                                  Image.network("http://crypto.supermsoft.com/public/image/country/${controller.filteredOffers[index]["country"]['image']}",width: 20,),
                                                                 ],
                                                               )
 
@@ -2504,7 +2504,7 @@ class OffersScreen extends GetView<OffersController> {
                                                           flex:2,
                                                           child: Row(
                                                             children: [
-                                                              Image.network("http://crypto.supersoftdemo.com/public/image/country/${controller.filteredOffers[index]["country"]['image']}",width: 20,),
+                                                              Image.network("http://crypto.supermsoft.com/public/image/country/${controller.filteredOffers[index]["country"]['image']}",width: 20,),
                                                               SizedBox(width: 10,),
                                                               CustomText(
                                                                 text: "مصر",

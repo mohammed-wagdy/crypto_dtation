@@ -175,7 +175,7 @@ class FavouriteScreen extends GetView<FavouriteController> {
                                             children: Helper.getStarsList(double.parse(controller.favList[index]['user']['rate'])),),
                                           SizedBox(width: 20,),
 
-                                          Image.network("http://crypto.supersoftdemo.com/public/image/country/${imageUrl.substring(50)}",width: 20,),
+                                          Image.network("http://crypto.supermsoft.com/public/image/country/${imageUrl.substring(50)}",width: 20,),
                                         ],
                                       )
 
@@ -321,7 +321,7 @@ class FavouriteScreen extends GetView<FavouriteController> {
                                                                 Row(
                                                                   children: Helper.getStarsList(double.parse(controller.favList[index]["user"]["rate"])),),
                                                                 SizedBox(width: 20,),
-                                                                Image.network("http://crypto.supersoftdemo.com/public/image/country/${imageUrl.substring(50)}",width: 20,),                                                              ],
+                                                                Image.network("http://crypto.supermsoft.com/public/image/country/${imageUrl.substring(50)}",width: 20,),                                                              ],
                                                             )
 
                                                           ],
@@ -721,7 +721,7 @@ class FavouriteScreen extends GetView<FavouriteController> {
                                                 ),
                                               ),
                                               SizedBox(width: 10,),
-                                              Image.network("http://crypto.supersoftdemo.com/public/image/country/${imageUrl.substring(50)}",width: 20,),
+                                              Image.network("http://crypto.supermsoft.com/public/image/country/${imageUrl.substring(50)}",width: 20,),
                                               SizedBox(width: 20,),
                                               controller.favList[index].isEmpty ?
                                               GestureDetector(
@@ -881,7 +881,7 @@ class FavouriteScreen extends GetView<FavouriteController> {
                                                                   Row(
                                                                     children: Helper.getStarsList(double.parse(controller.favList[index]["user"]["rate"])),),
                                                                   SizedBox(width: 20,),
-                                                                  Image.network("http://crypto.supersoftdemo.com/public/image/country/${imageUrl.substring(50)}",width: 20,),                                                                  // Image.network("https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_Egypt.svg/640px-Flag_of_Egypt.svg.png",width: 20,),
+                                                                  Image.network("http://crypto.supermsoft.com/public/image/country/${imageUrl.substring(50)}",width: 20,),                                                                  // Image.network("https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_Egypt.svg/640px-Flag_of_Egypt.svg.png",width: 20,),
                                                                 ],
                                                               )
 

@@ -118,7 +118,7 @@ class ShowOfferFromHomepagePending extends GetView<HomeOffersSliderController> {
                                   shape: BoxShape.circle,
                                   image: DecorationImage(
                                     fit: BoxFit.cover,
-                                    image: NetworkImage("http://crypto.supersoftdemo.com/public/image/user/${controller.allPendingOfersData.value[index]["user"]["image"]}"),
+                                    image: NetworkImage("http://crypto.supermsoft.com/public/image/user/${controller.allPendingOfersData.value[index]["user"]["image"]}"),
                                   )
                               ),
                             ),
@@ -175,7 +175,7 @@ class ShowOfferFromHomepagePending extends GetView<HomeOffersSliderController> {
                                         children: Helper.getStarsList(double.parse(controller.allPendingOfersData.value[index]["user"]["rate"])),),
                                       SizedBox(width: 20,),
                                       //
-                                      Image.network("http://crypto.supersoftdemo.com/public/image/country/${controller.allPendingOfersData.value[index]["country"]['image']}",width: 20,),
+                                      Image.network("http://crypto.supermsoft.com/public/image/country/${controller.allPendingOfersData.value[index]["country"]['image']}",width: 20,),
                                     ],
                                   )
 
@@ -284,7 +284,7 @@ class ShowOfferFromHomepagePending extends GetView<HomeOffersSliderController> {
                                                         shape: BoxShape.circle,
                                                         image: DecorationImage(
                                                           fit:BoxFit.cover,
-                                                          image: NetworkImage("http://crypto.supersoftdemo.com/public/image/user/${controller.allPendingOfersData.value[index]["user"]["image"]}"),
+                                                          image: NetworkImage("http://crypto.supermsoft.com/public/image/user/${controller.allPendingOfersData.value[index]["user"]["image"]}"),
                                                         )
                                                     ),
                                                   ),
@@ -321,7 +321,7 @@ class ShowOfferFromHomepagePending extends GetView<HomeOffersSliderController> {
                                                             Row(
                                                               children: Helper.getStarsList(double.parse(controller.allPendingOfersData.value[index]["user"]["rate"])),),
                                                             SizedBox(width: 20,),
-                                                            Image.network("http://crypto.supersoftdemo.com/public/image/country/${controller.allPendingOfersData.value[index]["country"]['image']}",width: 20,),
+                                                            Image.network("http://crypto.supermsoft.com/public/image/country/${controller.allPendingOfersData.value[index]["country"]['image']}",width: 20,),
                                                           ],
                                                         )
 
@@ -479,7 +479,7 @@ class ShowOfferFromHomepagePending extends GetView<HomeOffersSliderController> {
                                                     flex:2,
                                                     child: Row(
                                                       children: [
-                                                        Image.network("http://crypto.supersoftdemo.com/public/image/country/${controller.allPendingOfersData.value[index]["country"]['image']}",width: 20,),
+                                                        Image.network("http://crypto.supermsoft.com/public/image/country/${controller.allPendingOfersData.value[index]["country"]['image']}",width: 20,),
                                                         SizedBox(width: 10,),
                                                         CustomText(
                                                           text: controller.allPendingOfersData.value[index]["country"]['name'],

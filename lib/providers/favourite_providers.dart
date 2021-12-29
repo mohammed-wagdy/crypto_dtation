@@ -9,7 +9,7 @@ import 'package:dio/dio.dart';
 
 class FavouriteProvider {
   GetStorage box = GetStorage();
-  final String baseUrl = "http://crypto.supersoftdemo.com/public/api/";
+  final String baseUrl = "http://crypto.supermsoft.com/public/api/";
 
   // Get Favourite List
   Future getFavouriteList({user_id}) async {

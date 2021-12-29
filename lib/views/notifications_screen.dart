@@ -67,7 +67,7 @@ class NotificationScreen extends GetView<NotificationsController> {
                               border: Border.all(color: grayColor),
                               shape: BoxShape.circle,
                               image: DecorationImage(
-                                image: NetworkImage("http://crypto.supersoftdemo.com/public/image/user/${controller.notiList[index]['user_get_notifi']['image']}"),
+                                image: NetworkImage("http://crypto.supermsoft.com/public/image/user/${controller.notiList[index]['user_get_notifi']['image']}"),
                               )
                           ),
                         ),

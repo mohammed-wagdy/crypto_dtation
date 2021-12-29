@@ -9,7 +9,7 @@ import 'package:dio/dio.dart';
 
 class AuthProvider {
   GetStorage box = GetStorage();
-  final String baseUrl = "http://crypto.supersoftdemo.com/public/api/";
+  final String baseUrl = "http://crypto.supermsoft.com/public/api/";
 
   // Login
   Future login({email, password}) async {
@@ -82,7 +82,7 @@ class AuthProvider {
         "full_name": full_name
       });
 
-      final response = await dio.post("http://crypto.supersoftdemo.com/public/api/update/profile",data: formData,
+      final response = await dio.post("http://crypto.supermsoft.com/public/api/update/profile",data: formData,
           options: Options(
               headers: {
                 // 'Content-Type': 'application/json',
@@ -102,7 +102,7 @@ class AuthProvider {
         "full_name": full_name
       });
 
-      final response = await dio.post("http://crypto.supersoftdemo.com/public/api/update/profile",data: formData,
+      final response = await dio.post("http://crypto.supermsoft.com/public/api/update/profile",data: formData,
           options: Options(
               headers: {
                 // 'Content-Type': 'application/json',

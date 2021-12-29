@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 
 class HomeProvider {
   GetStorage box = GetStorage();
-  final String baseUrl = "http://crypto.supersoftdemo.com/public/api/";
+  final String baseUrl = "http://crypto.supermsoft.com/public/api/";
 
   // Get All Offers In Homepage
   Future getHomePageAllOffers({page}) async {

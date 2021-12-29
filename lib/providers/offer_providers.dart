@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 
 class OffersProvider {
   GetStorage box = GetStorage();
-  final String baseUrl = "http://crypto.supersoftdemo.com/public/api/";
+  final String baseUrl = "http://crypto.supermsoft.com/public/api/";
 
   // Add Offer
   Future addOffer({user_id, payment_type, type, pay_price, quantity, low_quantity, country_id}) async {

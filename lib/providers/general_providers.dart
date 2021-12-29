@@ -9,7 +9,7 @@ import 'package:dio/dio.dart';
 
 class GeneralProvider {
   GetStorage box = GetStorage();
-  final String baseUrl = "http://crypto.supersoftdemo.com/public/api/";
+  final String baseUrl = "http://crypto.supermsoft.com/public/api/";
 
   // Privacy
   Future getPrivacy() async {

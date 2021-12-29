@@ -9,7 +9,7 @@ import 'package:dio/dio.dart';
 
 class NotificationsProvider {
   GetStorage box = GetStorage();
-  final String baseUrl = "http://crypto.supersoftdemo.com/public/api/";
+  final String baseUrl = "http://crypto.supermsoft.com/public/api/";
 
   // Get All Notifications
   Future getAllNotifications({user_id, page}) async {

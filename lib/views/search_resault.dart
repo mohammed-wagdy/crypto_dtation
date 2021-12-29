@@ -112,7 +112,7 @@ class SearchResultScreen extends GetView<AdvancedSearchController> {
                                     shape: BoxShape.circle,
                                     image: DecorationImage(
                                       fit: BoxFit.cover,
-                                      image: NetworkImage("http://crypto.supersoftdemo.com/public/image/user/${controller.allOffersAfterAdvancedFilter.value[index]['user']['image']}"),
+                                      image: NetworkImage("http://crypto.supermsoft.com/public/image/user/${controller.allOffersAfterAdvancedFilter.value[index]['user']['image']}"),
                                     )
                                 ),
                               ),
@@ -168,7 +168,7 @@ class SearchResultScreen extends GetView<AdvancedSearchController> {
                                         Row(
                                           children: Helper.getStarsList(double.parse(controller.allOffersAfterAdvancedFilter.value[index]['user']['rate'])),),
                                         SizedBox(width: 20,),
-                                        Image.network("http://crypto.supersoftdemo.com/public/image/country/${controller.allOffersAfterAdvancedFilter[index]["country"]['image']}",width: 20,),
+                                        Image.network("http://crypto.supermsoft.com/public/image/country/${controller.allOffersAfterAdvancedFilter[index]["country"]['image']}",width: 20,),
                                       ],
                                     )
 
@@ -277,7 +277,7 @@ class SearchResultScreen extends GetView<AdvancedSearchController> {
                                                           shape: BoxShape.circle,
                                                           image: DecorationImage(
                                                             fit:BoxFit.cover,
-                                                            image: NetworkImage("http://crypto.supersoftdemo.com/public/image/user/${controller.allOffersAfterAdvancedFilter.value[index]["user"]["image"]}"),
+                                                            image: NetworkImage("http://crypto.supermsoft.com/public/image/user/${controller.allOffersAfterAdvancedFilter.value[index]["user"]["image"]}"),
                                                           )
                                                       ),
                                                     ),
@@ -314,7 +314,7 @@ class SearchResultScreen extends GetView<AdvancedSearchController> {
                                                               Row(
                                                                 children: Helper.getStarsList(double.parse(controller.allOffersAfterAdvancedFilter.value[index]["user"]["rate"])),),
                                                               SizedBox(width: 20,),
-                                                              Image.network("http://crypto.supersoftdemo.com/public/image/country/${controller.allOffersAfterAdvancedFilter[index]["country"]['image']}",width: 20,),
+                                                              Image.network("http://crypto.supermsoft.com/public/image/country/${controller.allOffersAfterAdvancedFilter[index]["country"]['image']}",width: 20,),
                                                             ],
                                                           )
 
@@ -472,7 +472,7 @@ class SearchResultScreen extends GetView<AdvancedSearchController> {
                                                       flex:2,
                                                       child: Row(
                                                         children: [
-                                                          Image.network("http://crypto.supersoftdemo.com/public/image/country/${controller.allOffersAfterAdvancedFilter[index]["country"]['image']}",width: 20,),
+                                                          Image.network("http://crypto.supermsoft.com/public/image/country/${controller.allOffersAfterAdvancedFilter[index]["country"]['image']}",width: 20,),
                                                           SizedBox(width: 10,),
                                                           CustomText(
                                                             text: "مصر",
